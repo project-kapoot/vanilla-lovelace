@@ -1,3 +1,22 @@
 <?php 
 
-echo 'Hello, World !';
+$path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+
+$template = match($path) {
+    '/' => 'home.php',
+    '/quiz' => 'quiz.php',
+    '/patate' => 'patate.php',
+    default => null
+};
+
+if($template === null) {
+    echo '404 not found';
+}
+
+$file = __DIR__ . '/../templates/' . $template;
+
+if(!file_exists($file)) {
+    echo 'Le fichier : ' . $file . ' n\'existe pas !';
+}
+
+require_once $file;
