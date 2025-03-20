@@ -1,0 +1,11 @@
+body {
+    background-color: red;
+
+    & > main {
+        background-color: blue;
+    }
+
+    & > div {
+        color: red;
+    }
+}
