@@ -1,0 +1,31 @@
+@font-face {
+  font-family: "Baloo 2";
+  font-weight: normal;
+  src: url("/assets/fonts/Baloo2/Baloo2-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Baloo 2";
+  font-weight: bold;
+  src: url("/assets/fonts/Baloo2/Baloo2-Bold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Fredoka";
+  font-weight: normal;
+  src: url("/assets/fonts/Fredoka/Fredoka-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Fredoka";
+  font-weight: bold;
+  src: url("/assets/fonts/Fredoka/Fredoka-Bold.ttf") format("truetype");
+}
+body {
+  background-color: red;
+}
+body > main {
+  background-color: blue;
+}
+body > div {
+  color: red;
+}
+
+/*# sourceMappingURL=main.css.map */
