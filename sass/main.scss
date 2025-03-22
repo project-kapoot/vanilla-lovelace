@@ -1,4 +1,15 @@
-@use './base/base';
+// abstracts
+@use './abstracts' as *;
+
+// base
+@use './base' as *;
+
+// components
+@use './components' as *;
+
+// pages
+@use './pages' as *;
+
 
 body {
     background-color: red;
@@ -8,6 +19,6 @@ body {
     }
 
     & > div {
-        color: red;
+        color: rgb(33, 29, 29);
     }
 }
