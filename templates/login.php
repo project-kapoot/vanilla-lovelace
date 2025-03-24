@@ -9,24 +9,25 @@
 </head>
 
 <body>
-    <div class="container">
-        <div class="form-container" id="login-container">
-            <h2>Connexion</h2>
-            <form>
-            <div class="input-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" required>
+    <section class="account">
+        <div class="container">
+            <div class="form-container" id="login-container">
+                <h2 class="form-container-title">Connexion</h2>
+                <form>
+                <div class="input-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" required>
                 </div>
                 <div class="input-group">
                     <label for="password">Mot de passe</label>
                     <input type="password" id="password" required>
                 </div>
-                <button type="submit">Se connecter</button>
-            </form>
-            
-            </form>
-            <p>Pas encore de compte ? <a href="/inscription">S'inscrire</a></p>
+                <button class="btn btn-primary" type="submit">Se connecter</button>
+                </form>
+                <p class="form-container-paragraph">Pas encore de compte ? <a href="/inscription">S'inscrire</a></p>
+            </div>
         </div>
-    </div>
+    </section>
+    
 </body>
 </html>
