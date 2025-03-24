@@ -1,7 +1,5 @@
-@use './abstracts' as *;
+@use './base';
 
-@use './base' as *;
+@use './components';
 
-@use './components' as *;
-
-@use './pages' as *;
+@use './pages';
