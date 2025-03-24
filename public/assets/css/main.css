@@ -19,21 +19,91 @@
   font-weight: bold;
   src: url("/assets/fonts/Fredoka/Fredoka-Bold.ttf") format("truetype");
 }
-/* Styles généraux */
-* {
+/*! minireset.css v0.0.6 | MIT License | github.com/jgthms/minireset.css */
+html,
+body,
+p,
+ol,
+ul,
+li,
+dl,
+dt,
+dd,
+blockquote,
+figure,
+fieldset,
+legend,
+textarea,
+pre,
+iframe,
+hr,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-  font-family: Arial, sans-serif;
 }
 
-body {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: 100%;
+  font-weight: normal;
+}
+
+ul {
+  list-style: none;
+}
+
+button,
+input,
+select {
+  margin: 0;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+img,
+video {
+  height: auto;
+  max-width: 100%;
+}
+
+iframe {
+  border: 0;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+td,
+th {
+  padding: 0;
+}
+
+/* Styles généraux */
+.account {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: linear-gradient(to bottom, #00C2FF, #7B51FF);
-  color: white;
+  background: linear-gradient(#00C2FF, #7B51FF);
+  color: #F8F9F3;
+  font-family: Arial, sans-serif;
 }
 
 /* Conteneur principal */
@@ -47,7 +117,7 @@ body {
 }
 
 /* Titre */
-h2 {
+.form-container-title {
   margin-bottom: 20px;
   font-size: 24px;
 }
@@ -74,35 +144,33 @@ h2 {
 }
 
 /* Bouton */
-button {
+.btn {
   padding: 10px;
   border: none;
-  background: #7B51FF;
-  color: white;
   font-size: 18px;
   border-radius: 15px;
   cursor: pointer;
   transition: 0.3s;
 }
 
-button:hover {
+.btn-primary {
+  background: #7B51FF;
+  color: #F8F9F3;
+}
+.btn-primary:hover {
   background: #00C2FF;
 }
 
 /* Lien vers l'inscription */
-p {
+.form-container-paragraph {
   margin-top: 10px;
   font-size: 14px;
 }
-
-p a {
+.form-container-paragraph a {
   color: #FFD700;
   text-decoration: none;
   font-weight: bold;
 }
-
-p a:hover {
+.form-container-paragraph a:hover {
   text-decoration: underline;
-}
-
-/*# sourceMappingURL=main.css.map */
+}/*# sourceMappingURL=main.css.map */

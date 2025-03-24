@@ -1,18 +1,15 @@
-/* Styles généraux */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
-}
+@use '../abstracts' as *;
 
-body {
+/* Styles généraux */
+
+.account {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background: linear-gradient(to bottom, #00C2FF, #7B51FF);
-    color: white;
+    background: $bg-gradient;
+    color: $color-white;
+    font-family: Arial, sans-serif;
 }
 
 /* Conteneur principal */
@@ -26,7 +23,7 @@ body {
 }
 
 /* Titre */
-h2 {
+.form-container-title {
     margin-bottom: 20px;
     font-size: 24px;
 }
@@ -35,7 +32,7 @@ h2 {
 .input-group {
     text-align: left;
     margin-bottom: 15px;
-    color: #222222;
+    color: $color-darkgrey;
 }
 
 .input-group label {
@@ -53,33 +50,45 @@ h2 {
 }
 
 /* Bouton */
-button {
+
+.btn {
     padding: 10px;
     border: none;
-    background: #7B51FF;
-    color: white;
     font-size: 18px;
     border-radius: 15px;
     cursor: pointer;
     transition: 0.3s;
 }
 
-button:hover {
-    background: #00C2FF;
+.btn-primary {
+    background: $color-purple;
+    color: $color-white;
+    
+        &:hover {
+        background: $color-lightblue;
+        }
 }
+
+
 
 /* Lien vers l'inscription */
-p {
+
+.form-container-paragraph {
+
     margin-top: 10px;
     font-size: 14px;
+
+        a {
+            color: $color-yellow;
+            text-decoration: none;
+            font-weight: bold;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+        }
 }
 
-p a {
-    color: #FFD700;
-    text-decoration: none;
-    font-weight: bold;
-}
 
-p a:hover {
-    text-decoration: underline;
-}
+
+    
