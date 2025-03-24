@@ -1,0 +1,19 @@
+{
+    "commit-msg": {
+        "enabled": true,
+        "actions": [
+            {
+                "action": "\\Ramsey\\CaptainHook\\ValidateConventionalCommit"
+            }
+        ]
+    },
+    "_comment": "Le reste du code (ne pas ajouter)",
+    "prepare-commit-msg": {
+        "enabled": true,
+        "actions": [
+            {
+                "action": "\\Ramsey\\CaptainHook\\PrepareConventionalCommit"
+            }
+        ]
+    }
+}

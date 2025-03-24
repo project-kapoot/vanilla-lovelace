@@ -1,0 +1,17 @@
+{
+    "name": "sogom/vanilla-lovelace",
+    "autoload": {
+        "psr-4": {
+            "Sogom\\VanillaLovelace\\": "src/"
+        }
+    },
+    "require-dev": {
+        "ramsey/conventional-commits": "^1.6",
+        "captainhook/captainhook": "^5.25"
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "vendor/bin/captainhook install -sf"
+        ]
+    }
+}

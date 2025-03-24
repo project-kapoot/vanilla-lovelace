@@ -1,0 +1,9 @@
+body {
+  background-color: red;
+}
+body > main {
+  background-color: blue;
+}
+body > div {
+  color: red;
+}/*# sourceMappingURL=main.css.map */
