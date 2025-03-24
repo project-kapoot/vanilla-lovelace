@@ -1,13 +1,7 @@
-@use './base/base';
+@use './abstracts' as *;
 
-body {
-    background-color: red;
+@use './base' as *;
 
-    & > main {
-        background-color: blue;
-    }
+@use './components' as *;
 
-    & > div {
-        color: red;
-    }
-}
+@use './pages' as *;

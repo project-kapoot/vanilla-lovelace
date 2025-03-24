@@ -27,3 +27,15 @@
 
     src: url("/assets/fonts/Fredoka/Fredoka-Bold.ttf") format("truetype");
 }
+
+body {
+    background-color: red;
+
+    & > main {
+        background-color: blue;
+    }
+
+    & > div {
+        color: red;
+    }
+}
