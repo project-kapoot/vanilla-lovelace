@@ -30,7 +30,7 @@
 
                 <button type="submit">S'inscrire</button>
             </form>
-            <p>Déjà inscrit ? <a href="../templates/login.php">Connectez-vous !</a></p>
+            <p>Déjà inscrit ? <a href="/connexion">Connectez-vous !</a></p>
         </div>
     </div>
 
