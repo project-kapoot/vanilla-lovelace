@@ -4,7 +4,8 @@ $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
 $template = match($path) {
     '/' => 'home.php',
-    '/quiz' => 'quiz.php',
+    '/connexion' => 'login.php',
+    '/inscription' => 'register.php',
     default => null
 };
 

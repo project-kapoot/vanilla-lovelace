@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @font-face {
   font-family: "Baloo 2";
   font-weight: normal;
@@ -18,14 +19,90 @@
   font-weight: bold;
   src: url("/assets/fonts/Fredoka/Fredoka-Bold.ttf") format("truetype");
 }
+/* Styles généraux */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
 body {
-  background-color: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(to bottom, #00C2FF, #7B51FF);
+  color: white;
 }
-body > main {
-  background-color: blue;
+
+/* Conteneur principal */
+.container {
+  width: 90%;
+  max-width: 400px;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
 }
-body > div {
-  color: red;
+
+/* Titre */
+h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+/* Groupes de saisie */
+.input-group {
+  text-align: left;
+  margin-bottom: 15px;
+  color: #222222;
+}
+
+.input-group label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+/* Bouton */
+button {
+  padding: 10px;
+  border: none;
+  background: #7B51FF;
+  color: white;
+  font-size: 18px;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #00C2FF;
+}
+
+/* Lien vers l'inscription */
+p {
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+p a {
+  color: #FFD700;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+p a:hover {
+  text-decoration: underline;
 }
 
 /*# sourceMappingURL=main.css.map */
