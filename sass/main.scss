@@ -1,1 +1,5 @@
-@use 'pages/login';
+@use './base';
+
+@use './components';
+
+@use './pages';
