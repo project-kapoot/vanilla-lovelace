@@ -1,1 +1,109 @@
 @use '../abstracts' as *;
+
+// general styles
+
+.logo-kapoot-desktop,
+.nav-icon {
+    display: none;
+}
+
+.nav-link a,
+.nav-icon a {
+    text-decoration: none;
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: $color-white;
+    box-shadow: 0px 0px 1px $color-darkgrey;
+}
+
+// kapoot logo
+.kapoot-logo {
+    padding-top: 15px;
+}
+
+// links
+
+.navbar-group {
+    display: flex;
+    align-items: center;
+    gap:  30px;
+
+        .nav-link {
+            margin: 15px 0;
+            text-align: center;
+            transition: transform .3s ease;
+
+            &:hover {
+                transform: translateY(-2px);
+            }
+        }
+
+        a {
+            font-family: $font-baloo;
+            font-weight: bold;
+            color: $color-darkgrey;
+            font-size: $fs-12;
+            transition: color .3s ease;
+
+            &:hover {
+                color: $color-purple;
+            }
+        }
+}
+
+// responsive
+
+@media (min-width : 525px) {
+
+    // general styles
+    .logo-kapoot-desktop,
+    .nav-icon {
+        display: block;
+    }
+
+    .logo-kapoot-mobile {
+        display: none;
+    }
+
+    header {
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+    
+    // logo
+    .logo-kapoot-desktop {
+        max-width: 120px;
+    }
+
+    // link 
+    .nav-link a {
+        font-size: $fs-16;
+    }
+
+    // nav icon
+    .nav-icon  {
+        transition: transform .3s ease;
+
+            &:hover {
+                transform: scale(1.1);
+            }
+
+        i {
+            font-size: $fs-18;
+            background-color: $color-purple;
+            color: $color-white;
+            padding: 5px;
+            border-radius: 50%;
+            transition: color .3s ease;
+
+                &:hover{
+                    color: $color-yellow;
+                }
+        }
+    
+    }
+}

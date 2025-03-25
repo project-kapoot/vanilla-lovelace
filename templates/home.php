@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Kapoot</title>
     <link rel="stylesheet" href="/assets/css/main.css">
     <script src="/assets/js/script.js" defer></script>
     <!-- remixicon link css -->
@@ -27,5 +27,6 @@
             <a href="/connexion" aria-label="profil"><i class="ri-user-fill"></i></a>
         </div>
     </header>
+    
 </body>
 </html>
