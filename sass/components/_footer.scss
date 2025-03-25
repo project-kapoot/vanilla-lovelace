@@ -1,1 +1,55 @@
 @use '../abstracts' as *;
+
+footer {
+    position: fixed;
+    bottom: 0;
+    background-color: $color-white;
+    width: 100%;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 0;
+    font-family: $font-baloo;
+    font-weight: bold;
+    font-size: $fs-12;
+
+    .footer-text-1,
+    a {
+        color: $color-darkgrey;
+    }
+
+    .footer-text-2,
+    .footer-text-3 {
+        transition: transform .3s ease;
+
+        &:hover {
+            transform: translatey(-2px);
+        }
+    }
+
+    a {
+        text-decoration: none;
+
+        &:hover {
+            color: $color-lightblue;
+            text-decoration: underline;
+        }
+    }
+}
+
+
+// responsive 
+
+@media (min-width : 525px) {
+    footer {
+        flex-direction: row;
+        justify-content: center;
+        padding: 15px 0;
+        font-size: $fs-16;
+
+        .footer-text-2 {
+            margin: 0 20px;
+        }
+    }
+}
