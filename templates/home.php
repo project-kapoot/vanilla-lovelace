@@ -27,6 +27,15 @@
             <a href="/connexion" aria-label="profil"><i class="ri-user-fill"></i></a>
         </div>
     </header>
-    
+    <!-- Main content -->
+    <main role="main" class="home-page-main">
+        <p>contenu princippal</p>
+    </main>
+    <!-- Footer -->
+    <footer>
+        <p class="footer-text-1">&copy; KaPoot-2025</p>
+        <p class="footer-text-2"><a href="#">Mention légales</a></p>
+        <p class="footer-text-3"><a href="#">Politique de confidentialité</a></p>
+    </footer>
 </body>
 </html>
