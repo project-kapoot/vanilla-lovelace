@@ -1,0 +1,43 @@
+@use '../abstracts' as *;
+
+.visually-hidden {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    margin: -1px !important;
+    border: 0 !important;
+    padding: 0 !important;
+    
+    white-space: nowrap !important;
+    clip-path: inset(100%) !important;
+    clip: rect(0 0 0 0) !important;
+    overflow: hidden !important;
+}
+
+.fw-bold {
+    font-weight: bold !important;
+}
+
+.d-block {
+    display: block !important;
+}
+
+.d-flex {
+    display: flex !important;
+}
+
+.column-gap-16 {
+    column-gap: $space-16;
+}
+
+.space-margin-16 {
+    @include space-margin($space-16);
+}
+
+.mx-auto {
+    margin-inline: auto !important;
+}
+
+.text-center {
+    text-align: center !important;
+}

@@ -1,0 +1,17 @@
+@use 'spacing' as *;
+
+@mixin space-flex($gap) {
+    display: flex;
+    flex-direction: column;
+    row-gap: $gap;
+}
+
+@mixin space-margin($gap) {
+    & > *:not(:last-child) {
+        margin-bottom: $gap;
+    }
+
+    & > :last-child {
+        margin-bottom: 0px;
+    }
+}
