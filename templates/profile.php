@@ -35,7 +35,7 @@
             </section>
             <section class="card">
                 <h2 class="text-center">Statistiques :</h2>
-                <table class="table">
+                <table class="table-stats">
                     <thead>
                         <tr>
                             <th>Quiz créés</th>
@@ -70,21 +70,42 @@
                     <button type="submit" class="btn-primary">Confirmer</button>
                 </form>
                 <p class="text-center"><span>X</span> résultats sur <span>X</span></p>
-                <table class="table">
+                
+                <?php
+                    $headers = [
+                        'Quiz',
+                        'Erreurs (en %)',
+                        'Classement',
+                        'Réalisé le',
+                    ];
+                ?>
+
+                <table class="table-quiz">
                     <thead>
                         <tr>
-                            <th>Quiz</th>
-                            <th>Erreurs (en %)</th>
-                            <th>Classement</th>
-                            <th>Réalisé le</th>
+                            <?php foreach($headers as $header) : ?>
+                                <th><?= $header ?></th>
+                            <?php endforeach ?>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Nom du quiz</td>
-                            <td>X%</td>
-                            <td>X/X</td>
-                            <td>XX/XX/XXXX</td>
+                            <td data-header="<?= $headers[0] ?>">Nom du quiz</td>
+                            <td data-header="<?= $headers[1] ?>">X%</td>
+                            <td data-header="<?= $headers[2] ?>">X/X</td>
+                            <td data-header="<?= $headers[3] ?>">XX/XX/XXXX</td>
+                        </tr>
+                        <tr>
+                            <td data-header="<?= $headers[0] ?>">Nom du quiz</td>
+                            <td data-header="<?= $headers[1] ?>">X%</td>
+                            <td data-header="<?= $headers[2] ?>">X/X</td>
+                            <td data-header="<?= $headers[3] ?>">XX/XX/XXXX</td>
+                        </tr>
+                        <tr>
+                            <td data-header="<?= $headers[0] ?>">Nom du quiz</td>
+                            <td data-header="<?= $headers[1] ?>">X%</td>
+                            <td data-header="<?= $headers[2] ?>">X/X</td>
+                            <td data-header="<?= $headers[3] ?>">XX/XX/XXXX</td>
                         </tr>
                     </tbody>
                 </table>

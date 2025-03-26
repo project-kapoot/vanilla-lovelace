@@ -326,19 +326,19 @@ th {
   padding: 8px 8px;
   background-color: #F8F9F3;
 }
-.profile-page .table {
+.profile-page .table-quiz, .profile-page .table-stats {
   width: 100%;
   text-align: center;
 }
-.profile-page .table thead {
+.profile-page .table-quiz thead, .profile-page .table-stats thead {
   border-bottom: 1px solid black;
 }
-.profile-page .table tr {
+.profile-page .table-quiz tr, .profile-page .table-stats tr {
   display: grid;
   grid-auto-flow: column;
   grid-auto-columns: 1fr;
 }
-.profile-page .table td, .profile-page .table th {
+.profile-page .table-quiz td, .profile-page .table-quiz th, .profile-page .table-stats td, .profile-page .table-stats th {
   padding-block: 8px;
 }
 .profile-page .form > *:not(:last-child) {
@@ -350,7 +350,7 @@ th {
 .profile-page .form__fields {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  column-gap: 16px;
+  gap: 1em;
   white-space: nowrap;
 }
 .profile-page .form__field {
@@ -384,6 +384,54 @@ th {
   }
   .profile-page h2, .profile-page h3 {
     font-size: 16px;
+  }
+  .profile-page .table-quiz {
+    text-align: left;
+  }
+  .profile-page .table-quiz thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    border: 0;
+    padding: 0;
+    white-space: nowrap;
+    clip-path: inset(100%);
+    clip: rect(0 0 0 0);
+    overflow: hidden;
+  }
+  .profile-page .table-quiz tr {
+    display: flex;
+    flex-direction: column;
+    row-gap: 16px;
+    padding-block: 16px;
+  }
+  .profile-page .table-quiz td[data-header]::before {
+    content: attr(data-header) " : ";
+  }
+  .profile-page .table-quiz tbody tr:not(:last-child) {
+    border-bottom: 1px solid #000;
+  }
+  .profile-page .table-quiz td[data-header] {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    column-gap: 16px;
+    padding: 0;
+  }
+  .profile-page .table-quiz td[data-header]::before {
+    font-weight: bold;
+  }
+  .profile-page .form__fields {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+  }
+  .profile-page .form__fields > :first-child {
+    grid-column: span 2;
+    grid-row: 1;
+  }
+  .profile-page .form__fields > * {
+    grid-row: 2;
   }
 }
 

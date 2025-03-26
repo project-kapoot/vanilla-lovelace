@@ -101,7 +101,7 @@
         }
     }
 
-    .table {
+    .table-quiz, .table-stats {
         width: 100%;
         text-align: center;
 
@@ -126,7 +126,7 @@
         &__fields {
             display: grid;            
             grid-template-columns: repeat(3, 1fr);
-            column-gap: $space-16;
+            gap: 1em;
 
             white-space: nowrap;
         }
@@ -167,6 +167,43 @@
 
         h2, h3 {
             font-size: $fs-16;
+        }
+
+        .table-quiz {
+            @include table-responsive($cell-gap: $space-16, $row-gap: $space-16);
+
+            text-align: left;
+
+            tbody tr:not(:last-child) {
+                border-bottom: 1px solid #000;
+            }
+
+            td[data-header] {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                column-gap: $space-16;
+
+                padding: 0;
+            }
+
+            td[data-header]::before {
+                font-weight: bold;
+            }
+        }
+
+        .form__fields {
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+
+            & > :first-child {
+                grid-column: span 2;
+                grid-row: 1;
+            }
+
+            & > * {
+                grid-row: 2;
+            }
         }
     }
 }

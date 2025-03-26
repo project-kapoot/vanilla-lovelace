@@ -15,3 +15,49 @@
         margin-bottom: 0px;
     }
 }
+
+@mixin visually-hidden($isImportant: false) {
+    @if $isImportant {
+        position: absolute !important;
+        width: 1px !important;
+        height: 1px !important;
+        margin: -1px !important;
+        border: 0 !important;
+        padding: 0 !important;
+        
+        white-space: nowrap !important;
+        clip-path: inset(100%) !important;
+        clip: rect(0 0 0 0) !important;
+        overflow: hidden !important;
+    } @else {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+        border: 0;
+        padding: 0;
+        
+        white-space: nowrap;
+        clip-path: inset(100%);
+        clip: rect(0 0 0 0);
+        overflow: hidden;
+    }
+}
+
+@mixin table-responsive($cell-gap, $row-gap) {
+    thead {
+        @include visually-hidden;
+    }
+
+    tr {
+        display: flex;
+        flex-direction: column;
+        row-gap: $cell-gap;
+
+        padding-block: $row-gap;
+    }
+
+    td[data-header]::before {
+        content: attr(data-header) " : ";
+    }
+}
