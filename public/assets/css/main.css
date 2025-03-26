@@ -116,14 +116,6 @@ th {
   display: block !important;
 }
 
-.d-flex {
-  display: flex !important;
-}
-
-.column-gap-16 {
-  column-gap: 16px;
-}
-
 .space-margin-16 > *:not(:last-child) {
   margin-bottom: 16px;
 }
@@ -274,10 +266,12 @@ th {
 .profile-page .card {
   flex-grow: 1;
   flex-shrink: 1;
-  flex-basis: 500px;
+  flex-basis: 650px;
   padding: 32px;
   border-radius: 15px;
   background-color: #F8F9F3;
+  max-width: 650px;
+  margin-inline: auto;
 }
 .profile-page .card > *:not(:last-child) {
   margin-bottom: 32px;
@@ -287,13 +281,20 @@ th {
 }
 .profile-page .user-visuals {
   position: relative;
-  height: 250px;
+  height: clamp(180px, 60vw, 250px);
 }
 .profile-page .user-visuals > *:not(:last-child) {
   margin-bottom: 16px;
 }
 .profile-page .user-visuals > :last-child {
   margin-bottom: 0px;
+}
+.profile-page .user-visuals-buttons {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1em;
+  white-space: nowrap;
 }
 .profile-page .user-banner {
   position: absolute;

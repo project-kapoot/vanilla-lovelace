@@ -22,14 +22,6 @@
     display: block !important;
 }
 
-.d-flex {
-    display: flex !important;
-}
-
-.column-gap-16 {
-    column-gap: $space-16;
-}
-
 .space-margin-16 {
     @include space-margin($space-16);
 }

@@ -21,16 +21,21 @@
     }
 
     .card {
+        $max-width: 650px;
+
         @include space-margin($space-32);
 
         flex-grow: 1;
         flex-shrink: 1;
-        flex-basis: 500px;
+        flex-basis: $max-width;
 
         padding: $space-32;
 
         border-radius: 15px;
         background-color: $color-white;
+
+        max-width: $max-width;
+        margin-inline: auto;
     }
     
     .user-visuals {
@@ -38,7 +43,16 @@
 
         position: relative;
         
-        height: 250px;
+        height: clamp(180px, 60vw, 250px);
+    }
+
+    .user-visuals-buttons {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 1em;
+
+        white-space: nowrap;
     }
 
     .user-banner {

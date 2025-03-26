@@ -18,7 +18,7 @@
                         <span class="user-pseudo">Pseudonyme</span>
                     </div>
                 </div>
-                <div class="d-flex column-gap-16">
+                <div class="user-visuals-buttons">
                     <button class="btn-primary">Modifier l'avatar</button>
                     <button class="btn-primary">Modifier la bannière</button>
                 </div>
