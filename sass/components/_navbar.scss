@@ -2,12 +2,11 @@
 
 // general styles
 
-.logo-kapoot-desktop,
-.nav-icon {
+.logo-kapoot-desktop {
     display: none;
 }
 
-.nav-link a,
+.nav-link,
 .nav-icon a {
     text-decoration: none;
 }
@@ -27,32 +26,99 @@ header {
 
 // links
 
-.navbar-group {
+.navbar {
+    padding: 12px 0;;
+}
+
+.navbar-group,
+.nav-list {
     display: flex;
     align-items: center;
-    gap:  30px;
+    gap: 80px;
+}
+
+.navbar-group {
+
+    position: relative;
 
         .nav-link {
-            margin: 15px 0;
-            text-align: center;
-            transition: transform .3s ease;
-
-            &:hover {
-                transform: translateY(-2px);
-            }
-        }
-
-        a {
             font-family: $font-baloo;
             font-weight: bold;
             color: $color-darkgrey;
             font-size: $fs-12;
-            transition: color .3s ease;
+            transition: color, transform .3s ease;
 
             &:hover {
                 color: $color-purple;
+                transform: translateY(-2px);
             }
         }
+}
+
+// nav toogler
+
+.nav-toggler {
+    position: absolute;
+    right: -35px;
+    top: 25px;
+    overflow: hidden;
+    height: 0;
+ 
+
+        .toggler-group {
+            background-color: $color-white;
+            padding-top: 10px;
+        }
+
+        .toggler-list {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .toggler-link {
+            width: 100%;
+            margin:  5px 10px;
+            text-align: center;
+            color: $color-darkgrey;
+            font-family: $font-baloo;
+            font-weight: bold;
+            font-size: $fs-12;
+            transition: all .5s;
+
+            &:hover {
+               
+                background-color: $color-purple;
+                color: $color-white;
+            }
+        }
+}
+
+// toggle menu
+.toggle-menu {
+    height: auto;
+}
+
+// nav icon
+.nav-icon  {
+
+    i {
+        font-size: $fs-12;
+        background-color: $color-purple;
+        color: $color-white;
+        padding: 5px;
+        border-radius: 50%;
+        transition: color .3s ease;
+        cursor: pointer;
+
+            &:hover{
+                color: $color-yellow;
+            }
+
+            
+    }
+
 }
 
 // responsive
@@ -60,8 +126,7 @@ header {
 @media (min-width : 525px) {
 
     // general styles
-    .logo-kapoot-desktop,
-    .nav-icon {
+    .logo-kapoot-desktop {
         display: block;
     }
 
@@ -79,33 +144,26 @@ header {
         max-width: 120px;
     }
 
-    // link 
-    .nav-link a {
-        font-size: $fs-16;
-    }
-
-    // nav icon
-    .nav-icon  {
-        position: relative;
-        transition: transform .3s ease;
-
-            &:hover {
-                transform: scale(1.1);
-            }
-
-
-        i {
-            font-size: $fs-16;
-            background-color: $color-purple;
-            color: $color-white;
-            padding: 5px;
-            border-radius: 50%;
-            transition: color .3s ease;
-
-                &:hover{
-                    color: $color-yellow;
-                }
-        }
+    // navbar
     
+    .nav-link,
+    .toggler-link {
+        font-size: $fs-16 !important;
     }
+
+    .nav-icon i {
+        font-size: $fs-24;
+    }
+
+    // nav toogler
+    .nav-toggler  {
+        right: -40px;
+        top: 30px;
+    }
+
+    .toggler-group {
+        padding-top: 20px !important;
+    }
+
+
 }

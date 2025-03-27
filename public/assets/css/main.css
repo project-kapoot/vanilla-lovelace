@@ -140,12 +140,11 @@ footer a:hover {
     margin: 0 20px;
   }
 }
-.logo-kapoot-desktop,
-.nav-icon {
+.logo-kapoot-desktop {
   display: none;
 }
 
-.nav-link a,
+.nav-link,
 .nav-icon a {
   text-decoration: none;
 }
@@ -162,33 +161,83 @@ header {
   padding-top: 15px;
 }
 
-.navbar-group {
+.navbar {
+  padding: 12px 0;
+}
+
+.navbar-group,
+.nav-list {
   display: flex;
   align-items: center;
-  gap: 30px;
+  gap: 80px;
+}
+
+.navbar-group {
+  position: relative;
 }
 .navbar-group .nav-link {
-  margin: 15px 0;
-  text-align: center;
-  transition: transform 0.3s ease;
-}
-.navbar-group .nav-link:hover {
-  transform: translateY(-2px);
-}
-.navbar-group a {
   font-family: "Baloo 2", sans-serif;
   font-weight: bold;
   color: #222222;
   font-size: 12px;
-  transition: color 0.3s ease;
+  transition: color, transform 0.3s ease;
 }
-.navbar-group a:hover {
+.navbar-group .nav-link:hover {
   color: #7B51FF;
+  transform: translateY(-2px);
+}
+
+.nav-toggler {
+  position: absolute;
+  right: -35px;
+  top: 25px;
+  overflow: hidden;
+  height: 0;
+}
+.nav-toggler .toggler-group {
+  background-color: #F8F9F3;
+  padding-top: 10px;
+}
+.nav-toggler .toggler-list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.nav-toggler .toggler-link {
+  width: 100%;
+  margin: 5px 10px;
+  text-align: center;
+  color: #222222;
+  font-family: "Baloo 2", sans-serif;
+  font-weight: bold;
+  font-size: 12px;
+  transition: all 0.5s;
+}
+.nav-toggler .toggler-link:hover {
+  background-color: #7B51FF;
+  color: #F8F9F3;
+}
+
+.toggle-menu {
+  height: auto;
+}
+
+.nav-icon i {
+  font-size: 12px;
+  background-color: #7B51FF;
+  color: #F8F9F3;
+  padding: 5px;
+  border-radius: 50%;
+  transition: color 0.3s ease;
+  cursor: pointer;
+}
+.nav-icon i:hover {
+  color: #FFD700;
 }
 
 @media (min-width: 525px) {
-  .logo-kapoot-desktop,
-  .nav-icon {
+  .logo-kapoot-desktop {
     display: block;
   }
   .logo-kapoot-mobile {
@@ -201,26 +250,19 @@ header {
   .logo-kapoot-desktop {
     max-width: 120px;
   }
-  .nav-link a {
-    font-size: 16px;
-  }
-  .nav-icon {
-    position: relative;
-    transition: transform 0.3s ease;
-  }
-  .nav-icon:hover {
-    transform: scale(1.1);
+  .nav-link,
+  .toggler-link {
+    font-size: 16px !important;
   }
   .nav-icon i {
-    font-size: 16px;
-    background-color: #7B51FF;
-    color: #F8F9F3;
-    padding: 5px;
-    border-radius: 50%;
-    transition: color 0.3s ease;
+    font-size: 24px;
   }
-  .nav-icon i:hover {
-    color: #FFD700;
+  .nav-toggler {
+    right: -40px;
+    top: 30px;
+  }
+  .toggler-group {
+    padding-top: 20px !important;
   }
 }
 /* Styles généraux */
