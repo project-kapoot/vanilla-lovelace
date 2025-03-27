@@ -14,7 +14,7 @@
     <!-- HEADER (dans le bloc blanc global) -->
 
     <!-- CONTENU PRINCIPAL -->
-    <main class="question-container">
+    <main class="question-container question-container-player">
         <!-- Pastilles (Durée, titre quiz, joueurs restant) -->
         <div class="stats">
             <div class="stat">
@@ -27,21 +27,15 @@
                 <span>4</span>
                 <p>restants</p>
             </div>
-        </div>
-        <div class="question-quiz">
-            <!-- Pastille "Question 1" -->
-            <div class="question-number">Question 1</div>
-            <!-- Libellé de la question -->
-            <p class="question-subtitle">Comment déclarer une variable en PHP ?</p>
-        </div>
+        </div>       
         <!-- Image + console -->
-        <div class="question-content">
-            <div class="image-question">
+        <div class="question-content question-content-player">
+            <div class="image-question image-question-player">
                 <img
                     src="assets/img/PHP-Global-Variable-1.jpg"
                     alt="Illustration d'un écran avec du code PHP">
             </div>
-            <div class="ranking">
+            <div class="ranking ranking-player">
                 <table>
                     <thead>
                         <tr>
@@ -89,21 +83,24 @@
                 </table>
             </div>
         </div>
+        <div class="question-quiz">
+            <!-- Pastille "Question 1" -->
+            <div class="question-number">Question 1</div>
+            <!-- Libellé de la question -->
+            <p class="question-subtitle">Comment déclarer une variable en PHP ?</p>
+        </div>
         <!-- Réponses -->
-        <div class="answers">
-            <button class="answer"><span class="answer-num">Réponse A : </span><span class="answer-result"><code>$maVariable = 'Patate';</code></span></button>
-            <button class="answer"><span class="answer-num">Réponse B :</span><span class="answer-result"><code>let $maVariable = 'Patate';</code></span> </button>
-            <button class="answer"><span class="answer-num">Réponse C :</span><span class="answer-result"><code>var = 'Patate';</code></span> </button>
-            <button class="answer"><span class="answer-num">Réponse D :</span><span class="answer-result"><code>variable = 'Patate';</code></span> </button>
+        <div class="answers answers-player">
+            <button class="answer-color-1"><span class="answer-num">Réponse A : </span><span class="answer-result"><code>$maVariable = 'Patate';</code></span></button>
+            <button class="answer-color-2"><span class="answer-num">Réponse B :</span><span class="answer-result"><code>let $maVariable = 'Patate';</code></span> </button>
+            <button class="answer-color-3"><span class="answer-num">Réponse C :</span><span class="answer-result"><code>var = 'Patate';</code></span> </button>
+            <button class="answer-color-4"><span class="answer-num">Réponse D :</span><span class="answer-result"><code>variable = 'Patate';</code></span> </button>
         </div>
-        <!-- Bouton "Suivante" -->
-        <div class="action">
-            <button class="next">Question suivante</button>
-        </div>
+    
     </main>
     <!-- FOOTER -->
     </div>
-    <script src="/assets/js/question.js"></script>
+    
 </body>
 
 </html>

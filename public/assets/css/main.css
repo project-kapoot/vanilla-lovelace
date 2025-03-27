@@ -228,7 +228,7 @@ th {
   font-size: 20px;
   color: #F8F9F3;
   height: auto;
-  margin-bottom: 10px;
+  margin: 10px 0;
 }
 .question-container .question-quiz .question-number {
   display: inline-block;
@@ -269,7 +269,7 @@ th {
   display: block;
 }
 .question-container .question-content .ranking {
-  min-width: 300px;
+  min-width: 280px;
   background-color: #F8F9F3;
   font-size: 16px;
   border: 3px solid #7B51FF;
@@ -333,7 +333,7 @@ th {
   font-size: 20px;
   font-weight: bold;
 }
-.answers .answer-resp {
+.answers .answer-result {
   color: #222222;
   font-family: "Baloo 2", sans-serif;
   font-size: 16px;
@@ -376,7 +376,7 @@ th {
     font-size: 20px;
   }
   .question-container .stats .quiz-title {
-    font-size: 24px;
+    font-size: 16px;
   }
   .question-container .question-quiz .question-number {
     font-size: 12px;
@@ -414,24 +414,115 @@ th {
   .question-container .answers .answer {
     font-size: 12px;
     gap: 0.5rem;
+    align-items: center;
   }
   .question-container .answers .answer-num {
     font-size: 16px;
   }
-  .question-container .answers .answer-resp {
+  .question-container .answers .answer-result {
     font-size: 12px;
     margin-bottom: 5px;
   }
   .question-container .ranking {
     order: 3;
-    min-width: auto;
     width: 100%;
-    margin: 1rem auto;
+    align-items: center;
+    margin: auto;
     transform: scale(0.85);
     transform-origin: center;
   }
   .question-container .action {
     order: 4;
+  }
+}
+.answers {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-top: 20px;
+}
+.answers .answer-color, .answers .answer-color-4, .answers .answer-color-3, .answers .answer-color-2, .answers .answer-color-1 {
+  padding: 10px 0;
+  font-family: "Fredoka", sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  border: 2px solid #7B51FF;
+  border-radius: 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+}
+.answers .answer-color:hover, .answers .answer-color-4:hover, .answers .answer-color-3:hover, .answers .answer-color-2:hover, .answers .answer-color-1:hover {
+  background-color: #f9f9f9;
+}
+.answers .answer-color-1 {
+  background-color: #00C2FF;
+}
+.answers .answer-color-2 {
+  background-color: #F1A713;
+}
+.answers .answer-color-3 {
+  background-color: #FF4081;
+}
+.answers .answer-color-4 {
+  background-color: #28D55C;
+}
+.answers .answer-num {
+  color: #222222;
+  font-family: "Fredoka", sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+}
+.answers .answer-resp {
+  color: #222222;
+  font-family: "Baloo 2", sans-serif;
+  font-size: 16px;
+}
+
+@media (max-width: 768px) {
+  .question-container-player .question-content-player {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .question-container-player .question-content-player .image-question-player {
+    order: 0;
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+  }
+  .question-container-player .question-content-player img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+  .question-container-player .answers-player {
+    grid-template-columns: 1fr;
+    width: auto;
+    gap: 0.5rem;
+  }
+  .question-container-player .answers-player .answer-color, .question-container-player .answers-player .answers .answer-color-1, .answers .question-container-player .answers-player .answer-color-1, .question-container-player .answers-player .answers .answer-color-2, .answers .question-container-player .answers-player .answer-color-2, .question-container-player .answers-player .answers .answer-color-3, .answers .question-container-player .answers-player .answer-color-3, .question-container-player .answers-player .answers .answer-color-4, .answers .question-container-player .answers-player .answer-color-4 {
+    font-size: 12px;
+    gap: 0.5rem;
+    align-items: center;
+  }
+  .question-container-player .answers-player .answer-num {
+    font-size: 16px;
+  }
+  .question-container-player .answers-player .answer-result {
+    font-size: 12px;
+    margin-bottom: 5px;
+  }
+  .question-container-player .ranking-player {
+    width: 100%;
+    align-items: center;
+    margin: auto;
+    transform: scale(0.85);
+    transform-origin: center;
   }
 }
 
