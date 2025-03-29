@@ -1,7 +1,7 @@
 @use '../abstracts' as *;
 
 footer {
-    position: fixed;
+    position: relative;
     bottom: 0;
     background-color: $color-white;
     width: 100%;
@@ -20,7 +20,8 @@ footer {
     }
 
     .footer-text-2,
-    .footer-text-3 {
+    .footer-text-3,
+    .footer-text-4 {
         transition: transform .3s ease;
 
         &:hover {
@@ -41,15 +42,18 @@ footer {
 
 // responsive 
 
-@media (min-width : 525px) {
+@media (min-width : 560px) {
     footer {
         flex-direction: row;
         justify-content: center;
         padding: 15px 0;
         font-size: $fs-16;
+        text-align: center;
+        gap: 25px;
 
-        .footer-text-2 {
-            margin: 0 20px;
+        .footer-text-4 {
+            order: 1;
         }
+        
     }
 }
