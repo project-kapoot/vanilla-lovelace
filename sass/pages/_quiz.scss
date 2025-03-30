@@ -1,0 +1,235 @@
+@use '../abstracts' as *;
+
+.quiz-page {
+    font-family: $font-fredoka;
+    font-size: $fs-12;  
+
+    // general style
+    .title-container {
+        background: $color-lightblue;
+    }
+
+    // title section
+    .title {
+        color: $color-white;
+        display:  flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px;
+        margin: 0 40px;
+
+
+        h1 {
+            font-family: $font-baloo;
+            font-size: $fs-24;
+            font-weight: 600;
+            margin-right: 20px;
+        }
+
+        .add-quiz-btn  {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background-color: $color-purple;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            &:hover, &:hover i {
+                background-color: darken($color-purple, 3);
+                color: $color-yellow;
+            }
+
+            i {
+                color: $color-white;
+            }
+        }
+    }
+
+    // search box
+    .search-box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0 70px;
+        margin-top: 10px;
+
+        .content {
+            display: grid;
+            grid-template-columns: repeat(3,1fr) 30px;
+            grid-template-rows: 35px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0px 0px 4px $color-darkgrey;
+            border-radius: 50px;
+
+            input {
+                grid-column: 1 / 4;
+                border-radius: 50px 0 0 50px;
+                border: 2px solid $color-purple;
+                outline: none;
+                padding: 0 15px;
+            }
+
+            input::placeholder {
+                font-size: $fs-12;
+                font-family: $font-baloo;
+            }
+
+            .search-btn {
+                grid-column: 4 / -1;
+                background-color: $color-purple;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-decoration: none;
+                color: $color-white;
+                border-radius: 0 50px 50px 0;
+            }
+        }
+
+        .filter {
+            margin: 15px 0;
+            align-self: end;
+
+            select {
+                background-color: $color-lightblue;
+                color: $color-white;
+                outline: none;
+                border: none;
+                font-family: $font-fredoka;
+            }
+        }
+    }
+
+    // category section
+
+    .quiz-category {
+
+        .category {
+            background-color: $color-lightblue;
+            padding-top: 15px;
+
+                .category-group {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    gap: 35px;
+                }
+
+                .category-list {
+                    background-color: rgba($color-purple, .4);
+                    padding: 8px 15px;
+                    border-radius: 5px 5px 0 0;
+                    font-weight: bold;
+                    transition: background-color .3s;
+                    text-align: center;
+
+                    &:hover {
+                        background-color: $color-purple;
+                    }
+                }
+
+                .active-category {
+                    background-color: $color-purple;
+                }
+
+                .category-link {
+                    text-decoration: none;
+                    color: $color-white;
+                    font-family: $font-baloo;
+                }
+        }
+    }
+
+    // quiz card section
+
+    .card-section {
+        height: 100vh;
+        background: $bg-gradient-reverse;
+        color: $color-white;
+        text-align: center;
+        padding-top: 50px;
+    }
+
+}
+
+
+// responsive 
+
+
+@media (min-width : 425px) {
+    .quiz-page {
+        // tilte section
+        font-size: $fs-16;
+
+        .title {
+            h1 {
+                font-size: $fs-32;
+            }
+        }
+
+        .search-box {
+
+            .content {
+
+                input::placeholder {
+                    font-size: $fs-16;
+                }
+            }
+
+            .filter {
+
+                select {
+                    font-size: $fs-16;
+                }
+            }
+        }
+    }
+}
+
+
+@media (min-width : 791px) {
+    .quiz-page {
+        // title section
+        .title {
+            margin: 0 80px;
+        }
+    
+        .search-box {
+            flex-direction: row;
+            justify-content: center;
+            gap: 35px;
+            padding-bottom: 15px;
+        }
+
+        // category section 
+        .quiz-category {
+            .category {
+                .category-group {
+                    gap: 100px;
+                }
+            }
+        }
+    }
+}
+
+@media (min-width : 1024px) {
+    .quiz-page {
+        // title section
+        .title {
+            justify-content: space-around;
+            gap: 100px;
+        }
+
+        // category section 
+        .quiz-category {
+            .category {
+                .category-group {
+                    gap: 170px;
+                }
+            }
+        }
+    }
+    
+}
