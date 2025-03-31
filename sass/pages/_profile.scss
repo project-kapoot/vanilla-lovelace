@@ -103,6 +103,30 @@
         }
     }
 
+    .dialog {
+        @include container(500px);
+
+        width: 100%;
+        padding: 0;
+        border: none;
+
+        &::backdrop {
+            background-color: $dialog-backdrop;
+        }
+
+        &__inner {
+            @include space-margin($space-32);
+
+            padding: $space-32;
+        }
+
+        .buttons {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+    }
+
     .table-quiz, .table-stats {
         width: 100%;
         text-align: center;
