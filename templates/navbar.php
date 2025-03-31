@@ -8,7 +8,7 @@
     <!-- remixicon link css -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css">
     <!-- script js -->
-    <script src="/assets/js/script.js" defer></script>
+    <script src="/assets/js/script.js" type="module"></script>
 </head>
 <body>
     <!-- header -->
