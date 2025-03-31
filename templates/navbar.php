@@ -17,8 +17,8 @@
         <nav class="navbar" aria-label="Main menu">
             <a href="/">
                 <picture>
-                    <source class="logo-kapoot-desktop" srcset="/assets/img/logo-kapoot-desktop.png" media="(min-width: 525px)" alt="site logo">
-                    <source class="logo-kapoot-mobile" srcset="/assets/img/logo-kapoot-mobile.png" alt="site logo">
+                    <source srcset="/assets/img/logo-kapoot-desktop.png" media="(min-width: 525px)" alt="site logo">
+                    <source srcset="/assets/img/logo-kapoot-mobile.png" alt="site logo">
                     <img class="logo" src="/assets/img/logo-kapoot-mobile.png" alt="site logo">
                 </picture>
             </a>
@@ -28,7 +28,7 @@
                     <a class="nav-link" href="#">Quiz</a>
                 </li>
                 <li class="nav-icon">
-                    <i class="ri-user-fill toggleBtn"></i>
+                    <i id="navbar-toggle" class="ri-user-fill"></i>
                     <!-- toggle menu -->
                     <div class="nav-toggler">
                         <ul class="toggler-group">
