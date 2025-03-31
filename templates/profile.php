@@ -140,11 +140,11 @@
                         <label for="user-email" class="form__label">Email</label>
                         <input id="user-email" name="user[email]" type="text" class="form__widget" placeholder="johndoe@mail.com">
                     </div>
-                    <div class="buttons">
+                    <menu class="buttons">
                         <button type="submit" class="btn-primary">Confirmer</button>
                         <button formmethod="dialog" class="btn-primary">Fermer</button>
-                    </div>
-                </form>
+                    </menu>
+            </form>
             </div>
         </dialog>
     </main>
