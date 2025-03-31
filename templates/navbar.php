@@ -13,12 +13,12 @@
 <body>
     <!-- header -->
     <header>
-        <div class="kapoot-logo">
-            <a href="/" class="logo-kapoot-mobile"><img src="/assets/img/logo-kapoot-mobile.png" alt="site logo"></a>
-            <a href="/" class="logo-kapoot-desktop"><img src="/assets/img/logo-kapoot-desktop.png" alt="site logo"></a>
-        </div>
         <!-- navbar -->
         <nav class="navbar" aria-label="Main menu">
+            <div class="kapoot-logo">
+                <a href="/" class="logo-kapoot-mobile"><img src="/assets/img/logo-kapoot-mobile.png" alt="site logo"></a>
+                <a href="/" class="logo-kapoot-desktop"><img src="/assets/img/logo-kapoot-desktop.png" alt="site logo"></a>
+            </div>
             <ul class="navbar-group">
                 <li class="nav-list">
                     <a class="nav-link" href="#">Accueil</a>
