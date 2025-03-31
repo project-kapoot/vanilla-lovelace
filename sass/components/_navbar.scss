@@ -113,10 +113,17 @@ body > header {
     @media (min-width : 525px) {
         flex-direction: row;
         justify-content: space-between;
+        padding: 0 35px;
 
         // logo
         .logo {
             max-width: 120px;
+        }
+
+        .navbar-group {
+            .nav-list {
+                gap: 60px;
+            }
         }
 
         .nav-link,
@@ -129,13 +136,21 @@ body > header {
         }
 
         // nav toogler
-        .nav-roggler {
+        .nav-toggler {
             right: -40px;
-            top: 30px;
+            top: 40px;
         }
 
         .toggler-group {
             padding-top: 20px !important;
+        }
+    }
+
+    @media (min-width : 700px) {
+        .navbar-group {
+            .nav-list {
+                gap: 80px;
+            }
         }
     }
 }
