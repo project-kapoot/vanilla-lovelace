@@ -190,15 +190,6 @@ footer a:hover {
     order: 1;
   }
 }
-.nav-link,
-.nav-icon a {
-  text-decoration: none;
-}
-
-.logo {
-  padding-block: 15px;
-}
-
 .navbar {
   display: flex;
   flex-direction: column;
@@ -207,47 +198,51 @@ footer a:hover {
   box-shadow: 0px 1px 3px #222222;
   padding: 12px 0;
 }
-
-.navbar-group,
-.nav-list {
+.navbar .nav-link,
+.navbar .nav-icon a {
+  text-decoration: none;
+}
+.navbar .logo {
+  padding-block: 15px;
+}
+.navbar .navbar-group,
+.navbar .nav-list {
   display: flex;
   align-items: center;
   gap: 80px;
 }
-
-.navbar-group {
+.navbar .navbar-group {
   position: relative;
 }
-.navbar-group .nav-link {
+.navbar .navbar-group .nav-link {
   font-family: "Baloo 2", sans-serif;
   font-weight: bold;
   color: #222222;
   font-size: 12px;
   transition: color, transform 0.3s ease;
 }
-.navbar-group .nav-link:hover {
+.navbar .navbar-group .nav-link:hover {
   color: #7B51FF;
   transform: translateY(-2px);
 }
-
-.nav-toggler {
+.navbar .nav-toggler {
   position: absolute;
   right: -35px;
   top: 25px;
   overflow: hidden;
   height: 0;
 }
-.nav-toggler .toggler-group {
+.navbar .nav-toggler .toggler-group {
   background-color: #F8F9F3;
   padding-top: 10px;
 }
-.nav-toggler .toggler-list {
+.navbar .nav-toggler .toggler-list {
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.nav-toggler .toggler-link {
+.navbar .nav-toggler .toggler-link {
   width: 100%;
   margin: 5px 10px;
   text-align: center;
@@ -257,16 +252,14 @@ footer a:hover {
   font-size: 12px;
   transition: all 0.5s;
 }
-.nav-toggler .toggler-link:hover {
+.navbar .nav-toggler .toggler-link:hover {
   background-color: #7B51FF;
   color: #F8F9F3;
 }
-
-.toggle-menu {
+.navbar .toggle-menu {
   height: auto;
 }
-
-.nav-icon i {
+.navbar .nav-icon i {
   font-size: 12px;
   background-color: #7B51FF;
   color: #F8F9F3;
@@ -275,33 +268,33 @@ footer a:hover {
   transition: color 0.3s ease;
   cursor: pointer;
 }
-.nav-icon i:hover {
+.navbar .nav-icon i:hover {
   color: #FFD700;
 }
-
 @media (min-width: 525px) {
-  .logo {
-    max-width: 120px;
-  }
   .navbar {
     flex-direction: row;
     justify-content: space-evenly;
   }
-  .nav-link,
-  .toggler-link {
+  .navbar .logo {
+    max-width: 120px;
+  }
+  .navbar .nav-link,
+  .navbar .toggler-link {
     font-size: 16px !important;
   }
-  .nav-icon i {
+  .navbar .nav-icon i {
     font-size: 24px;
   }
-  .nav-toggler {
+  .navbar .nav-roggler {
     right: -40px;
     top: 30px;
   }
-  .toggler-group {
+  .navbar .toggler-group {
     padding-top: 20px !important;
   }
 }
+
 .btn-primary {
   display: inline;
   border: none;
