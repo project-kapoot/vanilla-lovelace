@@ -132,12 +132,12 @@ th {
 }
 
 .container-700 {
-  max-width: min(700, 100% - 32px);
+  max-width: min(700px, 100% - 32px);
   margin-inline: auto;
 }
 
 .container-1400 {
-  max-width: min(1400, 100% - 32px);
+  max-width: min(1400px, 100% - 32px);
   margin-inline: auto;
 }
 
@@ -426,6 +426,7 @@ body > header {
   font-size: 16px;
   color: #222222;
   background: linear-gradient(#00C2FF, #7B51FF);
+  padding-block: 64px;
 }
 .profile-page h2, .profile-page h3 {
   font-family: "Fredoka", sans-serif;
