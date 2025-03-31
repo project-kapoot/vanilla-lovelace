@@ -4,7 +4,6 @@ $sizes: (700, 1400);
 
 @each $size in $sizes {
     .container-#{$size} {
-        max-width: min(#{$size}px, 100% - $space-32);
-        margin-inline: auto;
+        @include container($size);
     }
 }
