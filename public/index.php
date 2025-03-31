@@ -6,6 +6,7 @@ $template = match($path) {
     '/' => 'home.php',
     '/connexion' => 'login.php',
     '/inscription' => 'register.php',
+    '/profil' => 'profile.php',
     default => null
 };
 
