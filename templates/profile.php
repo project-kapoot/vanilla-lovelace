@@ -4,9 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kapoot - Mon profil</title>
+
     <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css">
+
+    <script type="module" src="/assets/js/script.js"></script>
 </head>
 <body>
+    <?php templatePart('navbar.php'); ?>
+
     <main class="profile-page">
         <h1 class="visually-hidden">Mon profil</h1>
         <div class="cards container-1400">
@@ -113,5 +119,7 @@
             </section>
         </div>
     </main>
+
+    <?php templatePart('footer.php'); ?>
 </body>
 </html>

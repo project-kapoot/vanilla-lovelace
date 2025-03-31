@@ -61,3 +61,8 @@
         content: attr(data-header) " : ";
     }
 }
+
+@mixin container($size) {
+    max-width: min($size, 100% - $space-32);
+    margin-inline: auto;
+}

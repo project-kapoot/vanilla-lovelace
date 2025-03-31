@@ -20,4 +20,10 @@ if(!file_exists($file)) {
     echo 'Le fichier : ' . $file . ' n\'existe pas !';
 }
 
+function templatePart(string $name) {
+    $directory = __DIR__ . '/../templates/includes/';
+
+    require_once $directory . $name; 
+}
+
 require_once $file;
