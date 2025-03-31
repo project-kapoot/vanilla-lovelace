@@ -8,6 +8,7 @@ $template = match($path) {
     '/inscription' => 'register.php',
     '/navbar' => 'navbar.php',
     '/footer' => 'footer.php',
+    '/profil' => 'profile.php',
     default => null
 };
 

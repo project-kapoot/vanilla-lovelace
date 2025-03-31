@@ -1,0 +1,25 @@
+@use '../abstracts' as *;
+
+.visually-hidden {
+    @include visually-hidden($isImportant: true);
+}
+
+.fw-bold {
+    font-weight: bold !important;
+}
+
+.d-block {
+    display: block !important;
+}
+
+.space-margin-16 {
+    @include space-margin($space-16);
+}
+
+.mx-auto {
+    margin-inline: auto !important;
+}
+
+.text-center {
+    text-align: center !important;
+}
