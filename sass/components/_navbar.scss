@@ -2,18 +2,15 @@
 
 // general styles
 
-.logo-kapoot-desktop {
-    display: none;
-}
-
 .nav-link,
 .nav-icon a {
     text-decoration: none;
 }
 
-// kapoot logo
-.kapoot-logo {
-    padding-top: 15px;
+// logo
+
+.logo {
+    padding-block: 15px;
 }
 
 // links
@@ -121,18 +118,8 @@
 // responsive
 
 @media (min-width : 525px) {
-
-    // general styles
-    .logo-kapoot-desktop {
-        display: block;
-    }
-
-    .logo-kapoot-mobile {
-        display: none;
-    }
-
     // logo
-    .logo-kapoot-desktop {
+    .logo {
         max-width: 120px;
     }
 

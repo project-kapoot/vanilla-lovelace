@@ -190,17 +190,13 @@ footer a:hover {
     order: 1;
   }
 }
-.logo-kapoot-desktop {
-  display: none;
-}
-
 .nav-link,
 .nav-icon a {
   text-decoration: none;
 }
 
-.kapoot-logo {
-  padding-top: 15px;
+.logo {
+  padding-block: 15px;
 }
 
 .navbar {
@@ -284,13 +280,7 @@ footer a:hover {
 }
 
 @media (min-width: 525px) {
-  .logo-kapoot-desktop {
-    display: block;
-  }
-  .logo-kapoot-mobile {
-    display: none;
-  }
-  .logo-kapoot-desktop {
+  .logo {
     max-width: 120px;
   }
   .navbar {

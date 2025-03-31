@@ -15,10 +15,13 @@
     <header>
         <!-- navbar -->
         <nav class="navbar" aria-label="Main menu">
-            <div class="kapoot-logo">
-                <a href="/" class="logo-kapoot-mobile"><img src="/assets/img/logo-kapoot-mobile.png" alt="site logo"></a>
-                <a href="/" class="logo-kapoot-desktop"><img src="/assets/img/logo-kapoot-desktop.png" alt="site logo"></a>
-            </div>
+            <a href="/">
+                <picture>
+                    <source class="logo-kapoot-desktop" srcset="/assets/img/logo-kapoot-desktop.png" media="(min-width: 525px)" alt="site logo">
+                    <source class="logo-kapoot-mobile" srcset="/assets/img/logo-kapoot-mobile.png" alt="site logo">
+                    <img class="logo" src="/assets/img/logo-kapoot-mobile.png" alt="site logo">
+                </picture>
+            </a>
             <ul class="navbar-group">
                 <li class="nav-list">
                     <a class="nav-link" href="#">Accueil</a>
