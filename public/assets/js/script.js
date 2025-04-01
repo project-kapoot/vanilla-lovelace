@@ -37,3 +37,12 @@ if(dialog !== null) {
         }  
     });
 }
+const socket = new WebSocket('http://kapoot.localhost:443')
+
+socket.addEventListener('error', function(ev) {
+    console.log('Websocket error : ', ev)
+})
+
+socket.addEventListener('close', function(ev) {
+    console.log('Websocket closing : ', ev)
+})
