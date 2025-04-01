@@ -7,6 +7,8 @@ $template = match($path) {
     '/connexion' => 'login.php',
     '/inscription' => 'register.php',
     '/profil' => 'profile.php',
+    '/quiz' => 'quiz.php',
+    '/quiz-socket' => '../src/web_socket.php',
     default => null
 };
 
