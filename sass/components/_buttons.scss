@@ -1,0 +1,37 @@
+@use '../abstracts' as *;
+
+%btn {
+    display: inline;
+
+    border: none;
+    border-radius: 5px;
+
+    padding: $space-12 $space-16;
+
+    font-size: $fs-16;
+    font-family: $font-baloo;
+
+    cursor: pointer;
+
+    @media screen and (max-width: $break-sm) {
+        padding: $space-8 $space-16;
+
+        font-size: $fs-12;
+    }
+}
+
+.btn-primary {
+    @extend %btn;
+
+    color: white;
+
+    font-weight: bold;
+
+    background-color: $color-purple;
+
+    transition: background-color 300ms;
+
+    &:hover {
+        background-color: $color-lightblue;
+    }
+}

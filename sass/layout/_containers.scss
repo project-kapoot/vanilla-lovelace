@@ -1,0 +1,9 @@
+@use '../abstracts' as *;
+
+$sizes: (700, 1400);
+
+@each $size in $sizes {
+    .container-#{$size} {
+        @include container(#{$size}px);
+    }
+}

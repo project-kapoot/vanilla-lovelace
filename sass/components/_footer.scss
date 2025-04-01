@@ -1,1 +1,63 @@
 @use '../abstracts' as *;
+
+.footer {
+    background-color: $color-white;
+    font-family: $font-baloo;
+    font-weight: bold;
+    font-size: $fs-12;
+
+    white-space: nowrap;
+
+    &__inner {
+        @include container(750px);
+
+        position: relative;
+        bottom: 0;
+        width: 100%;
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 0;
+    } 
+
+    .footer-text-1,
+    a {
+        color: $color-darkgrey;
+    }
+
+    .footer-text-2,
+    .footer-text-3,
+    .footer-text-4 {
+        transition: transform .3s ease;
+
+        &:hover {
+            transform: translatey(-2px);
+        }
+    }
+
+    a {
+        text-decoration: none;
+
+        &:hover {
+            color: $color-lightblue;
+            text-decoration: underline;
+        }
+    }
+
+    // responsive 
+    @media (min-width : 600px) {
+        &__inner {
+            flex-direction: row;
+            justify-content: center;
+            padding: 15px 0;
+            font-size: $fs-16;
+            text-align: center;
+            gap: 25px;
+
+            .footer-text-4 {
+                order: 1;
+            }
+        }
+    }
+}
