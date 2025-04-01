@@ -1,6 +1,8 @@
 <?php 
 
-$path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+$path = rtrim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
+$path = $path === '' ? '/' : $path;
+
 
 $template = match($path) {
     '/' => 'home.php',
@@ -12,11 +14,13 @@ $template = match($path) {
     default => null
 };
 
-if($template === null) {
-    echo '404 not found';
+if ($template === null || !file_exists(__DIR__ . '/../templates/' . $template)) {
+    http_response_code(404);
+    require_once __DIR__ . '/../templates/errors/404.php';
+    exit;
 }
 
-$file = __DIR__ . '/../templates/' . $template;
+$file = __DIR__ . '../templates/' . $template;
 
 if(!file_exists($file)) {
     echo 'Le fichier : ' . $file . ' n\'existe pas !';
