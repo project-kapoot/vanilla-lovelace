@@ -669,6 +669,9 @@ body > header {
   background-color: transparent;
   cursor: pointer;
 }
+.dialog-answer pre {
+  white-space: pre-wrap;
+}
 .dialog-answer::backdrop {
   background-color: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(2px);
