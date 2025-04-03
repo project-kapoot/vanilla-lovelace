@@ -5,11 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kapoot - Quiz</title>
     <link rel="stylesheet" href="/assets/css/main.css">
-    <script src="/assets/js/script.js" defer></script>
-    <!-- font awesome link css -->
+    <script src="/assets/js/script.js" type="module" defer></script>
+    <!-- icon link css -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css">
 </head>
 <body>
+    <!-- header -->
+    <?php templatePart('navbar.php') ?>
+    <!-- Main content -->
     <main role="main" class="quiz-page">
         <!-- title section -->
         <section class="title-container">
@@ -44,9 +48,108 @@
             </div>
         </section>
         <!-- quiz card section -->
-        <div class="card-section">
-            <p>card section</p>
-        </div>
+        <section class="card-section">
+            <div class="section-container">
+                <div class="card-container">
+                    <div class="card-thumb">
+                        <img src="/assets/img/placeholder.png" alt="quiz image">
+                        <span class="level">Avancé</span>
+                        <span class="date">21/03/2025</span>
+                    </div>
+                    <div class="card-info">
+                        <h2 class="card-title">Cybersécurité : testez vos connaissances !</h2>
+                        <p class="card-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt doloremque minus necessitatibus repellat odit quasi.</p>
+                    </div>
+                    <button type="button" class="card-btn">Rejoindre</button>
+                </div>
+                <div class="card-container">
+                    <div class="card-thumb">
+                        <img src="/assets/img/placeholder.png" alt="quiz image">
+                        <span class="level">Avancé</span>
+                        <span class="date">21/03/2025</span>
+                    </div>
+                    <div class="card-info">
+                        <h2 class="card-title">Cybersécurité : testez vos connaissances !</h2>
+                        <p class="card-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt doloremque minus necessitatibus repellat odit quasi.</p>
+                    </div>
+                    <button type="button" class="card-btn">Rejoindre</button>
+                </div>
+                <div class="card-container">
+                    <div class="card-thumb">
+                        <img src="/assets/img/placeholder.png" alt="quiz image">
+                        <span class="level">Avancé</span>
+                        <span class="date">21/03/2025</span>
+                    </div>
+                    <div class="card-info">
+                        <h2 class="card-title">Cybersécurité : testez vos connaissances !</h2>
+                        <p class="card-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt doloremque minus necessitatibus repellat odit quasi.</p>
+                    </div>
+                    <button type="button" class="card-btn">Rejoindre</button>
+                </div>
+                <div class="card-container">
+                    <div class="card-thumb">
+                        <img src="/assets/img/placeholder.png" alt="quiz image">
+                        <span class="level">Avancé</span>
+                        <span class="date">21/03/2025</span>
+                    </div>
+                    <div class="card-info">
+                        <h2 class="card-title">Cybersécurité : testez vos connaissances !</h2>
+                        <p class="card-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt doloremque minus necessitatibus repellat odit quasi.</p>
+                    </div>
+                    <button type="button" class="card-btn">Rejoindre</button>
+                </div>
+                <div class="card-container">
+                    <div class="card-thumb">
+                        <img src="/assets/img/placeholder.png" alt="quiz image">
+                        <span class="level">Avancé</span>
+                        <span class="date">21/03/2025</span>
+                    </div>
+                    <div class="card-info">
+                        <h2 class="card-title">Cybersécurité : testez vos connaissances !</h2>
+                        <p class="card-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt doloremque minus necessitatibus repellat odit quasi.</p>
+                    </div>
+                    <button type="button" class="card-btn">Rejoindre</button>
+                </div>
+                <div class="card-container">
+                    <div class="card-thumb">
+                        <img src="/assets/img/placeholder.png" alt="quiz image">
+                        <span class="level">Avancé</span>
+                        <span class="date">21/03/2025</span>
+                    </div>
+                    <div class="card-info">
+                        <h2 class="card-title">Cybersécurité : testez vos connaissances !</h2>
+                        <p class="card-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt doloremque minus necessitatibus repellat odit quasi.</p>
+                    </div>
+                    <button type="button" class="card-btn">Rejoindre</button>
+                </div>
+                <div class="card-container">
+                    <div class="card-thumb">
+                        <img src="/assets/img/placeholder.png" alt="quiz image">
+                        <span class="level">Avancé</span>
+                        <span class="date">21/03/2025</span>
+                    </div>
+                    <div class="card-info">
+                        <h2 class="card-title">Cybersécurité : testez vos connaissances !</h2>
+                        <p class="card-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt doloremque minus necessitatibus repellat odit quasi.</p>
+                    </div>
+                    <button type="button" class="card-btn">Rejoindre</button>
+                </div>
+                <div class="card-container">
+                    <div class="card-thumb">
+                        <img src="/assets/img/placeholder.png" alt="quiz image">
+                        <span class="level">Avancé</span>
+                        <span class="date">21/03/2025</span>
+                    </div>
+                    <div class="card-info">
+                        <h2 class="card-title">Cybersécurité : testez vos connaissances !</h2>
+                        <p class="card-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt doloremque minus necessitatibus repellat odit quasi.</p>
+                    </div>
+                    <button type="button" class="card-btn">Rejoindre</button>
+                </div>
+            </div>
+        </section>
     </main>
+    <!-- footer -->
+    <?php templatePart('footer.php') ?>
 </body>
 </html>
