@@ -49,3 +49,51 @@ export function newNavbar(nav, btn, menu) {
 
     return nav;
 }
+
+/**
+ * @param {HTMLDialogElement} element La boite de dialogue concernée
+ * @returns {[HTMLDialogElement, null] | [null, Error | TypeError]} La boite de dialogue modifiée
+ */
+export function newDialog(element) {
+    if(!(element instanceof HTMLDialogElement)) {
+        return [null, new TypeError(`Cannot create a new dialog : argument #1 must be an instance of ${HTMLDialogElement.name} (${typeof element} received)`)];
+    }
+
+    const openBtn = document.querySelector(`button[data-dialog-id="${element.id}"]`);
+
+    if(!(openBtn instanceof HTMLButtonElement)) {
+        return [null, new TypeError(`Cannot create a new dialog : opening button for ${HTMLDialogElement.name} with id = ${element.id} was not found`)];
+    }
+
+    const body = element.querySelector('.dialog__inner');
+    
+    if(!body) {
+        return [null, new Error(`Cannot create a new dialog : dialog must have a body which was not found`)];
+    }
+
+    const closeBtn = element.querySelector('[formmethod="dialog"], .close-btn');
+
+    if(!closeBtn) {
+        return [null, new Error(`Cannot create a new dialog : dialog must have a closing button which was not found`)];
+    }
+    
+    if(!(closeBtn instanceof HTMLButtonElement)) {
+        return [null, new Error(`Cannot create a new dialog : closing button must be an instance of ${HTMLButtonElement}`)];
+    }
+
+    const dialog = {
+        body: body,
+        openBtn: openBtn,
+        closeBtn: closeBtn,
+    };
+
+    for(const prop in dialog) {
+        if(prop in element) {
+            return [null, new Error(`Cannot create a new dialog : property ${prop} in already defined on ${element}`)];
+        }
+        
+        element[prop] = dialog[prop];
+    }
+
+    return [element, null];
+}

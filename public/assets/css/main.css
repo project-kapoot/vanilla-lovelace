@@ -521,6 +521,30 @@ body > header {
   padding: 8px 8px;
   background-color: #F8F9F3;
 }
+.profile-page .dialog {
+  max-width: min(500px, 100% - 32px);
+  margin-inline: auto;
+  width: 100%;
+  padding: 0;
+  border: none;
+}
+.profile-page .dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.profile-page .dialog__inner {
+  padding: 32px;
+}
+.profile-page .dialog__inner > *:not(:last-child) {
+  margin-bottom: 32px;
+}
+.profile-page .dialog__inner > :last-child {
+  margin-bottom: 0px;
+}
+.profile-page .dialog .buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
 .profile-page .table-quiz, .profile-page .table-stats {
   width: 100%;
   text-align: center;
@@ -629,7 +653,6 @@ body > header {
     grid-row: 2;
   }
 }
-
 .waiting-room-page {
   font-family: "Baloo 2", sans-serif;
   background: linear-gradient(#00C2FF, #7B51FF);
