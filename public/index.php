@@ -32,10 +32,10 @@ function templatePart(string $name) {
 }
 
 $roles = [
-    'presenter',
     'player',
+    'presenter',
 ];
 
-$user = new User([$roles[1]]);
+$role = $roles[0];
 
 require_once $file;
