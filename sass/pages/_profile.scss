@@ -8,6 +8,8 @@
 
     background: $bg-gradient;
 
+    padding-block: $space-64;
+
     h2, h3 {
         font-family: $font-fredoka;
         font-weight: bold;
@@ -98,6 +100,30 @@
             padding: $space-8 $space-8;
 
             background-color: $color-white;
+        }
+    }
+
+    .dialog {
+        @include container(500px);
+
+        width: 100%;
+        padding: 0;
+        border: none;
+
+        &::backdrop {
+            background-color: $dialog-backdrop;
+        }
+
+        &__inner {
+            @include space-margin($space-32);
+
+            padding: $space-32;
+        }
+
+        .buttons {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
         }
     }
 

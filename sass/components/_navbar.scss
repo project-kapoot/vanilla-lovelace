@@ -1,1 +1,156 @@
 @use '../abstracts' as *;
+
+// general styles
+body > header {
+    background: $color-white;
+    box-shadow: 0px 1px 3px $color-darkgrey;
+    padding: 12px 0;
+}
+
+.navbar {
+    @include container(750px);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .nav-link,
+    .nav-icon a {
+        text-decoration: none;
+    }
+
+    // logo
+    .logo {
+        padding-block: 15px;
+    }
+
+    // links
+
+    .navbar-group,
+    .nav-list {
+        display: flex;
+        align-items: center;
+        gap: 80px;
+    }
+
+    .navbar-group {
+        position: relative;
+
+        .nav-link {
+            font-family: $font-baloo;
+            font-weight: bold;
+            color: $color-darkgrey;
+            font-size: $fs-12;
+            transition: color, transform .3s ease;
+
+            &:hover {
+                color: $color-purple;
+                transform: translateY(-2px);
+            }
+        }
+    }
+
+    // nav toogler
+    .nav-toggler {
+        position: absolute;
+        right: -35px;
+        top: 25px;
+        overflow: hidden;
+        height: 0;
+
+        .toggler-group {
+            background-color: $color-white;
+            padding-top: 10px;
+        }
+
+        .toggler-list {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .toggler-link {
+            width: 100%;
+            margin:  5px 10px;
+            text-align: center;
+            color: $color-darkgrey;
+            font-family: $font-baloo;
+            font-weight: bold;
+            font-size: $fs-12;
+            transition: all .5s;
+
+            &:hover {
+                background-color: $color-purple;
+                color: $color-white;
+            }
+        }
+    }
+
+    // toggle menu
+    .toggle-menu {
+        height: auto;
+    }
+
+    // nav icon
+    .nav-icon {
+        i {
+            font-size: $fs-12;
+            background-color: $color-purple;
+            color: $color-white;
+            padding: 5px;
+            border-radius: 50%;
+            transition: color .3s ease;
+            cursor: pointer;
+
+            &:hover {
+                color: $color-yellow;
+            }
+        }
+    }
+
+    // responsive
+    @media (min-width : 525px) {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 0 35px;
+
+        // logo
+        .logo {
+            max-width: 120px;
+        }
+
+        .navbar-group {
+            .nav-list {
+                gap: 60px;
+            }
+        }
+
+        .nav-link,
+        .toggler-link {
+            font-size: $fs-16 !important;
+        }
+
+        .nav-icon i {
+            font-size: $fs-24;
+        }
+
+        // nav toogler
+        .nav-toggler {
+            right: -40px;
+            top: 40px;
+        }
+
+        .toggler-group {
+            padding-top: 20px !important;
+        }
+    }
+
+    @media (min-width : 700px) {
+        .navbar-group {
+            .nav-list {
+                gap: 80px;
+            }
+        }
+    }
+}

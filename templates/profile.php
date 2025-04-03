@@ -4,9 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kapoot - Mon profil</title>
+
     <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css">
+
+    <script type="module" src="/assets/js/script.js"></script>
 </head>
 <body>
+    <?php templatePart('navbar.php'); ?>
+
     <main class="profile-page">
         <h1 class="visually-hidden">Mon profil</h1>
         <div class="cards container-1400">
@@ -30,7 +36,7 @@
                         <li><span class="fw-bold">Prénom : </span>Mon prénom</li>
                         <li><span class="fw-bold">Email : </span>Mon email</li>
                     </ul>
-                    <button class="btn-primary">Modifier</button>
+                    <button class="btn-primary" data-dialog-id="dialog-profile">Modifier</button>
                 </div>
             </section>
             <section class="card">
@@ -112,6 +118,37 @@
                 <button class="btn-primary d-block mx-auto">Voir plus</button>
             </section>
         </div>
+
+        <dialog id="dialog-profile" class="dialog">
+            <div class="dialog__inner">
+                <h2 class="text-center">Modifier mon profil</h2>
+                <form action="" method="post" class="form">
+                    <input type="hidden" name="user[id]">
+                    <div class="form__field">
+                        <label for="user-pseudo" class="form__label" autofocus>Pseudonyme</label>
+                        <input id="user-pseudo" name="user[pseudo]" type="text" class="form__widget" placeholder="johndoe">
+                    </div>
+                    <div class="form__field">
+                        <label for="user-lastname" class="form__label">Nom</label>
+                        <input id="user-lastname" name="user[lastname]" type="text" class="form__widget" placeholder="Doe">
+                    </div>
+                    <div class="form__field">
+                        <label for="user-firstname" class="form__label">Prénom</label>
+                        <input id="user-firstname" name="user[firstname]" type="text" class="form__widget" placeholder="John">
+                    </div>
+                    <div class="form__field">
+                        <label for="user-email" class="form__label">Email</label>
+                        <input id="user-email" name="user[email]" type="text" class="form__widget" placeholder="johndoe@mail.com">
+                    </div>
+                    <menu class="buttons">
+                        <button type="submit" class="btn-primary">Confirmer</button>
+                        <button formmethod="dialog" class="btn-primary">Fermer</button>
+                    </menu>
+            </form>
+            </div>
+        </dialog>
     </main>
+
+    <?php templatePart('footer.php'); ?>
 </body>
 </html>
