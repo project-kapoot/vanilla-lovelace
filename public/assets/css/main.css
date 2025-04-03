@@ -746,11 +746,84 @@ body > header {
   font-family: "Baloo 2", sans-serif;
 }
 .quiz-page .card-section {
-  height: 100vh;
   background: linear-gradient(#7B51FF, #00C2FF);
+}
+.quiz-page .section-container {
+  display: flex;
+  flex-direction: column;
+  row-gap: 15px;
+  max-width: min(1500px, 100% - 32px);
+  margin-inline: auto;
+  align-items: center;
+  padding: 25px 35px;
+}
+.quiz-page .section-container .card-container {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  background-color: #00C2FF;
+  padding: 15px;
+  border-radius: 5px;
+  align-items: center;
   color: #F8F9F3;
-  text-align: center;
-  padding-top: 50px;
+  max-width: 320px;
+  box-shadow: 0px 0px 2px #222222;
+}
+.quiz-page .section-container .card-container:hover .card-description {
+  opacity: 1 !important;
+  visibility: visible !important;
+  height: auto !important;
+}
+.quiz-page .section-container .card-container .card-thumb {
+  position: relative;
+}
+.quiz-page .section-container .card-container .card-thumb img {
+  width: 100%;
+  border-radius: 5px;
+}
+.quiz-page .section-container .card-container .card-thumb .level, .quiz-page .section-container .card-container .card-thumb .date {
+  position: absolute;
+  background-color: #7B51FF;
+  padding: 3px 10px;
+  border-radius: 5px;
+  font-weight: 600;
+  font-style: italic;
+  letter-spacing: 1px;
+}
+.quiz-page .section-container .card-container .card-thumb .level {
+  top: 10px;
+  left: 10px;
+}
+.quiz-page .section-container .card-container .card-thumb .date {
+  bottom: 15px;
+  right: 10px;
+}
+.quiz-page .section-container .card-container .card-info .card-title {
+  margin-bottom: 5px;
+  font-size: 16px;
+  font-family: "Baloo 2", sans-serif;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+.quiz-page .section-container .card-container .card-info .card-description {
+  opacity: 0;
+  visibility: hidden;
+  height: 0;
+  transition: height visibility 0.6s ease;
+  transition: opacity 0.3s ease;
+}
+.quiz-page .section-container .card-container .card-btn {
+  width: 100%;
+  padding: 8px;
+  border-radius: 5px;
+  border: 0;
+  color: #F8F9F3;
+  background-color: #7B51FF;
+  font-family: "Fredoka", sans-serif;
+  cursor: pointer;
+}
+.quiz-page .section-container .card-container .card-btn:hover {
+  background-color: #6f42ff;
 }
 
 @media (min-width: 425px) {
@@ -782,6 +855,13 @@ body > header {
   }
   .quiz-page .quiz-category .category .category-group {
     gap: 100px;
+  }
+  .quiz-page .section-container {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 25px;
   }
 }
 @media (min-width: 1024px) {
