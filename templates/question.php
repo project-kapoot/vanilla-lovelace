@@ -5,8 +5,10 @@
     <meta charset="UTF-8" />
     <title>Les bases en PHP - Quiz</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- Lien vers la feuille de style -->
+
     <link rel="stylesheet" href="/assets/css/main.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css">
+
     <script src="/assets/js/question.js" type="module"></script>
 </head>
 
