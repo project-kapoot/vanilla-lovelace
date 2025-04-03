@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/assets/css/main.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css">
 
+    <script src="/assets/js/script.js" type="module"></script>
     <script src="/assets/js/question.js" type="module"></script>
 </head>
 
