@@ -27,4 +27,11 @@ function templatePart(string $name) {
     require_once $directory . $name; 
 }
 
+$roles = [
+    'player',
+    'presenter',
+];
+
+$role = $roles[0];
+
 require_once $file;

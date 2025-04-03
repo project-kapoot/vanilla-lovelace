@@ -94,15 +94,16 @@
         </div>
         <!-- Réponses -->
         <div class="answers">
-            <button class="answer-color-1" data-dialog-id="dialog-answer"><span class="answer-num">Réponse A : </span><span class="answer-result"><code>$maVariable = 'Patate';</code></span></button>
-            <button class="answer-color-2" data-dialog-id="dialog-answer"><span class="answer-num">Réponse B :</span><span class="answer-result"><code>let $maVariable = 'Patate';</code></span> </button>
-            <button class="answer-color-3" data-dialog-id="dialog-answer"><span class="answer-num">Réponse C :</span><span class="answer-result"><code>var = 'Patate';</code></span> </button>
-            <button class="answer-color-4" data-dialog-id="dialog-answer"><span class="answer-num">Réponse D :</span><span class="answer-result"><code>variable = 'Patate';</code></span> </button>
+            <button class="answer-color <?php if($role !== 'presenter') : ?>answer-color-1 <?php endif ?>" data-dialog-id="dialog-answer"><span class="answer-num">Réponse A : </span><span class="answer-result"><code>$maVariable = 'Patate';</code></span></button>
+            <button class="answer-color <?php if($role !== 'presenter') : ?>answer-color-2 <?php endif ?>" data-dialog-id="dialog-answer"><span class="answer-num">Réponse B :</span><span class="answer-result"><code>let $maVariable = 'Patate';</code></span> </button>
+            <button class="answer-color <?php if($role !== 'presenter') : ?>answer-color-3 <?php endif ?>" data-dialog-id="dialog-answer"><span class="answer-num">Réponse C :</span><span class="answer-result"><code>var = 'Patate';</code></span> </button>
+            <button class="answer-color <?php if($role !== 'presenter') : ?>answer-color-4 <?php endif ?>" data-dialog-id="dialog-answer"><span class="answer-num">Réponse D :</span><span class="answer-result"><code>variable = 'Patate';</code></span> </button>
         </div>
-        <!-- Bouton "Suivante" -->
-        <div class="action">
-            <button class="next">Question suivante</button>
-        </div>
+        <?php if($role === 'presenter') : ?>
+            <div class="action">
+                <button class="next">Question suivante</button>
+            </div>
+        <?php endif ?>
 
         <dialog is="answer-dialog" id="dialog-answer" class="dialog-answer">
             <div class="dialog">
