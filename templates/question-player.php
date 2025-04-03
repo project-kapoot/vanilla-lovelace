@@ -106,8 +106,18 @@
             <div class="dialog">
                 <button class="dialog-close">&times;</button>
                 <h2>Explication</h2>
-                <p class="dialog-text">
-                <p>En PHP, déclarer une variable est très simple. Il suffit de la nommer en commençant par le symbole <span style="color:red;">$</span> et de lui affecter une valeur avec l'opérateur <span style="color:red;">=</span>. Par exemple :</p><pre style="background-color:rgb(197, 197, 197); padding: 1rem; border-radius: 10px; font-family: 'Courier New', monospace;">&lt;?php<br><span style="color: red;">$nom</span> = "Guillaume";<br><span style="color: red;">$age</span> = 30;<br><br><span style="color: green;">echo</span> "<span style="color: green;">Bonjour, je m'appelle</span> $nom <span style="color: green;">et j'ai</span> $age <span style="color: green;">ans.</span>";<br>?&gt;</pre></p>
+                <p>En PHP, déclarer une variable est très simple. Il suffit de la nommer en commençant par le symbole <span class="color-red">$</span> et de lui affecter une valeur avec l'opérateur <span class="color-red">=</span>. Par exemple :</p>
+                <pre class="explanation-example">
+                    <code>&lt;?php</code>
+
+                    <code><span class="color-red">$nom</span> = "Guillaume";</code>
+
+                    <code><span class="color-red">$age</span> = 30;</code>
+
+                    <code><span class="color-green">echo</span> "<span class="color-green">Bonjour, je m'appelle</span> $nom <span class="color-green">et j'ai</span> $age <span class="color-green">ans.</span>";</code>
+
+                    <code>?&gt;</code>
+                </pre>
             </div>
         </dialog>
     </main>

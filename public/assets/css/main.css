@@ -131,6 +131,14 @@ th {
   text-align: center !important;
 }
 
+.color-green {
+  color: green !important;
+}
+
+.color-red {
+  color: red !important;
+}
+
 .container-700 {
   max-width: min(700px, 100% - 32px);
   margin-inline: auto;
@@ -636,7 +644,7 @@ body > header {
 }
 
 .dialog-answer {
-  max-width: min(650px, 100% - 32px);
+  max-width: min(600px, 100% - 32px);
   margin-inline: auto;
   background-color: #F8F9F3;
   padding: 2rem;
@@ -672,8 +680,14 @@ body > header {
   background-color: transparent;
   cursor: pointer;
 }
-.dialog-answer pre {
-  white-space: pre-wrap;
+.dialog-answer .explanation-example {
+  background-color: rgb(197, 197, 197);
+  padding: 1rem;
+  border-radius: 10px;
+  white-space: pre-line;
+}
+.dialog-answer .explanation-example > code {
+  font-family: "Courier New", monospace;
 }
 .dialog-answer::backdrop {
   background-color: rgba(0, 0, 0, 0.5);

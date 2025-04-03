@@ -228,7 +228,7 @@ $answers-colors: (
 }
 
 .dialog-answer {
-    @include container(650px);
+    @include container(600px);
 
     background-color: $color-white;
     padding: 2rem;
@@ -268,8 +268,15 @@ $answers-colors: (
         cursor: pointer;
     }
 
-    pre {
-        white-space: pre-wrap;
+    .explanation-example {
+        background-color: rgb(197, 197, 197);
+        padding: 1rem;
+        border-radius: 10px;
+        white-space: pre-line;
+
+        & > code {
+            font-family: 'Courier New', monospace;
+        }
     }
 
     &::backdrop {
