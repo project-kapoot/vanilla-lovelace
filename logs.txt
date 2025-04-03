@@ -1,0 +1,1 @@
+error while accpeting a connecting on the socket (L’opération a réussi)

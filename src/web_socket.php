@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__ . '/Request.php';
+
 set_exception_handler(function(Throwable $exception) {
     warningLog($exception->getMessage());
 });
@@ -15,14 +17,14 @@ function warningLog(string $data) {
 }
 
 function println(string $value) {
-    echo $value . PHP_EOL;
+    fwrite(STDOUT, $value . PHP_EOL);
 }
 
 // Socket creation, configuration and listening
 $errorFmt = 'Cannot create a new WebSocket : %s';
 
 $ipAddress = '0.0.0.0';
-$port = 443;
+$port = 8080;
 
 if(!extension_loaded('sockets')) {
     throw new Exception(sprintf($errorFmt, 'sockets extension has not been loaded.'));
@@ -57,43 +59,47 @@ if($data === false) {
     throw new Exception(sprintf($errorFmt, 'error while receiving data from the socket (' . socket_strerror(socket_last_error($client)) . ')'));
 }
 
-var_dump($request);
+$request = Request::parseFromString($request);
+$key = $request->getHeader('Sec-WebSocket-Key');
 
-println('Connexion réussie !');
-
-socket_close($client);
-
-println('Closing socket');
-
-socket_close($socket);
-die;
-// HTTP Handshake
-if(($method = $_SERVER['REQUEST_METHOD'] ?? null) !== 'GET') {
+if(strcasecmp($request->getMethod(), 'GET') !== 0) {
     warningLog('bad method');
     http_response_code(400);
     exit;
 }
 
-if(($key = $_SERVER['HTTP_SEC_WEBSOCKET_KEY'] ?? null) === null) {
+if($key === null) {
     warningLog('websocket key not correct');
     http_response_code(400);
     exit;
 }
 
-if(($upgrade = $_SERVER['HTTP_UPGRADE'] ?? null) === null || $upgrade !== 'websocket') {
+if(($upgrade = $request->getHeader('Upgrade')) === null || $upgrade !== 'websocket') {
     warningLog('upgrade header incorrect : ' . $upgrade);
     http_response_code(400);
     exit;
 }
 
-if(($connection = $_SERVER['HTTP_CONNECTION'] ?? null) === null || str_contains($connection, 'Upgrade') === false) {
+if(($connection = $request->getHeader('Connection')) === null || str_contains($connection, 'Upgrade') === false) {
     warningLog('connection header incorrect : ' . $connection);
     http_response_code(400);
     exit;
 }
 
-http_response_code(HTTP_SWITCHING_PROTOCOLS);
-header('Upgrade: websocket');
-header('Connection: Upgrade');
-$hash = base64_encode(sha1($key . '258EAFA5-E914-47DA-95CA-C5AB0DC85B11'));
-header('Sec-WebSocket-Accept: ' . $hash);
+$hash = base64_encode(pack('H*', sha1($key . '258EAFA5-E914-47DA-95CA-C5AB0DC85B11')));
+$response  = "HTTP/1.1 101 Switching Protocols\r\n";
+$response .= "Upgrade: websocket\r\n";
+$response .= "Connection: Upgrade\r\n";
+$response .= "Sec-WebSocket-Accept: $hash\r\n";
+$response .= "\r\n";
+
+if(($write = socket_write($client, $response, strlen($response))) === false) {
+    throw new Exception(sprintf($errorFmt, 'handshake failed (' . socket_strerror(socket_last_error()) . ')'));
+}
+
+while(true) {
+
+}
+
+socket_close($client);
+socket_close($socket);
