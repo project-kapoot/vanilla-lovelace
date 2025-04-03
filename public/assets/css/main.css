@@ -315,7 +315,7 @@ body > header {
   }
 }
 
-.btn-primary {
+.btn-secondary, .btn-primary {
   display: inline;
   border: none;
   border-radius: 5px;
@@ -325,7 +325,7 @@ body > header {
   cursor: pointer;
 }
 @media screen and (max-width: 576px) {
-  .btn-primary {
+  .btn-secondary, .btn-primary {
     padding: 8px 16px;
     font-size: 12px;
   }
@@ -338,6 +338,16 @@ body > header {
   transition: background-color 300ms;
 }
 .btn-primary:hover {
+  background-color: #00C2FF;
+}
+
+.btn-secondary {
+  color: #222222;
+  font-weight: bold;
+  background-color: #FFD700;
+  transition: background-color 300ms;
+}
+.btn-secondary:hover {
   background-color: #00C2FF;
 }
 
@@ -641,6 +651,77 @@ body > header {
   }
   .profile-page .form__fields > * {
     grid-row: 2;
+  }
+}
+.waiting-room-page {
+  font-family: "Baloo 2", sans-serif;
+  background: linear-gradient(#00C2FF, #7B51FF);
+  padding-block: 64px;
+}
+.waiting-room-page > div > *:not(:last-child) {
+  margin-bottom: 32px;
+}
+.waiting-room-page > div > :last-child {
+  margin-bottom: 0px;
+}
+.waiting-room-page h1 {
+  font-family: "Fredoka", sans-serif;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  color: #F8F9F3;
+}
+.waiting-room-page .players {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, clamp(100px, 25vw, 150px)), 1fr));
+  align-items: center;
+  align-content: center;
+  gap: 32px;
+}
+.waiting-room-page .player {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 8px;
+}
+.waiting-room-page .player > *:not(:last-child) {
+  margin-bottom: 8px;
+}
+.waiting-room-page .player > :last-child {
+  margin-bottom: 0px;
+}
+.waiting-room-page .player__avatar {
+  border-radius: 5px;
+  object-fit: cover;
+  aspect-ratio: 1;
+  max-width: clamp(100px, 25vw, 150px);
+  height: 100%;
+  width: 100%;
+}
+.waiting-room-page .player__pseudo {
+  text-align: center;
+}
+.waiting-room-page .presenter > *:not(:last-child) {
+  margin-bottom: 16px;
+}
+.waiting-room-page .presenter > :last-child {
+  margin-bottom: 0px;
+}
+.waiting-room-page .game-menu {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  white-space: nowrap;
+}
+@media screen and (max-width: 576px) {
+  .waiting-room-page {
+    font-size: 12px;
+    padding-block: 32px;
+  }
+  .waiting-room-page h1 {
+    font-size: 16px;
   }
 }
 
