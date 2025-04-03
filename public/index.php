@@ -10,8 +10,8 @@ $template = match($path) {
     '/' => 'home.php',
     '/connexion' => 'login.php',
     '/inscription' => 'register.php',
-    '/question-presentateur' => 'question-presenter.php',
-    '/question-joueur' => 'question-player.php',
+    '/question' => 'question.php',
+    '/profil' => 'profile.php',
     default => null
 };
 
