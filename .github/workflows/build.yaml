@@ -26,3 +26,14 @@ jobs:
         run: npm ci
       - name: Run npx sass sass:public/assets/css
         run: npx sass sass:public/assets/css
+      - name: Deploy
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          source: "*"
+          target: /var/www/kapoot
+          strip_components: 0
+
