@@ -36,6 +36,10 @@ if(($socket = socket_create(AF_INET, SOCK_STREAM, getprotobyname('tcp'))) === fa
 
 println('Socket créé avec succès');
 
+if(socket_set_option($socket, SOL_SOCKET, SO_REUSEADDR, 1) === false) {
+    throw new Exception(sprintf($errorFmt, 'error while setting option on the socket (' . socket_strerror(socket_last_error()) . ')'));
+}
+
 if(socket_bind($socket, $ipAddress, $port) === false) {
     throw new Exception(sprintf($errorFmt, 'error while binding socket (' . socket_strerror(socket_last_error($socket)) . ')'));
 }
