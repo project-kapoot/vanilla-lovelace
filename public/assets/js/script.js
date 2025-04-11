@@ -18,6 +18,7 @@ document.addEventListener('click', function(ev) {
     }
 });
 
+<<<<<<< HEAD
 // Remplacement du try ... catch pour une méthode plus élaborée et qui assure qu'on doit prendre en compte l'erreur
 // Voir : https://www.youtube.com/watch?v=Y6jT-IkV0VM pour une méthode qui reprend un peu ce principe
 const [dialog, error] = newDialog('dialog-profile');
@@ -37,6 +38,8 @@ if(dialog !== null) {
         }  
     });
 }
+=======
+>>>>>>> 0ea77aaacb1384f5649b4273243e987a71605b5b
 const socket = new WebSocket('http://kapoot.localhost:443')
 
 socket.addEventListener('error', function(ev) {
@@ -45,4 +48,8 @@ socket.addEventListener('error', function(ev) {
 
 socket.addEventListener('close', function(ev) {
     console.log('Websocket closing : ', ev)
+<<<<<<< HEAD
 })
+=======
+})
+>>>>>>> 0ea77aaacb1384f5649b4273243e987a71605b5b
