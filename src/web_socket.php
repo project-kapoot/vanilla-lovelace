@@ -102,7 +102,58 @@ if(($write = socket_write($client, $response, strlen($response))) === false) {
 }
 
 while(true) {
+    if(socket_recv($client, $data, 1024, 0) === false) {
+        throw new Exception(sprintf($errorFmt, 'error while receving data from the socket (' . socket_strerror(socket_last_error())) . ')');
+    }
 
+    websocket_message_unmask($data);
+}
+
+function websocket_message_unmask(string $mesage)
+{
+    $byte = ord($mesage[0]);
+
+    $isLastMessage = boolval($byte & 0b00000001);
+    
+    $byte = ord($mesage[1]);
+    $isEncoded = boolval($byte & 0b00000001);
+
+    $payloadLength = $byte - 0b00000001;
+    $mask = substr($mesage, 2, 6);
+    $data = substr($mesage, 6, 6 + $payloadLength);
+
+    if($payloadLength === 126) {
+        $payloadLength = (ord($mesage[2]) << 8) + ord($mesage[3]);
+        $mask = substr($mesage, 4, 8);
+        $data = substr($mesage, 8, 8 + $payloadLength);
+    }
+
+    if($payloadLength === 127) {
+        $payloadLength = 0;
+        $bytes = str_split(substr($mesage, 2, 10));
+        $bitShift = 56;
+        foreach($bytes as $byte) {
+           $payloadLength += (ord($byte) << $bitShift);
+           $bitShift -= 8;
+        }
+
+        $mask = substr($mesage, 10, 14);
+        $data = substr($mesage, 14, 14 + $payloadLength);
+    }
+
+    println($payloadLength);
+    println($mask);
+    println($data);
+
+    $bytes = str_split($data);
+    $decoded = '';
+    foreach($bytes as $index => $byte) {
+        $decoded .= $byte ^ $mask[$index % 4];
+    }
+
+    println($decoded);
+    
+    return $decoded;
 }
 
 socket_close($client);

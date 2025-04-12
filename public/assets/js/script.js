@@ -18,9 +18,6 @@ document.addEventListener('click', function(ev) {
     }
 });
 
-const origin = window.location.origin
-const port = '8080'
-console.log(origin)
 // Remplacement du try ... catch pour une méthode plus élaborée et qui assure qu'on doit prendre en compte l'erreur
 // Voir : https://www.youtube.com/watch?v=Y6jT-IkV0VM pour une méthode qui reprend un peu ce principe
 const [dialog, error] = newDialog('dialog-profile');
@@ -40,7 +37,9 @@ if(dialog !== null) {
         }  
     });
 }
-const socket = new WebSocket(`${origin}:${port}`)
+
+const port = '8080'
+const socket = new WebSocket(`${window.location.origin}:${port}`)
 
 socket.addEventListener('error', function(ev) {
     console.log('Websocket error : ', ev)
@@ -48,7 +47,9 @@ socket.addEventListener('error', function(ev) {
 
 socket.addEventListener('close', function(ev) {
     console.log('Websocket closing : ', ev)
-<<<<<<< HEAD
 })
-=======
+
+socket.addEventListener('open', function(ev) {
+    console.log('Websocket opened')
+    socket.send('message')
 })
