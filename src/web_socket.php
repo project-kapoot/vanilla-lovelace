@@ -96,8 +96,71 @@ if(($connection = $_SERVER['HTTP_CONNECTION'] ?? null) === null || str_contains(
     exit;
 }
 
-http_response_code(HTTP_SWITCHING_PROTOCOLS);
-header('Upgrade: websocket');
-header('Connection: Upgrade');
-$hash = base64_encode(sha1($key . '258EAFA5-E914-47DA-95CA-C5AB0DC85B11'));
-header('Sec-WebSocket-Accept: ' . $hash);
+$hash = base64_encode(pack('H*', sha1($key . '258EAFA5-E914-47DA-95CA-C5AB0DC85B11')));
+$response  = "HTTP/1.1 101 Switching Protocols\r\n";
+$response .= "Upgrade: websocket\r\n";
+$response .= "Connection: Upgrade\r\n";
+$response .= "Sec-WebSocket-Accept: $hash\r\n";
+$response .= "\r\n";
+
+if(($write = socket_write($client, $response, strlen($response))) === false) {
+    throw new Exception(sprintf($errorFmt, 'handshake failed (' . socket_strerror(socket_last_error()) . ')'));
+}
+
+while(true) {
+    if(socket_recv($client, $data, 1024, 0) === false) {
+        throw new Exception(sprintf($errorFmt, 'error while receving data from the socket (' . socket_strerror(socket_last_error())) . ')');
+    }
+
+    websocket_message_unmask($data);
+}
+
+function websocket_message_unmask(string $mesage)
+{
+    $byte = ord($mesage[0]);
+
+    $isLastMessage = boolval($byte & 0b00000001);
+    
+    $byte = ord($mesage[1]);
+    $isEncoded = boolval($byte & 0b00000001);
+
+    $payloadLength = $byte - 0b00000001;
+    $mask = substr($mesage, 2, 6);
+    $data = substr($mesage, 6, 6 + $payloadLength);
+
+    if($payloadLength === 126) {
+        $payloadLength = (ord($mesage[2]) << 8) + ord($mesage[3]);
+        $mask = substr($mesage, 4, 8);
+        $data = substr($mesage, 8, 8 + $payloadLength);
+    }
+
+    if($payloadLength === 127) {
+        $payloadLength = 0;
+        $bytes = str_split(substr($mesage, 2, 10));
+        $bitShift = 56;
+        foreach($bytes as $byte) {
+           $payloadLength += (ord($byte) << $bitShift);
+           $bitShift -= 8;
+        }
+
+        $mask = substr($mesage, 10, 14);
+        $data = substr($mesage, 14, 14 + $payloadLength);
+    }
+
+    println($payloadLength);
+    println($mask);
+    println($data);
+
+    $bytes = str_split($data);
+    $decoded = '';
+    foreach($bytes as $index => $byte) {
+        $decoded .= $byte ^ $mask[$index % 4];
+    }
+
+    println($decoded);
+    
+    return $decoded;
+}
+
+socket_close($client);
+socket_close($socket);
