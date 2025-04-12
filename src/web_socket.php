@@ -101,15 +101,15 @@ if(($write = socket_write($client, $response, strlen($response))) === false) {
     throw new Exception(sprintf($errorFmt, 'handshake failed (' . socket_strerror(socket_last_error()) . ')'));
 }
 
-while(true) {
-    if(socket_recv($client, $data, 1024, 0) === false) {
-        throw new Exception(sprintf($errorFmt, 'error while receving data from the socket (' . socket_strerror(socket_last_error())) . ')');
-    }
-
-    websocket_message_unmask($data);
+if(socket_recv($client, $data, 2, 0) === false) {
+    throw new Exception(sprintf($errorFmt, 'error while receving data from the socket (' . socket_strerror(socket_last_error())) . ')');
 }
 
-function websocket_message_unmask(string $mesage)
+$payloadLength = websocket_decode_payload_length($data, $client);
+
+println($payloadLength);
+
+function websocket_decode_payload_length(string $mesage, Socket &$client) : int
 {
     $byte = ord($mesage[0]);
 
@@ -118,42 +118,33 @@ function websocket_message_unmask(string $mesage)
     $byte = ord($mesage[1]);
     $isEncoded = boolval($byte & 0b00000001);
 
-    $payloadLength = $byte - 0b00000001;
-    $mask = substr($mesage, 2, 6);
-    $data = substr($mesage, 6, 6 + $payloadLength);
+    $payloadLength = $byte - 0b10000000;
 
     if($payloadLength === 126) {
-        $payloadLength = (ord($mesage[2]) << 8) + ord($mesage[3]);
-        $mask = substr($mesage, 4, 8);
-        $data = substr($mesage, 8, 8 + $payloadLength);
+        println('125 < length < 65536');
+
+        if(socket_recv($client, $test, 2, 0) === false) {
+            throw new Exception('error while receving data from the socket (' . socket_strerror(socket_last_error()) . ')');
+        }
+
+        $payloadLength = (ord($test[0]) << 8) + ord($test[1]);
     }
 
     if($payloadLength === 127) {
-        $payloadLength = 0;
-        $bytes = str_split(substr($mesage, 2, 10));
-        $bitShift = 56;
-        foreach($bytes as $byte) {
-           $payloadLength += (ord($byte) << $bitShift);
-           $bitShift -= 8;
+        println('length > 65536');
+
+        if(socket_recv($client, $test, 8, 0) === false) {
+            throw new Exception('error while receving data from the socket (' . socket_strerror(socket_last_error()) . ')');
         }
 
-        $mask = substr($mesage, 10, 14);
-        $data = substr($mesage, 14, 14 + $payloadLength);
+        $payloadLength = 0;
+        $bytes = str_split($test);
+        foreach($bytes as $index => $byte) {
+            $payloadLength += ord($byte) << ((8 - $index - 1) * 8);
+        }
     }
 
-    println($payloadLength);
-    println($mask);
-    println($data);
-
-    $bytes = str_split($data);
-    $decoded = '';
-    foreach($bytes as $index => $byte) {
-        $decoded .= $byte ^ $mask[$index % 4];
-    }
-
-    println($decoded);
-    
-    return $decoded;
+    return $payloadLength;
 }
 
 socket_close($client);

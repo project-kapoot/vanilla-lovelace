@@ -51,5 +51,6 @@ socket.addEventListener('close', function(ev) {
 
 socket.addEventListener('open', function(ev) {
     console.log('Websocket opened')
-    socket.send('message')
+    const string = 'x'.repeat(124)
+    socket.send(string)
 })
