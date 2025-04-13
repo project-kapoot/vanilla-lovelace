@@ -1,205 +1,24 @@
 <?php
 
-set_exception_handler(function(Throwable $exception) {
-    warningLog($exception->getMessage());
-});
+use App\WebSocket\WebSocket;
 
-const HTTP_SWITCHING_PROTOCOLS = 101;
+require_once __DIR__ . '/Request.php';
+require_once __DIR__ . '/../functions.php';
+require_once __DIR__ . '/../lib/websocket/WebSocket.php';
+require_once __DIR__ . '/../lib/websocket/Connection.php';
 
-set_time_limit(0);
+$socket = new WebSocket();
+$connections = [];
+$connection = $socket->acceptConnection();
+$connections[] = $connection;
 
-function warningLog(string $data) {
-    $file = __DIR__ . '/../logs.txt';
+$connection->performHandshake();
 
-    file_put_contents($file, $data);
-}
-
-function println(string $value) {
-    echo $value . PHP_EOL;
-}
-
-// Socket creation, configuration and listening
-$errorFmt = 'Cannot create a new WebSocket : %s';
-
-$ipAddress = '0.0.0.0';
-$port = 443;
-
-if(!extension_loaded('sockets')) {
-    throw new Exception(sprintf($errorFmt, 'sockets extension has not been loaded.'));
-}
-
-if(($socket = socket_create(AF_INET, SOCK_STREAM, getprotobyname('tcp'))) === false) {
-    throw new Exception(sprintf($errorFmt, 'error while creating socket (' . socket_strerror(socket_last_error()). ')'));
-}
-
-println('Socket créé avec succès');
-
-if(socket_set_option($socket, SOL_SOCKET, SO_REUSEADDR, 1) === false) {
-    throw new Exception(sprintf($errorFmt, 'error while setting option on the socket (' . socket_strerror(socket_last_error()) . ')'));
-}
-
-if(socket_bind($socket, $ipAddress, $port) === false) {
-    throw new Exception(sprintf($errorFmt, 'error while binding socket (' . socket_strerror(socket_last_error($socket)) . ')'));
-}
-
-println('Binding réussi');
-
-if(socket_listen($socket) === false) {
-    throw new Exception(sprintf($errorFmt, 'error while listening to socket (' . socket_strerror(socket_last_error($socket)) . ')'));
-}
-
-println('Socket en écoute');
-
-if(($client = socket_accept($socket)) === false) {
-    throw new Exception(sprintf('error while accpeting a connecting on the socket (' . socket_strerror(socket_last_error($socket)) . ')'));
-}
-
-$request = '';
-$data = socket_recv($client, $request, 1024, 0);
-
-if($data === false) {
-    throw new Exception(sprintf($errorFmt, 'error while receiving data from the socket (' . socket_strerror(socket_last_error($client)) . ')'));
-}
-
-var_dump($request);
-
-println('Connexion réussie !');
-
-socket_close($client);
-
-println('Closing socket');
-
-socket_close($socket);
-die;
-// HTTP Handshake
-if(($method = $_SERVER['REQUEST_METHOD'] ?? null) !== 'GET') {
-    warningLog('bad method');
-    http_response_code(400);
-    exit;
-}
-
-if(($key = $_SERVER['HTTP_SEC_WEBSOCKET_KEY'] ?? null) === null) {
-    warningLog('websocket key not correct');
-    http_response_code(400);
-    exit;
-}
-
-if(($upgrade = $_SERVER['HTTP_UPGRADE'] ?? null) === null || $upgrade !== 'websocket') {
-    warningLog('upgrade header incorrect : ' . $upgrade);
-    http_response_code(400);
-    exit;
-}
-
-if(($connection = $_SERVER['HTTP_CONNECTION'] ?? null) === null || str_contains($connection, 'Upgrade') === false) {
-    warningLog('connection header incorrect : ' . $connection);
-    http_response_code(400);
-    exit;
-}
-
-$hash = base64_encode(pack('H*', sha1($key . '258EAFA5-E914-47DA-95CA-C5AB0DC85B11')));
-$response  = "HTTP/1.1 101 Switching Protocols\r\n";
-$response .= "Upgrade: websocket\r\n";
-$response .= "Connection: Upgrade\r\n";
-$response .= "Sec-WebSocket-Accept: $hash\r\n";
-$response .= "\r\n";
-
-if(($write = socket_write($client, $response, strlen($response))) === false) {
-    throw new Exception(sprintf($errorFmt, 'handshake failed (' . socket_strerror(socket_last_error()) . ')'));
-}
-
-while(true) {
-    if(socket_recv($client, $data, 1024, 0) === false) {
-        throw new Exception(sprintf($errorFmt, 'error while receving data from the socket (' . socket_strerror(socket_last_error())) . ')');
-    }
-
-    websocket_message_unmask($data);
-}
-
-$payloadLength = websocket_decode_payload_length($data, $client);
-
-println($payloadLength);
-
-$message = websocket_unmask_payload($client, $payloadLength);
+$message = $connection->readMessage();
 
 println($message);
 
-$result = websocket_send_message($client, 'test');
+$connection->sendMessage(str_repeat('x', 300));
 
-function websocket_decode_payload_length(string $mesage, Socket &$client) : int
-{
-    $byte = ord($mesage[0]);
-
-    $isLastMessage = boolval($byte & 0b00000001);
-    
-    $byte = ord($mesage[1]);
-    $isEncoded = boolval($byte & 0b00000001);
-
-    $payloadLength = $byte - 0b00000001;
-    $mask = substr($mesage, 2, 6);
-    $data = substr($mesage, 6, 6 + $payloadLength);
-
-    if($payloadLength === 126) {
-        $payloadLength = (ord($mesage[2]) << 8) + ord($mesage[3]);
-        $mask = substr($mesage, 4, 8);
-        $data = substr($mesage, 8, 8 + $payloadLength);
-    }
-
-    if($payloadLength === 127) {
-        $payloadLength = 0;
-        $bytes = str_split(substr($mesage, 2, 10));
-        $bitShift = 56;
-        foreach($bytes as $byte) {
-           $payloadLength += (ord($byte) << $bitShift);
-           $bitShift -= 8;
-        }
-
-        $mask = substr($mesage, 10, 14);
-        $data = substr($mesage, 14, 14 + $payloadLength);
-    }
-
-    println($payloadLength);
-    println($mask);
-    println($data);
-
-    $bytes = str_split($data);
-    $decoded = '';
-    foreach($bytes as $index => $byte) {
-        $decoded .= $byte ^ $mask[$index % 4];
-    }
-
-    println($decoded);
-    
-    return $decoded;
-}
-
-function websocket_send_message(Socket $client, string $message) : bool
-{
-    $frame = [];
-
-    $isLastMessage = 0b10000000;
-    $opcode = 0b00000001;
-    $frame[0] = $isLastMessage | $opcode;
-
-    $isMasked = 0;
-    $payloadLength = strlen($message);
-
-    if($payloadLength <= 125) {
-        $frame[1] = $isMasked | $payloadLength;
-    }
-
-    if(126 < $payloadLength && $payloadLength < 65536) {
-        $frame[1] = $isMasked | 126;
-        $frame[2] = $payloadLength >> 8;
-        $frame[3] = $payloadLength - ($payloadLength >> 8);
-    }
-
-    $bytes = str_split($message);
-    foreach($bytes as $byte) {
-        $frame[] = ord($byte);
-    }
-
-    $data = implode('', array_map('chr', $frame));
-    return socket_write($client, $data, strlen($data));
-}
-socket_close($client);
-socket_close($socket);
+$connection->close();
+$socket->close();
