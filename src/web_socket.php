@@ -113,7 +113,7 @@ $message = websocket_unmask_payload($client, $payloadLength);
 
 println($message);
 
-$message = str_repeat('x', 65534);
+$message = str_repeat('x', 80000);
 
 $result = websocket_send_message($client, $message);
 
@@ -219,6 +219,12 @@ function websocket_send_message(Socket $client, string $message) : bool
         }
     }
 
+    if($payloadLength >= 65336) {
+        $bytes = uint_to_bytes($payloadLength);
+        $frame[1] = $isMasked | 127;
+        array_unshift($bytes, ...array_fill(0, 8 - count($bytes), 0));
+        array_push($frame, ...$bytes);
+    }
     $bytes = str_split($message);
     foreach($bytes as $byte) {
         $frame[] = ord($byte);
