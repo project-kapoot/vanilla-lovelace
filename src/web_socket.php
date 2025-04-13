@@ -113,7 +113,9 @@ $message = websocket_unmask_payload($client, $payloadLength);
 
 println($message);
 
-$result = websocket_send_message($client, 'test');
+$message = str_repeat('x', 65534);
+
+$result = websocket_send_message($client, $message);
 
 function websocket_decode_payload_length(string $mesage, Socket &$client) : int
 {
@@ -172,6 +174,28 @@ function websocket_unmask_payload(Socket &$client, int $length) : string
     return $message;
 } 
 
+function uint_to_bytes(int $num) : array
+{
+    $intSize = match(true) {
+        $num < 0xFF => 8,
+        $num < 0xFFFF => 16,
+        $num < 0xFFFFFFFF => 32,
+        $num < 0xFFFFFFFFFFFFFFFF => 64,
+        default => null,
+    };
+
+    if($intSize === null) {
+        throw new Exception('Cannot convert number ' . $num . ' to bytes : number size is not recognizable');
+    }
+
+    $bytes = [];
+    for($i = $intSize - 8; $i >= 0; $i -= 8) {
+        $bytes[] = $num >> $i & 255;
+    }
+
+    return $bytes;
+}
+
 function websocket_send_message(Socket $client, string $message) : bool
 {
     $frame = [];
@@ -188,9 +212,11 @@ function websocket_send_message(Socket $client, string $message) : bool
     }
 
     if(126 < $payloadLength && $payloadLength < 65536) {
+        $bytes = uint_to_bytes($payloadLength);
         $frame[1] = $isMasked | 126;
-        $frame[2] = $payloadLength >> 8;
-        $frame[3] = $payloadLength - ($payloadLength >> 8);
+        foreach($bytes as $byte) {
+            $frame[] = $byte;
+        }
     }
 
     $bytes = str_split($message);

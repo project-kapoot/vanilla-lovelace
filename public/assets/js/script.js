@@ -56,5 +56,5 @@ socket.addEventListener('open', function(ev) {
 })
 
 socket.addEventListener('message', function(ev) {
-    console.log(ev.data)
+    console.log('Message received : ', ev.data, ev.data.length)
 })
