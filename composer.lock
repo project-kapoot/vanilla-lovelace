@@ -1976,8 +1976,6 @@
             "time": "2025-03-01T19:18:27+00:00"
         },
         {
-<<<<<<< HEAD
-=======
             "name": "react/promise",
             "version": "v3.2.0",
             "source": {
@@ -2864,7 +2862,6 @@
             "time": "2025-02-07T05:00:38+00:00"
         },
         {
->>>>>>> f0d29c8 (chore: install phpunit)
             "name": "sebastianfeldmann/camino",
             "version": "0.9.5",
             "source": {

@@ -53,3 +53,7 @@ socket.addEventListener('open', function(ev) {
     console.log('Websocket opened')
     socket.send('message')
 })
+
+socket.addEventListener('message', function(ev) {
+    console.log(ev.data)
+})

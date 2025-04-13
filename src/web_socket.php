@@ -115,7 +115,17 @@ while(true) {
     websocket_message_unmask($data);
 }
 
-function websocket_message_unmask(string $mesage)
+$payloadLength = websocket_decode_payload_length($data, $client);
+
+println($payloadLength);
+
+$message = websocket_unmask_payload($client, $payloadLength);
+
+println($message);
+
+$result = websocket_send_message($client, 'test');
+
+function websocket_decode_payload_length(string $mesage, Socket &$client) : int
 {
     $byte = ord($mesage[0]);
 
@@ -162,5 +172,34 @@ function websocket_message_unmask(string $mesage)
     return $decoded;
 }
 
+function websocket_send_message(Socket $client, string $message) : bool
+{
+    $frame = [];
+
+    $isLastMessage = 0b10000000;
+    $opcode = 0b00000001;
+    $frame[0] = $isLastMessage | $opcode;
+
+    $isMasked = 0;
+    $payloadLength = strlen($message);
+
+    if($payloadLength <= 125) {
+        $frame[1] = $isMasked | $payloadLength;
+    }
+
+    if(126 < $payloadLength && $payloadLength < 65536) {
+        $frame[1] = $isMasked | 126;
+        $frame[2] = $payloadLength >> 8;
+        $frame[3] = $payloadLength - ($payloadLength >> 8);
+    }
+
+    $bytes = str_split($message);
+    foreach($bytes as $byte) {
+        $frame[] = ord($byte);
+    }
+
+    $data = implode('', array_map('chr', $frame));
+    return socket_write($client, $data, strlen($data));
+}
 socket_close($client);
 socket_close($socket);

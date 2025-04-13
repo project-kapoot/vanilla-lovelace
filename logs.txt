@@ -1,1 +1,0 @@
-socket_set_option() expects exactly 4 arguments, 3 given
