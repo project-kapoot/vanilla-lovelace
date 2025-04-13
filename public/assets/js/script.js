@@ -54,3 +54,7 @@ socket.addEventListener('open', function(ev) {
     const string = 'Bonjour je m\'appelle Johnathan et j\'ai 45 ans'
     socket.send(string)
 })
+
+socket.addEventListener('message', function(ev) {
+    console.log(ev.data)
+})
