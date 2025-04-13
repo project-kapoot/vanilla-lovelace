@@ -12,8 +12,6 @@ $template = match($path) {
     '/inscription' => 'register.php',
     '/profil' => 'profile.php',
     '/quiz/en-attente' => 'waiting_room.php',
-    '/quiz' => 'quiz.php',
-    '/quiz-socket' => '../src/web_socket.php',
     default => null
 };
 
