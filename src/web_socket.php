@@ -109,6 +109,10 @@ $payloadLength = websocket_decode_payload_length($data, $client);
 
 println($payloadLength);
 
+$message = websocket_unmask_payload($client, $payloadLength);
+
+println($message);
+
 function websocket_decode_payload_length(string $mesage, Socket &$client) : int
 {
     $byte = ord($mesage[0]);
@@ -146,6 +150,25 @@ function websocket_decode_payload_length(string $mesage, Socket &$client) : int
 
     return $payloadLength;
 }
+
+function websocket_unmask_payload(Socket &$client, int $length) : string
+{
+    if(socket_recv($client, $mask, 4, 0) === false) {
+        throw new Exception('error while receving data from the socket (' . socket_strerror(socket_last_error()) . ')');
+    }
+
+    if(socket_recv($client, $payload, $length, 0) === false) {
+        throw new Exception('error while receving data from the socket (' . socket_strerror(socket_last_error()) . ')');
+    }
+
+    $bytes = str_split($payload);
+    $message = '';
+    foreach($bytes as $index => $byte) {
+        $message .= $byte ^ $mask[$index % 4];
+    }
+
+    return $message;
+} 
 
 socket_close($client);
 socket_close($socket);
