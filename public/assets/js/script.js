@@ -51,9 +51,17 @@ socket.addEventListener('close', function(ev) {
 
 socket.addEventListener('open', function(ev) {
     console.log('Websocket opened')
-    socket.send('message')
+    const age = Math.floor(Math.random() * 100)
+    const string = `bonjour je m'appelle johnathan et j'ai ${age} ans`
+    socket.send(string)
 })
 
 socket.addEventListener('message', function(ev) {
     console.log(ev.data)
+})
+
+document.addEventListener('click', function(ev) {
+    const age = Math.floor(Math.random() * 100)
+    const string = `bonjour je m'appelle johnathan et j'ai ${age} ans`
+    socket.send(string);
 })
