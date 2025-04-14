@@ -37,31 +37,3 @@ if(dialog !== null) {
         }  
     });
 }
-
-const port = '8080'
-const socket = new WebSocket(`${window.location.origin}:${port}`)
-
-socket.addEventListener('error', function(ev) {
-    console.log('Websocket error : ', ev)
-})
-
-socket.addEventListener('close', function(ev) {
-    console.log('Websocket closing : ', ev)
-})
-
-socket.addEventListener('open', function(ev) {
-    console.log('Websocket opened')
-    const age = Math.floor(Math.random() * 100)
-    const string = `bonjour je m'appelle johnathan et j'ai ${age} ans`
-    socket.send(string)
-})
-
-socket.addEventListener('message', function(ev) {
-    console.log('Message received : ', ev.data, ev.data.length)
-})
-
-document.addEventListener('click', function(ev) {
-    const age = Math.floor(Math.random() * 100)
-    const string = `bonjour je m'appelle johnathan et j'ai ${age} ans`
-    socket.send(string);
-})
