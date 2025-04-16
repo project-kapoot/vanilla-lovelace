@@ -1,0 +1,39 @@
+name: Compiles and install all dependencies to build the project
+
+on:
+  push:
+    branches: [develop]
+
+defaults:
+  run:
+    working-directory: ./
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: sockets
+          tools: composer
+      - name: Run composer install
+        run: composer install
+      - name: Run npm ci
+        run: npm ci
+      - name: Run npx sass sass:public/assets/css
+        run: npx sass sass:public/assets/css
+      - name: Deploy
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          source: "*"
+          target: /var/www/kapoot
+          strip_components: 0
+
