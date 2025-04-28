@@ -10,6 +10,7 @@ $template = match($path) {
     '/' => 'home.php',
     '/connexion' => 'login.php',
     '/inscription' => 'register.php',
+    '/question' => 'question.php',
     '/profil' => 'profile.php',
     '/quiz/en-attente' => 'waiting_room.php',
     default => null
@@ -32,10 +33,11 @@ function templatePart(string $name) {
 }
 
 $roles = [
-    'presenter',
     'player',
+    'presenter',
 ];
 
+$role = $roles[0];
 $user = new User([$roles[1]]);
 
 require_once $file;
