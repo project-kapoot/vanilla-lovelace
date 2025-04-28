@@ -17,7 +17,7 @@ abstract class AbstractField
 
     public function isValid(string|int|array $fieldData) : bool
     {
-        if(!$this->isRequired() && null === $fieldData) {
+        if(!$this->isRequired() && "" === $fieldData) {
             return true;
         }
 
