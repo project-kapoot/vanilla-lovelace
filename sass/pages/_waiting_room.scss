@@ -1,0 +1,77 @@
+@use '../abstracts' as *;
+
+$avatar-size: clamp(100px, 25vw, 150px);
+
+.waiting-room-page {
+    font-family: $font-baloo;
+
+    background: $bg-gradient;
+    
+    padding-block: $space-64;
+
+    & > div {
+        @include space-margin($space-32);
+    }
+
+    h1 {
+        font-family: $font-fredoka;
+        font-size: $fs-24;
+        font-weight: bold;
+        text-align: center;
+        color: $color-white;
+    }
+
+    .players {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(min(100%, $avatar-size), 1fr));
+        align-items: center;
+        align-content: center;
+        gap: $space-32;
+    }
+
+    .player {
+        @include space-margin($space-8);
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        row-gap: $space-8;
+
+        &__avatar {
+            border-radius: 5px;
+            object-fit: cover;
+            aspect-ratio: 1;
+            max-width: $avatar-size;
+            height: 100%;
+            width: 100%;
+        }
+
+        &__pseudo {
+            text-align: center;
+        }
+    }
+
+    .presenter {
+        @include space-margin($space-16);
+    }
+
+    .game-menu {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: $space-16;
+
+        white-space: nowrap;
+    }
+
+    @media screen and (max-width: $break-sm) {
+        font-size: $fs-12;
+
+        padding-block: $space-32;
+
+        h1 {
+            font-size: $fs-16;
+        }
+    }
+}

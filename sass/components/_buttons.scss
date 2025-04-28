@@ -24,10 +24,24 @@
     @extend %btn;
 
     color: white;
-
     font-weight: bold;
 
     background-color: $color-purple;
+
+    transition: background-color 300ms;
+
+    &:hover {
+        background-color: $color-lightblue;
+    }
+}
+
+.btn-secondary {
+    @extend %btn;
+
+    color: $color-darkgrey;
+    font-weight: bold;
+
+    background-color: $color-yellow;
 
     transition: background-color 300ms;
 
