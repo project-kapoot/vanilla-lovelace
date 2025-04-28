@@ -44,6 +44,12 @@ class Form
                 return false;
             }
 
+            $fieldData = match($field->getDataType()) {
+                'integer' => (is_numeric($fieldData)) ? (int) $fieldData : $fieldData,
+                default => $fieldData
+            };
+
+
             if(!$field->isValid($fieldData)) {
                 return false;
             }
