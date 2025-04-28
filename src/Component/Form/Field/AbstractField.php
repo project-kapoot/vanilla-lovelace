@@ -15,7 +15,7 @@ abstract class AbstractField
 
     abstract public function getDataType() : string;
 
-    public function isValid(string|int|array|bool|null $fieldData) : bool
+    public function isValid(string|int|array $fieldData) : bool
     {
         if(!$this->isRequired() && null === $fieldData) {
             return true;

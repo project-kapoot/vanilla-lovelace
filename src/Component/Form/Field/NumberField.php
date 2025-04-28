@@ -38,11 +38,13 @@ class NumberField extends AbstractField
         return 'integer';
     }
 
-    public function isValid(string|int|array|bool|null $fieldData): bool
+    public function isValid(string|int|array $fieldData): bool
     {
         if(parent::isValid($fieldData)) {
             return true;
         }
+
+        var_dump($fieldData);
 
         if(gettype($fieldData) !== 'integer') {
             return false;

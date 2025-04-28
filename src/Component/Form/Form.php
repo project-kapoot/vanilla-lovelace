@@ -40,6 +40,10 @@ class Form
         {
             $fieldData = $formData[$field->getName()] ?? null;
 
+            if($fieldData === null) {
+                return false;
+            }
+
             if(!$field->isValid($fieldData)) {
                 return false;
             }

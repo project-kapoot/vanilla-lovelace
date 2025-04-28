@@ -25,7 +25,7 @@ class ChoiceField extends AbstractField
         return 'string';
     }
 
-    public function isValid(string|int|array|bool|null $fieldData): bool
+    public function isValid(string|int|array $fieldData): bool
     {
         if(parent::isValid($fieldData)) {
             return true;
