@@ -1,7 +1,8 @@
 {
     "require-dev": {
         "ramsey/conventional-commits": "^1.6",
-        "captainhook/captainhook": "^5.25"
+        "captainhook/captainhook": "^5.25",
+        "phpunit/phpunit": "^12.1"
     },
     "scripts": {
         "post-install-cmd": [
