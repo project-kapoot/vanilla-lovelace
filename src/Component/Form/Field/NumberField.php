@@ -44,8 +44,6 @@ class NumberField extends AbstractField
             return true;
         }
 
-        var_dump($fieldData);
-
         if(gettype($fieldData) !== 'integer') {
             return false;
         }
