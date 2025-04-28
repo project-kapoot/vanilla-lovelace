@@ -54,7 +54,7 @@ class TextField extends AbstractField
             return true;
         }
 
-        if(gettype($fieldData) !== 'string') {
+        if(gettype($fieldData) !== $this->getDataType()) {
             return false;
         }
 

@@ -44,7 +44,7 @@ class NumberField extends AbstractField
             return true;
         }
 
-        if(gettype($fieldData) !== 'integer') {
+        if(gettype($fieldData) !== $this->getDataType()) {
             return false;
         }
 
