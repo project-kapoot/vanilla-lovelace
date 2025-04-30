@@ -21,11 +21,11 @@ class FormBuilder
             throw new Exception();
         }
 
-        $field = new $type($name, $label);
-
-        if(!($field instanceof AbstractField)) {
+        if(!is_a($type, AbstractField::class, true)) {
             throw new Exception();
         }
+
+        $field = new $type($name, $label);
 
         $this->fields[] = $field;
 
