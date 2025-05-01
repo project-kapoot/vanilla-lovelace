@@ -1,6 +1,6 @@
 <?php
 
-namespace Test\Component\Form;
+namespace Test\Unit\Component\Form;
 
 use App\Component\Form\Field\ChoiceField;
 use App\Component\Form\Field\NumberField;
