@@ -10,12 +10,12 @@ class Form
 {
     public function __construct(
         private readonly string $prefix,
-        private readonly array $fields,
+        private readonly FieldCollection $fieldCollection,
     ){}
 
-    public function getField(string $name) : ?AbstractField
+    public function getField(string $name) : AbstractField
     {
-        return $this->fields[$name] ?? null;
+        return $this->fieldCollection->get($name);
     }
 
     public function getPrefix() : string
@@ -36,7 +36,7 @@ class Form
             return false;
         }
 
-        foreach($this->fields as $field)
+        foreach($this->fieldCollection as $field)
         {
             $fieldData = $formData[$field->getName()] ?? null;
 

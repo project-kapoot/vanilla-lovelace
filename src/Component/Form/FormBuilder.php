@@ -9,11 +9,13 @@ use Exception;
 
 class FormBuilder
 {
-    private array $fields = [];
+    private readonly FieldCollection $fieldCollection;
 
     public function __construct(
         private readonly string $name,
-    ){}
+    ){
+        $this->fieldCollection = new FieldCollection();
+    }
     
     public function addField(string $type, string $name, string $label) : AbstractField
     {
@@ -27,13 +29,13 @@ class FormBuilder
 
         $field = new $type($name, $label);
 
-        $this->fields[] = $field;
+        $this->fieldCollection->add($field);
 
         return $field;
     }
 
     public function build() : Form
     {
-        return new Form($this->name, $this->fields);
+        return new Form($this->name, $this->fieldCollection);
     }
 }
