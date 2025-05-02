@@ -5,13 +5,10 @@ declare(strict_types=1);
 namespace App\Component\Form;
 
 use App\Component\Form\Field\AbstractField;
-use Countable;
-use Iterator;
-use ValueError;
+use ReturnTypeWillChange;
 
-class FieldCollection implements Countable, Iterator
+class FieldCollection implements \Countable, \Iterator, \ArrayAccess
 {
-    private int $position = 0;
     private array $elements = [];
 
     /**
@@ -26,7 +23,7 @@ class FieldCollection implements Countable, Iterator
     public function add(AbstractField $field) : self
     {
         if($this->isset($field->getName())) {
-            throw new ValueError(sprintf('Field "%s" has already been added to the collection.', $field->getName()));
+            throw new \ValueError(sprintf('Field "%s" has already been added to the collection.', $field->getName()));
         }
 
         $this->elements[$field->getName()] = $field;
@@ -69,28 +66,54 @@ class FieldCollection implements Countable, Iterator
         return count($this->elements);
     }
 
-    public function current() : AbstractField
+    #[ReturnTypeWillChange]
+    public function current()
     {
-        return $this->elements[$this->position];
+        return current($this->elements);
     }
 
     public function rewind() : void
     {
-        $this->position = 0;
+        reset($this->elements);
     }
 
-    public function key() : int
+    #[ReturnTypeWillChange]
+    public function key()
     {
-        return $this->position;
+        return key($this->elements);
     } 
 
     public function next() : void
     {
-        ++$this->position;
+        next($this->elements);
     }
 
     public function valid() : bool
     {
-        return isset($this->elements[$this->position]);
+        return key($this->elements) !== null;
+    }
+
+    public function offsetSet(mixed $offset, mixed $field): void
+    {
+        if(!is_object($field) || !($field instanceof AbstractField)) {
+            throw new \ValueError('Cannot add an element in the collection which is not an instance of : ' . AbstractField::class);
+        }
+
+        $this->add($field);
+    }
+
+    public function offsetGet(mixed $offset): AbstractField|null
+    {
+        return $this->isset($offset) ? $this->get($offset) : null;
+    }
+
+    public function offsetExists(mixed $offset): bool
+    {
+        return $this->isset($offset);
+    }
+
+    public function offsetUnset(mixed $offset): void
+    {
+        unset($this->elements[$offset]);
     }
 }

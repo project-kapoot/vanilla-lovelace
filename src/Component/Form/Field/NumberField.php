@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace App\Component\Form\Field;
 
+use App\Component\Form\Validation\Min;
+use App\Component\Form\Validation\Max;
+
 class NumberField extends AbstractField
 {
     private readonly int $min;
@@ -13,12 +16,16 @@ class NumberField extends AbstractField
     {
         $this->min = $value;
 
+        $this->addValidation(new Min($value));
+        
         return $this;
     }
 
     public function setMax(int $value) : self
     {
         $this->max = $value;
+
+        $this->addValidation(new Max($value));
 
         return $this;
     }
@@ -36,26 +43,5 @@ class NumberField extends AbstractField
     public function getDataType(): string
     {
         return 'integer';
-    }
-
-    public function isValid(string|int|array $fieldData): bool
-    {
-        if(parent::isValid($fieldData)) {
-            return true;
-        }
-
-        if(gettype($fieldData) !== $this->getDataType()) {
-            return false;
-        }
-
-        if(isset($this->min) && $fieldData < $this->min) {
-            return false;
-        }
-
-        if(isset($this->max) && $fieldData > $this->max) {
-            return false;
-        }
-
-        return true;
     }
 }

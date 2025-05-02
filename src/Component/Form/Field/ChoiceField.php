@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Component\Form\Field;
 
+use App\Component\Form\Validation\InArray;
+
 class ChoiceField extends AbstractField
 {
     private readonly array $choices;
@@ -11,6 +13,8 @@ class ChoiceField extends AbstractField
     public function setChoices(array $choices) : self
     {
         $this->choices = $choices;
+
+        $this->addValidation(new InArray($choices));
 
         return $this;
     }
@@ -23,22 +27,5 @@ class ChoiceField extends AbstractField
     public function getDataType(): string
     {
         return 'string';
-    }
-
-    public function isValid(string|int|array $fieldData): bool
-    {
-        if(parent::isValid($fieldData)) {
-            return true;
-        }
-
-        if(gettype($fieldData) !== $this->getDataType()) {
-            return false;
-        }        
-
-        if(!in_array($fieldData, $this->choices)) {
-            return false;
-        }
-
-        return true;
     }
 }
