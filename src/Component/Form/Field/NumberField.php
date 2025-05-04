@@ -2,54 +2,39 @@
 
 declare(strict_types=1);
 
-namespace App\Component\Form\Field;
+namespace Kapoot\Form\Field;
 
-use App\Component\Form\Validation\Min;
-use App\Component\Form\Validation\Max;
+use Kapoot\Form\Validation\Min;
+use Kapoot\Form\Validation\Max;
 
 class NumberField extends AbstractField
 {
-    private readonly int $min;
-    private readonly int $max;
-
     public function setMin(int $value) : self
     {
-        $this->min = $value;
-
         $this->addValidation(new Min($value));
         
         return $this;
     }
 
+    public function getMin() : ?int
+    {
+        return $this->hasValidation(Min::class) ? $this->getValidation(Min::class)->getMin() : null;
+    }
+
     public function setMax(int $value) : self
     {
-        $this->max = $value;
-
         $this->addValidation(new Max($value));
 
         return $this;
     }
 
-    public function getMin() : int
+    public function getMax() : ?int
     {
-        return $this->min;
-    }
-
-    public function getMax() : int
-    {
-        return $this->max;
+        return $this->hasValidation(Max::class) ? $this->getValidation(Max::class)->getMax() : null;
     }
 
     public function getDataType(): string
     {
         return 'integer';
-    }
-
-    public function renderWidget(string $optionalAttributes = ''): string
-    {
-        $requiredAttr = ($this->isRequired) ? 'required' : '';
-        $html = sprintf('<input %s type="number" value="%s" min="%d" max="%d" %s>', $optionalAttributes, $this->value, $this->min ?? '', $this->max ?? '', $requiredAttr);
-
-        return $html;
     }
 }

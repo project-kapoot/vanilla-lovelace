@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Component\Form;
+namespace Kapoot\Form;
 
-use App\Component\Form\Field\AbstractField;
+use Kapoot\Form\Field\AbstractField;
 
 abstract class AbstractForm
 {

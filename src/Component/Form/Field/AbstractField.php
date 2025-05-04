@@ -2,15 +2,14 @@
 
 declare(strict_types=1);
 
-namespace App\Component\Form\Field;
+namespace Kapoot\Form\Field;
 
-use App\Component\Form\Validation\FieldValidationInterface;
-use App\Component\Form\Validation\IsRequired;
+use Exception;
+use Kapoot\Form\Validation\FieldValidationInterface;
+use Kapoot\Form\Validation\IsRequired;
 
 abstract class AbstractField
 {
-    protected bool $isRequired = false;
-
     private array $validations = [];
 
     public function __construct(
@@ -21,12 +20,32 @@ abstract class AbstractField
 
     abstract public function getDataType() : string;
 
+    public function getLabel() : string
+    {
+        return $this->label;
+    }
+
     public function addValidation(FieldValidationInterface $validation) : static
     {
-        $this->validations[] = $validation;
+        if($this->hasValidation($validation::class)) {
+            throw new \Exception();
+        }
+
+        $this->validations[$validation::class] = $validation;
 
         return $this;
     } 
+
+    public function hasValidation(string $validationFqcn) : bool
+    {
+        return isset($this->validations[$validationFqcn]);
+    }
+
+
+    public function getValidation(string $validationFqcn) : FieldValidationInterface
+    {
+        return $this->validations[$validationFqcn];
+    }
 
     public function getValidations() : array
     {
@@ -38,24 +57,10 @@ abstract class AbstractField
         return $this->name;
     }
 
-    final public function renderLabel(string $optionalAttributes = '') : string
-    {
-        return sprintf('<label %s>%s</label>', $optionalAttributes, $this->label);
-    }
-
-    abstract public function renderWidget(string $optionalAttributes = '') : string;
-
     public function setRequired() : static
     {
-        $this->isRequired = true;
-
         $this->addValidation(new IsRequired());
 
         return $this;
-    }
-
-    public function isRequired() : bool
-    {
-        return $this->isRequired;
     }
 }

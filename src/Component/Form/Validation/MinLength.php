@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Component\Form\Validation;
+namespace Kapoot\Form\Validation;
 
-use App\Component\Form\Field\AbstractField;
+use Kapoot\Form\Field\AbstractField;
 
 class MinLength implements FieldValidationInterface
 {
@@ -10,6 +10,11 @@ class MinLength implements FieldValidationInterface
         private readonly int $minLength,
     ){}
 
+    public function getMinLength() : int
+    {
+        return $this->minLength;
+    }
+    
     public function isValid(AbstractField $field, mixed $fieldData) : bool
     {
         return strlen($fieldData) >= $this->minLength;

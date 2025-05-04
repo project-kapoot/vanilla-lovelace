@@ -1,14 +1,20 @@
 <?php
 
-namespace App\Component\Form\Validation;
+namespace Kapoot\Form\Validation;
 
-use App\Component\Form\Field\AbstractField;
+use Kapoot\Form\Field\AbstractField;
+use Kapoot\Form\Field\ChoiceField;
 
 class InArray implements FieldValidationInterface
 {
     public function __construct(
         private readonly array $choices,
     ){}
+
+    public function getChoices() : array
+    {
+        return $this->choices;
+    }
 
     public function isValid(AbstractField $field, mixed $fieldData) : bool
     {

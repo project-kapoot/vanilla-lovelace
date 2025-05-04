@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Component\Form;
+namespace Kapoot\Form;
 
-use App\Component\Form\Field\AbstractField;
+use Kapoot\Form\Field\AbstractField;
 use ReturnTypeWillChange;
 
 class FieldCollection implements \Countable, \Iterator, \ArrayAccess
@@ -16,7 +16,7 @@ class FieldCollection implements \Countable, \Iterator, \ArrayAccess
      * 
      * NOTE: Uses the 'name' property of the field as a key in the collection
      * 
-     * @param \App\Component\Form\Field\AbstractField[] ...$fields
+     * @param \Kapoot\Form\Field\AbstractField[] ...$fields
      * @throws ValueError if a field has already the same name in the collection
      * @return self
      */
@@ -34,7 +34,7 @@ class FieldCollection implements \Countable, \Iterator, \ArrayAccess
     /**
      * Gets one field from the collection
      * 
-     * @return \App\Component\Form\Field\AbstractField
+     * @return \Kapoot\Form\Field\AbstractField
      */
     public function get(string $key) : AbstractField
     {
@@ -54,7 +54,7 @@ class FieldCollection implements \Countable, \Iterator, \ArrayAccess
     /**
      * Returns the elements in the collection as an array
      *
-     * @return \App\Components\Form\Field\AbstractField[]
+     * @return \Kapoots\Form\Field\AbstractField[]
      */
     public function toArray() : array
     {

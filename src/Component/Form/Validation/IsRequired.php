@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Component\Form\Validation;
+namespace Kapoot\Form\Validation;
 
-use App\Component\Form\Field\AbstractField;
+use Kapoot\Form\Field\AbstractField;
 
 class IsRequired implements FieldValidationInterface
 {

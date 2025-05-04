@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Component\Form;
+namespace Kapoot\Form;
 
 class FormValidator
 {

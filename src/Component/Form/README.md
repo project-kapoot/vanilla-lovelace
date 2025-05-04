@@ -10,11 +10,11 @@ First, create a form by extending the AbstractForm class and define the `configu
 
 namespace App\Form;
 
-use App\Component\Form\AbstractForm;
-use App\Component\Form\Field\ChoiceField;
-use App\Component\Form\Field\NumberField;
-use App\Component\Form\Field\TextField;
-use App\Component\Form\FieldCollection;
+use Kapoot\Form\AbstractForm;
+use Kapoot\Form\Field\ChoiceField;
+use Kapoot\Form\Field\NumberField;
+use Kapoot\Form\Field\TextField;
+use Kapoot\Form\FieldCollection;
 
 class ContactForm extends AbstractForm
 {
@@ -42,8 +42,8 @@ Once the form is defined in a class, you can use it like this :
 ```php
 <?php
 
-use App\Component\Form\FieldValidator;
-use App\Component\Form\FormValidator;
+use Kapoot\Form\FieldValidator;
+use Kapoot\Form\FormValidator;
 use App\Form\ContactForm;
 
 $formValidator = new FormValidator($_POST, new FieldValidator());

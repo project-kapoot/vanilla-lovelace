@@ -1,14 +1,19 @@
 <?php
 
-namespace App\Component\Form\Validation;
+namespace Kapoot\Form\Validation;
 
-use App\Component\Form\Field\AbstractField;
+use Kapoot\Form\Field\AbstractField;
 
 class Max implements FieldValidationInterface
 {
     public function __construct(
         private readonly int $max,
     ){}
+
+    public function getMax() : int
+    {
+        return $this->max;
+    }
 
     public function isValid(AbstractField $field, mixed $fieldData) : bool
     {

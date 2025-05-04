@@ -2,10 +2,10 @@
 
 namespace Test\Unit\Component\Form;
 
-use App\Component\Form\Field\ChoiceField;
-use App\Component\Form\Field\NumberField;
-use App\Component\Form\Field\TextField;
-use App\Component\Form\FieldCollection;
+use Kapoot\Form\Field\ChoiceField;
+use Kapoot\Form\Field\NumberField;
+use Kapoot\Form\Field\TextField;
+use Kapoot\Form\FieldCollection;
 use PHPUnit\Framework\TestCase;
 use ValueError;
 

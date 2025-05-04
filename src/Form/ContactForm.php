@@ -2,11 +2,11 @@
 
 namespace App\Form;
 
-use App\Component\Form\AbstractForm;
-use App\Component\Form\Field\ChoiceField;
-use App\Component\Form\Field\NumberField;
-use App\Component\Form\Field\TextField;
-use App\Component\Form\FieldCollection;
+use Kapoot\Form\AbstractForm;
+use Kapoot\Form\Field\ChoiceField;
+use Kapoot\Form\Field\NumberField;
+use Kapoot\Form\Field\TextField;
+use Kapoot\Form\FieldCollection;
 
 class ContactForm extends AbstractForm
 {

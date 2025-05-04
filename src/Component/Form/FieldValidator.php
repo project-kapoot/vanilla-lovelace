@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Component\Form;
+namespace Kapoot\Form;
 
-use App\Component\Form\Field\AbstractField;
+use Kapoot\Form\Field\AbstractField;
 
 class FieldValidator
 {

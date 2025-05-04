@@ -2,64 +2,47 @@
 
 declare(strict_types=1);
 
-namespace App\Component\Form\Field;
+namespace Kapoot\Form\Field;
 
-use App\Component\Form\Validation\MaxLength;
-use App\Component\Form\Validation\MinLength;
-use InvalidArgumentException;
+use Kapoot\Form\Validation\MaxLength;
+use Kapoot\Form\Validation\MinLength;
 
 class TextField extends AbstractField
 {
-    private readonly int $minLength;
-    private readonly int $maxLength;
-
     public function setMinLength(int $value) : self
     {
         if($value < 0) {
-            throw new InvalidArgumentException('Argument must not be less than 0');
+            throw new \InvalidArgumentException('Argument must not be less than 0');
         }
 
         $this->addValidation(new MinLength($value));
 
-        $this->minLength = $value;
-
         return $this;
+    }
+
+    public function getMinLength() : ?int 
+    {
+        return $this->hasValidation(MinLength::class) ? $this->getValidation(MinLength::class)->getMinLength() : null;
     }
 
     public function setMaxLength(int $value) : self
     {
         if($value <= 0) {
-            throw new InvalidArgumentException('Argument must not be less than or equal to 0');
+            throw new \InvalidArgumentException('Argument must not be less than or equal to 0');
         }
 
         $this->addValidation(new MaxLength($value));
 
-        $this->maxLength = $value;
-
         return $this;
     }
 
-    public function getMinLength() : int 
+    public function getMaxLength() : ?int
     {
-        return $this->minLength ?? 0;
-    }
-
-    public function getMaxLength() : int
-    {
-        return $this->maxLength ?? PHP_INT_MAX;
+        return $this->hasValidation(MaxLength::class) ? $this->getValidation(MaxLength::class)->getMaxLength() : null;
     }
 
     public function getDataType(): string
     {
         return 'string';
-    }
-
-    public function renderWidget(string $optionalAttributes = '') : string
-    {
-        $requiredAttr = ($this->isRequired) ? 'required' : '';
-
-        $html = sprintf('<input %s type="text" minlength="%d" maxlength="%d" %s>', $optionalAttributes, $this->minLength ?? '', $this->maxLength ?? '', $requiredAttr);
-
-        return $html;
     }
 }

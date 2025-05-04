@@ -1,14 +1,19 @@
 <?php
 
-namespace App\Component\Form\Validation;
+namespace Kapoot\Form\Validation;
 
-use App\Component\Form\Field\AbstractField;
+use Kapoot\Form\Field\AbstractField;
 
 class MaxLength implements FieldValidationInterface
 {
     public function __construct(
         private readonly int $maxLength,
     ){}
+
+    public function getMaxLength() : int
+    {
+        return $this->maxLength;
+    }
 
     public function isValid(AbstractField $field, mixed $fieldData) : bool
     {

@@ -1,14 +1,19 @@
 <?php
 
-namespace App\Component\Form\Validation;
+namespace Kapoot\Form\Validation;
 
-use App\Component\Form\Field\AbstractField;
+use Kapoot\Form\Field\AbstractField;
 
 class Min implements FieldValidationInterface
 {
     public function __construct(
         private readonly int $min,
     ){}
+
+    public function getMin() : int
+    {
+        return $this->min;
+    }
 
     public function isValid(AbstractField $field, mixed $fieldData) : bool
     {
