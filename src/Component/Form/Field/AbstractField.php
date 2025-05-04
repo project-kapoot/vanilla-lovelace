@@ -4,20 +4,19 @@ declare(strict_types=1);
 
 namespace App\Component\Form\Field;
 
-use App\Component\Form\AbstractForm;
 use App\Component\Form\Validation\FieldValidationInterface;
 use App\Component\Form\Validation\IsRequired;
 
 abstract class AbstractField
 {
-    private bool $isRequired = false;
+    protected bool $isRequired = false;
 
     private array $validations = [];
 
     public function __construct(
         private readonly string $name,
         private readonly string $label,
-        private readonly mixed $data,
+        protected readonly mixed $value
     ){}
 
     abstract public function getDataType() : string;
@@ -39,10 +38,12 @@ abstract class AbstractField
         return $this->name;
     }
 
-    public function getLabel() : string
+    final public function renderLabel(string $optionalAttributes = '') : string
     {
-        return $this->label;
+        return sprintf('<label %s>%s</label>', $optionalAttributes, $this->label);
     }
+
+    abstract public function renderWidget(string $optionalAttributes = '') : string;
 
     public function setRequired() : static
     {
@@ -51,34 +52,6 @@ abstract class AbstractField
         $this->addValidation(new IsRequired());
 
         return $this;
-    }
-
-    public function getLabelView(string $additionalHtml) : string
-    {
-        return <<<LABEL
-            <label {$additionalHtml}>{$this->label}</label>
-        LABEL;
-    }
-    
-    public function getWidgetView(AbstractForm $form, string $additionalHtml) : string
-    {
-        $attrFmt = '%s="%s"';
-
-        $attributes = [];
-        $attributes[] = $this->isRequired() ? 'required' : '';
-        $attributes[] = sprintf($attrFmt, 'name', $this->buildWidgetName($form));
-        $attributes[] = sprintf($attrFmt, 'value', $this->data);
-
-        $attributesHtml = implode(' ', $attributes);
-
-        return <<<WIDGET
-        <input {$additionalHtml} {$attributesHtml}>
-        WIDGET;
-    }
-
-    public function buildWidgetName(AbstractForm $form) : string
-    {
-        return sprintf('%s[%s]', $form->getName(), $this->getName());
     }
 
     public function isRequired() : bool

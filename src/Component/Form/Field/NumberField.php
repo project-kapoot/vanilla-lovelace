@@ -44,4 +44,12 @@ class NumberField extends AbstractField
     {
         return 'integer';
     }
+
+    public function renderWidget(string $optionalAttributes = ''): string
+    {
+        $requiredAttr = ($this->isRequired) ? 'required' : '';
+        $html = sprintf('<input %s type="number" value="%s" min="%d" max="%d" %s>', $optionalAttributes, $this->value, $this->min ?? '', $this->max ?? '', $requiredAttr);
+
+        return $html;
+    }
 }

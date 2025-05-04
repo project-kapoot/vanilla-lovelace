@@ -6,12 +6,12 @@ function form_widget(AbstractForm $form, string $fieldName, string $additionalHt
 {
     $field = $form->getField($fieldName);
 
-    return $field->getWidgetView($form, $additionalHtml);
+    return $field->renderWidget($additionalHtml);
 }
 
 function form_label(AbstractForm $form, string $fieldName, string $additionalHtml) : string
 {
     $field = $form->getField($fieldName);
 
-    return $field->getLabelView($additionalHtml);
+    return $field->renderLabel($additionalHtml);
 }

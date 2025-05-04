@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace App\Component\Form\Field;
 
+use App\Component\Form\AbstractForm;
 use App\Component\Form\Validation\InArray;
+use App\Component\Form\Validation\IsRequired;
+use Override;
 
 class ChoiceField extends AbstractField
 {
@@ -27,5 +30,21 @@ class ChoiceField extends AbstractField
     public function getDataType(): string
     {
         return 'string';
+    }
+
+    public function renderWidget(string $optionalAttributes = ''): string
+    {
+        $requiredAttr = $this->isRequired ? 'required' : '';
+
+        $html = sprintf('<select %s %s>', $optionalAttributes, $requiredAttr);
+
+        foreach($this->choices as $choice)
+        {
+            $html .= sprintf('<option value="%s">%s</option>', $choice, ucfirst($choice));
+        }
+
+        $html .= '</select>';
+
+        return $html;
     }
 }

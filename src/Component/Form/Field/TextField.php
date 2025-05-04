@@ -53,4 +53,13 @@ class TextField extends AbstractField
     {
         return 'string';
     }
+
+    public function renderWidget(string $optionalAttributes = '') : string
+    {
+        $requiredAttr = ($this->isRequired) ? 'required' : '';
+
+        $html = sprintf('<input %s type="text" minlength="%d" maxlength="%d" %s>', $optionalAttributes, $this->minLength ?? '', $this->maxLength ?? '', $requiredAttr);
+
+        return $html;
+    }
 }
