@@ -8,7 +8,7 @@ class IsRequired implements FieldValidationInterface
 {
     public function isValid(AbstractField $field, mixed $fieldData) : bool
     {
-        if($field->isRequired() && "" === $fieldData) {
+        if($fieldData === '' || $fieldData === null) {
             return false;
         }
 

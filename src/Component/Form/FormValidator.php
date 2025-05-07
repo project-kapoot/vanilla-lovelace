@@ -25,10 +25,6 @@ class FormValidator
         {
             $fieldData = $formData[$field->getName()] ?? null;
 
-            if($fieldData === null) {
-                return [true, false, []];
-            }
-
             $fieldData = match($field->getDataType()) {
                 'integer' => (is_numeric($fieldData)) ? (int) $fieldData : $fieldData,
                 default => $fieldData
@@ -46,7 +42,15 @@ class FormValidator
     
     public function validateField(AbstractField $field, mixed $data) : array
     {
-        $errors = [];
+        $validations = $field->getValidations();
+
+        if($field->isRequired()) {
+            $validation = $field->getValidation(IsRequired::class);
+
+            if(!$validation->isValid($field, $data)) {
+                return [false, $validation->getError($field, $data)];
+            }
+        }
 
         foreach($field->getValidations() as $validation)
         {

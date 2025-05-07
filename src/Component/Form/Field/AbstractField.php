@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Kapoot\Form\Field;
 
 use Exception;
+
 use Kapoot\Form\Validation\FieldValidationInterface;
 use Kapoot\Form\Validation\IsRequired;
 
@@ -62,5 +63,10 @@ abstract class AbstractField
         $this->addValidation(new IsRequired());
 
         return $this;
+    }
+    
+    public function isRequired() : bool
+    {
+        return $this->hasValidation(IsRequired::class);
     }
 }
