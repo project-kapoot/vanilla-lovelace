@@ -14,3 +14,9 @@ if($isSubmitted && $isValid) {
     // Do something
 }
 
+var_dump('Data', $_POST);
+var_dump('Is submitted : ', $isSubmitted);
+var_dump('Is validated : ', $isValid);
+var_dump('Error : ', $error);
+
+require_once __DIR__ . '/../templates/forms/contact_form.php';

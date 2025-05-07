@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Kapoot\Form\Field;
 
 use Exception;
-
+use Kapoot\Form\AbstractForm;
 use Kapoot\Form\Validation\FieldValidationInterface;
 use Kapoot\Form\Validation\IsRequired;
 
@@ -21,9 +21,24 @@ abstract class AbstractField
 
     abstract public function getDataType() : string;
 
+    public function getName() : string
+    {
+        return $this->name;
+    }
+    
+    public function getPrefixedName(AbstractForm $form) : string
+    {
+        return sprintf('%s[%s]', $form->getName(), $this->getName());
+    }
+
     public function getLabel() : string
     {
         return $this->label;
+    }
+    
+    public function getValue() : mixed
+    {
+        return $this->value;
     }
 
     public function addValidation(FieldValidationInterface $validation) : static
@@ -51,11 +66,6 @@ abstract class AbstractField
     public function getValidations() : array
     {
         return $this->validations;
-    }
-
-    public function getName() : string
-    {
-        return $this->name;
     }
 
     public function setRequired() : static
