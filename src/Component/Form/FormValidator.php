@@ -15,11 +15,17 @@ class FormValidator
 
     public function validate(AbstractForm $form) : array
     {
+        $isSubmitted = false;
+        $isValid = false;
+        $error = null;
+
         $formData = $this->requestData[$form->getName()] ?? null;
 
         if(!$formData === null) {
-            return [false, true, null];
+            return [$isSubmitted, $isValid, $error];
         }
+
+        $isSubmitted = true;
         
         foreach($form->getFields() as $name => $field)
         {
@@ -33,11 +39,13 @@ class FormValidator
             [$isValid, $error] = $this->validateField($field, $fieldData);
 
             if(!$isValid && null !== $error) {
-                return [true, false, $error];
+                return [$isSubmitted, $isValid, $error];
             }
         }
 
-        return [true, true, null];
+        $isValid = true;
+
+        return [$isSubmitted, $isValid, $error];
     }
     
     public function validateField(AbstractField $field, mixed $data) : array
