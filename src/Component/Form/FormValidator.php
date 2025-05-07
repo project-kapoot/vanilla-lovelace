@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Kapoot\Form;
 
 use Kapoot\Form\Field\AbstractField;
+use Kapoot\Form\Validation\IsRequired;
 
 class FormValidator
 {
@@ -17,9 +18,9 @@ class FormValidator
         $formData = $this->requestData[$form->getName()] ?? null;
 
         if(!$formData === null) {
-            return [false, true, []];
+            return [false, true, null];
         }
-
+        
         foreach($form->getFields() as $name => $field)
         {
             $fieldData = $formData[$field->getName()] ?? null;
@@ -33,14 +34,14 @@ class FormValidator
                 default => $fieldData
             };
 
-            [$isValid, $errors] = $this->validateField($field, $fieldData);
+            [$isValid, $error] = $this->validateField($field, $fieldData);
 
-            if(!$isValid) {
-                return [true, false, $errors];
+            if(!$isValid && null !== $error) {
+                return [true, false, $error];
             }
         }
 
-        return [true, true, []];
+        return [true, true, null];
     }
     
     public function validateField(AbstractField $field, mixed $data) : array
@@ -51,11 +52,11 @@ class FormValidator
         {
             if($validation->isValid($field, $data)) continue;
 
-            $errors[] = $validation->getError($field, $data);
+            $error = $validation->getError($field, $data);
+            
+            return [false, $error];
         }
 
-        $isValid = count($errors) === 0;
-
-        return [$isValid, $errors];
+        return [true, null];
     }
 }

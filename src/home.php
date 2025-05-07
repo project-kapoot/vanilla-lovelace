@@ -8,10 +8,9 @@ $formValidator = new FormValidator($_POST);
 $fakeData = ['name' => 'test', 'city' => 'paris', 'age' => 20];
 $form = new ContactForm('contact_form', $fakeData);
 
-[$isSubmitted, $isValid, $errors] = $formValidator->validate($form);
+[$isSubmitted, $isValid, $error] = $formValidator->validate($form);
 
 if($isSubmitted && $isValid) {
     // Do something
 }
 
-$error = $errors[0] ?? null;
