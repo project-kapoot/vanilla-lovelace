@@ -1,10 +1,9 @@
 <?php
 
-use Kapoot\Form\FieldValidator;
 use Kapoot\Form\FormValidator;
 use App\Form\ContactForm;
 
-$formValidator = new FormValidator($_POST, new FieldValidator());
+$formValidator = new FormValidator($_POST);
 
 $fakeData = ['name' => 'test', 'city' => 'paris', 'age' => 20];
 $form = new ContactForm('contact_form', $fakeData);

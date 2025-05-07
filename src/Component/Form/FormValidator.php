@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace Kapoot\Form;
 
+use Kapoot\Form\Field\AbstractField;
+
 class FormValidator
 {
     public function __construct(
         private readonly array $requestData,
-        private readonly FieldValidator $fieldValidator,
     ){}
 
     public function validate(AbstractForm $form) : array
@@ -32,7 +33,7 @@ class FormValidator
                 default => $fieldData
             };
 
-            [$isValid, $errors] = $this->fieldValidator->validate($field, $fieldData);
+            [$isValid, $errors] = $this->validateField($field, $fieldData);
 
             if(!$isValid) {
                 return [true, false, $errors];
@@ -40,5 +41,21 @@ class FormValidator
         }
 
         return [true, true, []];
+    }
+    
+    public function validateField(AbstractField $field, mixed $data) : array
+    {
+        $errors = [];
+
+        foreach($field->getValidations() as $validation)
+        {
+            if($validation->isValid($field, $data)) continue;
+
+            $errors[] = $validation->getError($field, $data);
+        }
+
+        $isValid = count($errors) === 0;
+
+        return [$isValid, $errors];
     }
 }
