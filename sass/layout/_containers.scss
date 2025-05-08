@@ -1,6 +1,6 @@
 @use '../abstracts' as *;
 
-$sizes: (700, 1400);
+$sizes: (700, 1400, 1200);
 
 @each $size in $sizes {
     .container-#{$size} {
