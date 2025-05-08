@@ -5,6 +5,8 @@ body > header {
     background: $color-white;
     box-shadow: 0px 1px 3px $color-darkgrey;
     padding: 12px 0;
+    z-index: 1;
+    position: relative;
 }
 
 .navbar {
@@ -13,6 +15,7 @@ body > header {
     display: flex;
     flex-direction: column;
     align-items: center;
+    
 
     .nav-link,
     .nav-icon a {
