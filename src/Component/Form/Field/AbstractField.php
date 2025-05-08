@@ -13,11 +13,18 @@ abstract class AbstractField
 {
     private array $validations = [];
 
-    public function __construct(
-        private readonly string $name,
-        private readonly string $label,
-        protected readonly mixed $value
-    ){}
+    private readonly string $name;
+
+    private readonly string $label;
+
+    protected readonly mixed $value;
+
+    public function __construct(string $name, string $label, mixed $value = null)
+    {
+        $this->name = $name;
+        $this->label = $label;
+        $this->value = $value;
+    }
 
     abstract public function getDataType() : string;
 
@@ -78,5 +85,34 @@ abstract class AbstractField
     public function isRequired() : bool
     {
         return $this->hasValidation(IsRequired::class);
+    }
+
+    public function validate(mixed $formData) : array
+    {
+        $fieldData = $formData[$this->getName()] ?? null;
+
+        $fieldData = match($this->getDataType()) {
+            'integer' => (is_numeric($fieldData)) ? (int) $fieldData : $fieldData,
+            default => $fieldData
+        };
+
+        if($this->isRequired()) {
+            $validation = $this->getValidation(IsRequired::class);
+
+            if(!$validation->isValid($this, $fieldData)) {
+                return [false, $validation->getError($this, $fieldData)];
+            }
+        }
+
+        foreach($this->getValidations() as $validation)
+        {
+            if($validation->isValid($this, $fieldData)) continue;
+
+            $error = $validation->getError($this, $fieldData);
+            
+            return [false, $error];
+        }
+
+        return [true, null];
     }
 }

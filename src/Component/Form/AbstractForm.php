@@ -49,9 +49,9 @@ abstract class AbstractForm
 
         $formData = $requestData[$this->getName()];
         
-        foreach($this->getFields() as $name => $field)
+        foreach($this->getFields() as $field)
         {
-            [$isValid, $error] = $this->validateField($field, $formData);
+            [$isValid, $error] = $field->validate($formData);
 
             if(!$isValid && null !== $error) {
                 return [$isSubmitted, $isValid, $error];
@@ -63,35 +63,6 @@ abstract class AbstractForm
         return [$isSubmitted, $isValid, $error];
     }
     
-    private function validateField(AbstractField $field, mixed $formData) : array
-    {
-        $fieldData = $formData[$field->getName()] ?? null;
-
-        $fieldData = match($field->getDataType()) {
-            'integer' => (is_numeric($fieldData)) ? (int) $fieldData : $fieldData,
-            default => $fieldData
-        };
-
-        if($field->isRequired()) {
-            $validation = $field->getValidation(IsRequired::class);
-
-            if(!$validation->isValid($field, $fieldData)) {
-                return [false, $validation->getError($field, $fieldData)];
-            }
-        }
-
-        foreach($field->getValidations() as $validation)
-        {
-            if($validation->isValid($field, $fieldData)) continue;
-
-            $error = $validation->getError($field, $fieldData);
-            
-            return [false, $error];
-        }
-
-        return [true, null];
-    }
-
     private function isSubmitted(array $requestData) : bool
     {
         $formData = $requestData[$this->getName()] ?? null;
