@@ -19,11 +19,11 @@ class FormValidator
         $isValid = false;
         $error = null;
 
-        $formData = $this->requestData[$form->getName()] ?? null;
-
-        if(!$formData === null) {
+        if(!$this->isSubmitted($form)) {
             return [$isSubmitted, $isValid, $error];
         }
+
+        $formData = $this->requestData[$form->getName()];
 
         $isSubmitted = true;
         
@@ -47,11 +47,16 @@ class FormValidator
 
         return [$isSubmitted, $isValid, $error];
     }
+
+    private function isSubmitted(AbstractForm $form) : bool
+    {
+        $formData = $this->requestData[$form->getName()] ?? null;
+
+        return null !== $formData;
+    }
     
     public function validateField(AbstractField $field, mixed $data) : array
     {
-        $validations = $field->getValidations();
-
         if($field->isRequired()) {
             $validation = $field->getValidation(IsRequired::class);
 
