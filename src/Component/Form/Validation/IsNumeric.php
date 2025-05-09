@@ -6,12 +6,12 @@ use Kapoot\Form\Field\AbstractField;
 
 class IsNumeric extends AbstractNumberValidation
 {
-    public function isValid(AbstractField $field, mixed $data) : bool
+    public static function isValid(AbstractField $field, mixed $data) : bool
     {
         return is_numeric($data);
     }
 
-    public function getError(AbstractField $field, mixed $fieldData) : string
+    public static function getError(AbstractField $field, mixed $fieldData) : string
     {
         return sprintf('Le champ %s doit être un nombre', $field->getLabel());
     }

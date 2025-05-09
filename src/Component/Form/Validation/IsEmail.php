@@ -6,12 +6,12 @@ use Kapoot\Form\Field\AbstractField;
 
 class IsEmail extends IsString
 {
-    public function isValid(AbstractField $field, mixed $fieldData): bool
+    public static function isValid(AbstractField $field, mixed $fieldData): bool
     {
         return filter_var($fieldData, FILTER_VALIDATE_EMAIL) !== false;
     }
 
-    public function getError(AbstractField $field, mixed $fieldData): string
+    public static function getError(AbstractField $field, mixed $fieldData): string
     {
         return 'Le champ ' . $field->getName() . ' n\'est pas un email valide';
     }

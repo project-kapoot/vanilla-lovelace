@@ -10,6 +10,6 @@ class EmailField extends TextField
     {
         parent::__construct($name, $label, $value);
 
-        $this->addValidation(new IsEmail());
+        $this->addValidation(IsEmail::class);
     }
 }

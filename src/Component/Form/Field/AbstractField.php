@@ -7,6 +7,7 @@ namespace Kapoot\Form\Field;
 use Kapoot\Form\AbstractForm;
 use Kapoot\Form\Validation\AbstractValidation;
 use Kapoot\Form\Validation\IsRequired;
+use ReflectionClass;
 
 abstract class AbstractField
 {
@@ -45,19 +46,29 @@ abstract class AbstractField
         return $this->value;
     }
 
-    final public function addValidation(AbstractValidation $validation) : static
+    final public function addValidation(string $validationFqcn) : static
     {
-        $allowedFieldFqcn = $validation::ALLOWED_FIELD_FQCN;
+        if(!is_subclass_of($validationFqcn, AbstractValidation::class, true)) {
+            throw new \InvalidArgumentException('Argument #1 must be a subclass of ' . AbstractValidation::class);
+        }
+
+        $allowedFieldFqcn = $validationFqcn::ALLOWED_FIELD_FQCN;
 
         if(!($this instanceof $allowedFieldFqcn)) {
-            throw new \InvalidArgumentException('Validation : "' . $validation::class . '" can only be added to instances of ' . $allowedFieldFqcn . '. See ' . $validation::class . '::getAllowedFieldFqcn() for more info on that.');
+            throw new \InvalidArgumentException('Argument #1 (' . $validationFqcn . ') can only be added to instances of ' . $allowedFieldFqcn . '. See ' . $validationFqcn . '::getAllowedFieldFqcn() for more info on that.');
         }
 
-        if($this->hasValidation($validation::class)) {
-            throw new \Exception();
+        if($this->hasValidation($validationFqcn)) {
+            throw new \Exception('Cannot add the same validation multiple times.');
         }
 
-        $this->validations[$validation::class] = $validation;
+        $reflection = new ReflectionClass($validationFqcn);
+
+        if($reflection->isAbstract() || $reflection->isInterface() || $reflection->isTrait()) {
+            throw new \InvalidArgumentException('Argument #1 must be a FQCN of a concrete implementation of ' . AbstractValidation::class);
+        }
+
+        $this->validations[$validationFqcn] = $validationFqcn;
 
         return $this;
     } 
@@ -68,7 +79,7 @@ abstract class AbstractField
     }
 
 
-    public function getValidation(string $validationFqcn) : AbstractValidation
+    public function getValidation(string $validationFqcn) : string
     {
         return $this->validations[$validationFqcn];
     }
@@ -80,7 +91,7 @@ abstract class AbstractField
 
     public function setRequired() : static
     {
-        $this->addValidation(new IsRequired());
+        $this->addValidation(IsRequired::class);
 
         return $this;
     }
@@ -97,9 +108,7 @@ abstract class AbstractField
         if($this->isRequired()) {
             $validation = $this->getValidation(IsRequired::class);
 
-            var_dump($validation);
-
-            [$isValid, $error] = $validation->validate($this, $fieldData);
+            [$isValid, $error] = $validation::validate($this, $fieldData);
 
             if(!$isValid) {
                 return [$isValid, $error];
@@ -108,7 +117,7 @@ abstract class AbstractField
 
         foreach($this->getValidations() as $validation)
         {
-            [$isValid, $error] = $validation->validate($this, $fieldData);
+            [$isValid, $error] = $validation::validate($this, $fieldData);
 
             if(!$isValid) {
                 return [$isValid, $error];

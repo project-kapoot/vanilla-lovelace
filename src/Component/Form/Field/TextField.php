@@ -21,7 +21,7 @@ class TextField extends AbstractField
 
         $this->minLength = $minLength;
 
-        $this->addValidation(new MinLength());
+        $this->addValidation(MinLength::class);
 
         return $this;
     }
@@ -39,7 +39,7 @@ class TextField extends AbstractField
 
         $this->maxLength = $maxLength;
 
-        $this->addValidation(new MaxLength());
+        $this->addValidation(MaxLength::class);
 
         return $this;
     }

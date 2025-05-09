@@ -17,7 +17,7 @@ class NumberField extends AbstractField
     {
         $this->min = $min;
 
-        $this->addValidation(new Min());
+        $this->addValidation(Min::class);
         
         return $this;
     }
@@ -31,7 +31,7 @@ class NumberField extends AbstractField
     {
         $this->max = $max;
 
-        $this->addValidation(new Max());
+        $this->addValidation(Max::class);
 
         return $this;
     }

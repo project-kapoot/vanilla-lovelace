@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Kapoot\Form;
 
 use Kapoot\Form\Field\AbstractField;
-use Kapoot\Form\Validation\IsRequired;
 
 abstract class AbstractForm
 {

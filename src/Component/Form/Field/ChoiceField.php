@@ -14,7 +14,7 @@ class ChoiceField extends AbstractField
     {
         $this->choices = $choices;
 
-        $this->addValidation(new InArray($choices));
+        $this->addValidation(InArray::class);
 
         return $this;
     }
