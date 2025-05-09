@@ -4,7 +4,7 @@ namespace Kapoot\Form\Validation;
 
 use Kapoot\Form\Field\AbstractField;
 
-class IsNumeric implements FieldValidationInterface
+class IsNumeric extends AbstractNumberValidation
 {
     public function isValid(AbstractField $field, mixed $data) : bool
     {

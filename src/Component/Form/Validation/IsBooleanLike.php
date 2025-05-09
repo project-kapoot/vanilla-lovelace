@@ -4,7 +4,7 @@ namespace Kapoot\Form\Validation;
 
 use Kapoot\Form\Field\AbstractField;
 
-class IsBooleanLike implements FieldValidationInterface
+class IsBooleanLike extends AbstractNumberValidation
 {
     public function isValid(AbstractField $field, mixed $data) : bool
     {

@@ -3,26 +3,16 @@
 namespace Kapoot\Form\Validation;
 
 use Kapoot\Form\Field\AbstractField;
-use Kapoot\Form\Field\ChoiceField;
 
-class InArray implements FieldValidationInterface
+class InArray extends AbstractChoiceValidation
 {
-    public function __construct(
-        private readonly array $choices,
-    ){}
-
-    public function getChoices() : array
+    protected function isValid(AbstractField $field, mixed $fieldData) : bool
     {
-        return $this->choices;
-    }
-
-    public function isValid(AbstractField $field, mixed $fieldData) : bool
-    {
-        return in_array($fieldData, $this->choices, true);
+        return in_array($fieldData, $field->getChoices(), true);
     }
 
     public function getError(AbstractField $field, mixed $fieldData) : string
     {
-        return sprintf('Le champ %s ne peux avoir que les valeurs suivantes : %s', strtolower($field->getLabel()), implode(', ', $this->choices));
+        return sprintf('Le champ %s ne peux avoir que les valeurs suivantes : %s', strtolower($field->getLabel()), implode(', ', $field->getChoices()));
     }
 }

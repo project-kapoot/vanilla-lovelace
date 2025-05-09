@@ -4,7 +4,7 @@ namespace Kapoot\Form\Validation;
 
 use Kapoot\Form\Field\AbstractField;
 
-class IsEmail implements FieldValidationInterface
+class IsEmail extends IsString
 {
     public function isValid(AbstractField $field, mixed $fieldData): bool
     {

@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace Kapoot\Form\Field;
 
-use Exception;
 use Kapoot\Form\AbstractForm;
-use Kapoot\Form\Validation\FieldValidationInterface;
+use Kapoot\Form\Validation\AbstractValidation;
 use Kapoot\Form\Validation\IsRequired;
 
 abstract class AbstractField
@@ -25,8 +24,6 @@ abstract class AbstractField
         $this->label = $label;
         $this->value = $value;
     }
-
-    abstract public function getDataType() : string;
 
     public function getName() : string
     {
@@ -48,8 +45,14 @@ abstract class AbstractField
         return $this->value;
     }
 
-    public function addValidation(FieldValidationInterface $validation) : static
+    final public function addValidation(AbstractValidation $validation) : static
     {
+        $allowedFieldFqcn = $validation::ALLOWED_FIELD_FQCN;
+
+        if(!($this instanceof $allowedFieldFqcn)) {
+            throw new \InvalidArgumentException('Validation : "' . $validation::class . '" can only be added to instances of ' . $allowedFieldFqcn . '. See ' . $validation::class . '::getAllowedFieldFqcn() for more info on that.');
+        }
+
         if($this->hasValidation($validation::class)) {
             throw new \Exception();
         }
@@ -65,7 +68,7 @@ abstract class AbstractField
     }
 
 
-    public function getValidation(string $validationFqcn) : FieldValidationInterface
+    public function getValidation(string $validationFqcn) : AbstractValidation
     {
         return $this->validations[$validationFqcn];
     }
@@ -91,26 +94,25 @@ abstract class AbstractField
     {
         $fieldData = $formData[$this->getName()] ?? null;
 
-        $fieldData = match($this->getDataType()) {
-            'integer' => (is_numeric($fieldData)) ? (int) $fieldData : $fieldData,
-            default => $fieldData
-        };
-
         if($this->isRequired()) {
             $validation = $this->getValidation(IsRequired::class);
 
-            if(!$validation->isValid($this, $fieldData)) {
-                return [false, $validation->getError($this, $fieldData)];
+            var_dump($validation);
+
+            [$isValid, $error] = $validation->validate($this, $fieldData);
+
+            if(!$isValid) {
+                return [$isValid, $error];
             }
         }
 
         foreach($this->getValidations() as $validation)
         {
-            if($validation->isValid($this, $fieldData)) continue;
+            [$isValid, $error] = $validation->validate($this, $fieldData);
 
-            $error = $validation->getError($this, $fieldData);
-            
-            return [false, $error];
+            if(!$isValid) {
+                return [$isValid, $error];
+            }
         }
 
         return [true, null];

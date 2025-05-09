@@ -9,40 +9,43 @@ use Kapoot\Form\Validation\MinLength;
 
 class TextField extends AbstractField
 {
-    public function setMinLength(int $value) : self
+    private readonly int $minLength;
+
+    private readonly int $maxLength;
+
+    public function setMinLength(int $minLength) : self
     {
-        if($value < 0) {
+        if($minLength < 0) {
             throw new \InvalidArgumentException('Argument must not be less than 0');
         }
 
-        $this->addValidation(new MinLength($value));
+        $this->minLength = $minLength;
+
+        $this->addValidation(new MinLength());
 
         return $this;
     }
 
     public function getMinLength() : ?int 
     {
-        return $this->hasValidation(MinLength::class) ? $this->getValidation(MinLength::class)->getMinLength() : null;
+        return $this->minLength;
     }
 
-    public function setMaxLength(int $value) : self
+    public function setMaxLength(int $maxLength) : self
     {
-        if($value <= 0) {
+        if($maxLength <= 0) {
             throw new \InvalidArgumentException('Argument must not be less than or equal to 0');
         }
 
-        $this->addValidation(new MaxLength($value));
+        $this->maxLength = $maxLength;
+
+        $this->addValidation(new MaxLength());
 
         return $this;
     }
 
     public function getMaxLength() : ?int
     {
-        return $this->hasValidation(MaxLength::class) ? $this->getValidation(MaxLength::class)->getMaxLength() : null;
-    }
-
-    public function getDataType(): string
-    {
-        return 'string';
+        return $this->maxLength;
     }
 }

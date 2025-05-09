@@ -4,7 +4,7 @@ namespace Kapoot\Form\Validation;
 
 use Kapoot\Form\Field\AbstractField;
 
-class IsRequired implements FieldValidationInterface
+class IsRequired extends AbstractValidation
 {
     public function isValid(AbstractField $field, mixed $fieldData) : bool
     {

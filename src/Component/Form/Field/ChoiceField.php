@@ -8,8 +8,12 @@ use Kapoot\Form\Validation\InArray;
 
 class ChoiceField extends AbstractField
 {
+    private readonly array $choices;
+
     public function setChoices(array $choices) : self
     {
+        $this->choices = $choices;
+
         $this->addValidation(new InArray($choices));
 
         return $this;
@@ -17,11 +21,6 @@ class ChoiceField extends AbstractField
 
     public function getChoices() : array
     {
-        return $this->hasValidation(InArray::class) ? $this->getValidation(InArray::class)->getChoices() : [];
-    }
-
-    public function getDataType(): string
-    {
-        return 'string';
+        return $this->choices ?? [];
     }
 }
