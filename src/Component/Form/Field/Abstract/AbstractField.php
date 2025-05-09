@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Kapoot\Form\Field;
+namespace Kapoot\Form\Field\Abstract;
 
-use Kapoot\Form\AbstractForm;
-use Kapoot\Form\Validation\AbstractValidation;
+use Kapoot\Form\Abstract\AbstractForm;
+use Kapoot\Form\Validation\Abstract\AbstractValidation;
 use Kapoot\Form\Validation\IsRequired;
 use ReflectionClass;
 

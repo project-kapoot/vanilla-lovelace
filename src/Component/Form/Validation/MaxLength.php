@@ -2,7 +2,8 @@
 
 namespace Kapoot\Form\Validation;
 
-use Kapoot\Form\Field\AbstractField;
+use Kapoot\Form\Field\Abstract\AbstractField;
+use Kapoot\Form\Validation\Abstract\AbstractTextValidation;
 
 class MaxLength extends AbstractTextValidation
 {

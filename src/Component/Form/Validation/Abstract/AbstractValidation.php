@@ -1,8 +1,8 @@
 <?php
 
-namespace Kapoot\Form\Validation;
+namespace Kapoot\Form\Validation\Abstract;
 
-use Kapoot\Form\Field\AbstractField;
+use Kapoot\Form\Field\Abstract\AbstractField;
 
 abstract class AbstractValidation
 {

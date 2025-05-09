@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Kapoot\Form\Field;
 
+use Kapoot\Form\Field\Abstract\AbstractField;
 use Kapoot\Form\Validation\Min;
 use Kapoot\Form\Validation\Max;
 

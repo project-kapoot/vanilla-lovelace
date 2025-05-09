@@ -2,7 +2,7 @@
 
 namespace Kapoot\Form\Validation;
 
-use Kapoot\Form\Field\AbstractField;
+use Kapoot\Form\Field\Abstract\AbstractField;
 
 class IsEmail extends IsString
 {
