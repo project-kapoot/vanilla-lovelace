@@ -47,6 +47,10 @@
                 border-radius: 5px;
             }
 
+            #quiz-image {
+                display: none;
+            }
+
             i {
                 position: absolute;
                 right: 10px;
@@ -62,7 +66,12 @@
             }
         }
 
-        form {
+        #error-message {
+            color: $color-pink;
+            text-align: center;
+        }
+
+        .info-quiz {
             display: flex;
             flex-direction: column;
             gap: 10px;
@@ -81,15 +90,14 @@
     // quiz-question
     .quiz-question {
         
-        form,.question, .choice-response, .numeric-response {
+        .question-container,.question, .choice-response, .numeric-response {
             display: flex;
             flex-direction: column;
         }
 
-        form {
-            max-width: 350px;
+        .question-container {
+            max-width: 400px;
             margin: 0 auto;
-            gap: 30px;
 
             .area {
                 resize: none;
@@ -146,10 +154,10 @@
     .list-question {
         margin-bottom: 20px;
         
-        h1 {
+        h2 {
             font-weight: bold;
             font-family: $font-baloo;
-            font-size: $fs-24;
+            font-size: $fs-18;
             text-align: center;
         }
 
@@ -162,6 +170,11 @@
             flex-direction: column;
             gap: 15px;
             max-width: 400px;
+
+            h2 {
+                font-size: $fs-16;
+                text-align: left;
+            }
             
             .card-icon {
                 align-self: flex-end;
@@ -193,10 +206,10 @@
     }
 
     // responsive
-    @media (min-width : 575px) {
+    @media (min-width : 600px) {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        grid-template-rows: 315px auto;
+        grid-template-rows: auto auto;
         gap: 10px;
         justify-items: center;
         padding: $space-16;

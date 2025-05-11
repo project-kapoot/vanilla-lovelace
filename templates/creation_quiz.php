@@ -9,33 +9,38 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css">
 
     <script src="/assets/js/script.js" type="module"></script>
+    <script src="/assets/js/creation_quiz.js" defer></script>
 </head>
 <body>
     <!-- header -->
     <?php templatePart('navbar.php') ?>
     <!-- main content -->
     <main class="quiz-container">
-        <div class="creation-quiz container-1200">
+        <form method="" class="creation-quiz container-1200">
             <!-- title-question -->
             <section class="title-question">
                 <div class="thumb">
-                    <img id="" src="/assets/img/placeholder.png" alt="image du quiz">
-                    <i class="ri-add-circle-fill"></i>
+                    <img id="image-preview" src="/assets/img/placeholder.png" alt="image du quiz">
+                    <input type="file" name="quiz-image" id="quiz-image" accept=".png, .jpeg, .jpg">
+                    <i id="add-image" class="ri-add-circle-fill"></i>
                 </div>
-                <form action="">
+                <p id="error-message"></p>
+                <div class="info-quiz">
                     <label for="quiz-title" class="form-title">Titre du quiz :</label>
                     <input class="form-input" type="text" name="quiz-title" id="quiz-title" placeholder="Entrer le titre du quiz" required>
+                    <label for="quiz-description" class="form-title">Description :</label>
+                    <input class="form-input" type="text" name="quiz-description" id="quiz-description" placeholder="Entrer la description du quiz" required>
                     <label for="quiz-difficult" class="form-title">Difficulté :</label>
                     <select name="quiz-difficult" id="quiz-difficult" required>
                         <option value="beginner">Débutant</option>
                         <option value="intermediate">Intermédiaire</option>
                         <option value="advanced">Avancé</option>
                     </select>
-                </form>
+                </div>
             </section>
             <!-- quiz-question -->
             <section class="quiz-question">
-                <form action="">
+                <div class="question-container">
                     <div class="question">
                         <label for="quiz-question" class="form-title">Question :</label>
                         <textarea class="form-input area" name="quiz-question" id="quiz-question" placeholder="Entrer la question" required></textarea>
@@ -75,11 +80,11 @@
                         </label>
                     </div>
                     <button id="addQuestion" type="submit" class="btn-primary">Ajouter la question</button>
-                </form>
+                </div>
             </section>
             <!-- list-qestion -->
             <section class="list-question">
-                <h1>Cybersécurité</h1>
+                <h2>Cybersécurité</h2>
                 <div class="card">
                     <div class="card-question">
                         <h2>Intitulé de la question</h2>
@@ -96,9 +101,9 @@
                         </div>
                     </div>
                 </div>
-                <button class="btn btn-primary" id="validate-quiz">Valider le quiz</button>
+                <button type="button" class="btn-primary" id="validate-quiz">Valider le quiz</button>
             </section>
-        </div>
+        </form>
     </main>
     <!-- footer -->
     <?php templatePart('footer.php') ?>
