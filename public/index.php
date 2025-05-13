@@ -12,6 +12,7 @@ $template = match($path) {
     '/inscription' => 'register.php',
     '/profil' => 'profile.php',
     '/quiz/en-attente' => 'waiting_room.php',
+    '/quiz/score' => 'score.php',
     default => null
 };
 
