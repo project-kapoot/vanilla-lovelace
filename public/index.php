@@ -13,7 +13,6 @@ $template = match($path) {
     '/question' => 'question.php',
     '/profil' => 'profile.php',
     '/quiz/en-attente' => 'waiting_room.php',
-    '/test' => '../src/home.php',
     default => null
 };
 
