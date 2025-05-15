@@ -13,6 +13,8 @@ $template = match($path) {
     '/question' => 'question.php',
     '/profil' => 'profile.php',
     '/quiz/en-attente' => 'waiting_room.php',
+    '/quiz/score' => 'score.php',
+    '/quiz/presentateur' => 'presentateur.php',
     default => null
 };
 

@@ -37,3 +37,17 @@ if(dialog !== null) {
         }  
     });
 }
+
+function showConfetti() {
+    confetti({
+        particleCount: 150,
+        spread: 70,
+        origin: { y: 0.6 }
+    });
+}
+
+if(typeof confetti !== 'undefined') {
+    window.addEventListener("DOMContentLoaded", () => {
+        showConfetti();
+    });
+}
