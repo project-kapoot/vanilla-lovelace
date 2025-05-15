@@ -60,14 +60,14 @@
 	h1 {
 		font-family: $font-baloo;
 		color: $color-white;
-		font-size: $fs-32;
+		font-size: pxToEm($fs-32);
 		margin-bottom: 3rem;
 	}
 
 	h2 {
 		font-family: $font-fredoka;
 		color: $color-darkgrey;
-		font-size: $fs-24;
+		font-size: pxToEm($fs-24);
 	}
 
 	.top-3 {
@@ -144,5 +144,9 @@
 	.winner-announcement {
 		position: relative;
 		display: inline-block;
+	}
+
+	@media screen and (max-width: $break-sm) {
+		font-size: 0.85rem;	
 	}
 }

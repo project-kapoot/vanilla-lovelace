@@ -11,7 +11,7 @@
 
     h1 {
         font-family: $font-baloo;
-        font-size: $fs-32;
+		font-size: pxToEm($fs-32);
         color: $color-white;
         margin-bottom: 3rem;
     }
@@ -24,35 +24,35 @@
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         margin-bottom: 3rem;
 
-    .avatar-large {
-        width: 100px;
-        height: 100px;
-        border-radius: 50%;
-        object-fit: cover;
-        margin-bottom: 1rem;
-    }
+        .avatar-large {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+        }
 
-    .pseudo {
-        font-size: $fs-24;
-        font-family: $font-fredoka;
-        margin-bottom: 1rem;
-        color: $color-yellow;
-    }
+        .pseudo {
+            font-size: pxToEm($fs-24);
+            font-family: $font-fredoka;
+            margin-bottom: 1rem;
+            color: $color-yellow;
+        }
 
-    .score,
-    .position,
-    .motivation-message {
-        font-family: $font-baloo;
-        font-size: $fs-16;
-        margin-bottom: 0.8rem;
-    }
+        .score,
+        .position,
+        .motivation-message {
+            font-family: $font-baloo;
+            font-size: pxToEm($fs-16);
+            margin-bottom: 0.8rem;
+        }
 
-    .motivation-message {
-        color: $color-lightblue;
-        font-style: italic;
-        font-size: $fs-24;
+        .motivation-message {
+            color: $color-lightblue;
+            font-style: italic;
+            font-size: pxToEm($fs-24);
+        }
     }
-}
 
     .other-players {
         display: flex;
@@ -61,59 +61,63 @@
         gap: 1.5rem;
         margin-bottom: 3rem;
 
-    .score-card {
-        background: $color-purple;
-        border-radius: 12px;
-        padding: 1rem;
-        width: 180px;
-        text-align: center;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-        color: $color-white;
-    }
+        .score-card {
+            background: $color-purple;
+            border-radius: 12px;
+            padding: 1rem;
+            width: 180px;
+            text-align: center;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            color: $color-white;
+        }
 
-    .highlight-card {
-        border: 2px solid $color-yellow;
-        box-shadow: 0 0 12px $color-yellow;
-    }
+        .highlight-card {
+            border: 2px solid $color-yellow;
+            box-shadow: 0 0 12px $color-yellow;
+        }
 
-    .avatar-container {
-    .rank {
-        background-color: $color-yellow;
-        color: $color-pink;
-        font-weight: bold;
-        font-size: 2rem;
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin: 0 auto 1rem auto;
-}
+        .avatar-container {
+            .rank {
+                background-color: $color-yellow;
+                color: $color-pink;
+                font-weight: bold;
+                font-size: 2em;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin: 0 auto 1rem auto;
+            }
 
-    .avatar {
-        width: 80px;
-        height: 80px;
-        border-radius: 50%;
-        object-fit: cover;
-    }
-}
+            .avatar {
+                width: 80px;
+                height: 80px;
+                border-radius: 50%;
+                object-fit: cover;
+            }
+        }
 
-    .pseudo {
-        color: $color-yellow;
-        font-family: $font-fredoka;
-    }
+        .pseudo {
+            color: $color-yellow;
+            font-family: $font-fredoka;
+        }
 
-    .score {
-        font-family: $font-baloo;
-        color: $color-darkgrey;
-        font-weight: bold;
+        .score {
+            font-family: $font-baloo;
+            color: $color-darkgrey;
+            font-weight: bold;
+        }
     }
-}
 
     .waiting-message {
-        font-size: $fs-16;
+        font-size: pxToEm($fs-16);
         font-weight: bold;
         color: $color-darkgrey;
+    }
+
+    @media screen and (max-width: $break-sm) {
+        font-size: 0.85rem;
     }
 }
