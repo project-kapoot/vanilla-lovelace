@@ -46,7 +46,9 @@ function showConfetti() {
     });
 }
 
-window.addEventListener("DOMContentLoaded", () => {
-    showConfetti();
-});
-
+if(typeof confetti !== 'undefined') {
+    console.log(confetti);
+    window.addEventListener("DOMContentLoaded", () => {
+        showConfetti();
+    });
+}
