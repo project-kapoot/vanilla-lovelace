@@ -7,7 +7,7 @@
     <title>Kapoot - Résultat joueur</title>
 
     <link rel="stylesheet" href="/assets/css/main.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css" integrity="sha384-PGQNwlIJdtnrtJP1MhGd7ezfcWnCVIKqKo45vPmdwuTJiDdO+7P6g1E3lRysQIqq" crossorigin="anonymous">
 
     <script src="/assets/js/presentateur.js" type="module"></script>
 </head>

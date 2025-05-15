@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css">
 
     <script src="/assets/js/script.js" type="module"></script>
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js" integrity="sha384-PGQNwlIJdtnrtJP1MhGd7ezfcWnCVIKqKo45vPmdwuTJiDdO+7P6g1E3lRysQIqq" crossorigin="anonymous"></script>
 
 </head>
 
