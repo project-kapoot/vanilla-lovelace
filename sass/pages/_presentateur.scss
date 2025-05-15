@@ -1,8 +1,13 @@
 @use "../abstracts" as *;
 
 .presenter-page {
+    font-family: $font-baloo;
     text-align: center;
+    color: $color-darkgrey;
+
     padding: 1rem 1rem;
+
+    background: $bg-gradient;
 
     h1 {
         font-family: $font-baloo;
