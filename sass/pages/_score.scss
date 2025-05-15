@@ -3,7 +3,10 @@
 .score-page {
     font-family: $font-baloo;
     color: $color-darkgrey;
+
     background: $bg-gradient;
+
+	padding-block: 4rem;
     
 	.score-card {
 		background: $color-purple;
@@ -58,7 +61,7 @@
 		font-family: $font-baloo;
 		color: $color-white;
 		font-size: $fs-32;
-		margin: 0 0 4em 0;
+		margin-bottom: 3rem;
 	}
 
 	h2 {
@@ -117,10 +120,10 @@
 	}
 
 	.score-footer {
-		margin: 3rem;
-		padding-bottom: 20px;
 		display: flex;
 		justify-content: flex-end;
+
+		margin-top: 3rem;
 
 		.btn-primary {
 			background: $color-purple;
