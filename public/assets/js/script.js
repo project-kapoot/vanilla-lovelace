@@ -47,7 +47,6 @@ function showConfetti() {
 }
 
 if(typeof confetti !== 'undefined') {
-    console.log(confetti);
     window.addEventListener("DOMContentLoaded", () => {
         showConfetti();
     });
