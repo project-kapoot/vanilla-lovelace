@@ -1,6 +1,7 @@
 <?php
 
 use App\Component\Routing\Router;
+use App\Controller\QuizController;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
@@ -33,10 +34,10 @@ $router->add('app_login', ['GET', 'POST'], '/connexion', 'DefaultController', 'l
 $router->add('app_register', ['GET', 'POST'], '/inscription', 'DefaultController', 'register');
 $router->add('app_profile', ['GET'], '/profil', 'DefaultController', 'profile');
 
-$router->add('app_quiz_question', ['GET'], '/question', 'QuizController', 'question');
-$router->add('app_quiz_waiting', ['GET'], '/quiz/en-attente', 'QuizController', 'waiting');
-$router->add('app_quiz_score', ['GET'], '/quiz/score', 'QuizController', 'score');
-$router->add('app_quiz_presenter', ['GET'], '/quiz/presentateur', 'QuizController', 'presenter');
+$router->add('app_quiz_question', ['GET'], '/quiz/([0-9]+)/question', 'QuizController', 'question');
+$router->add('app_quiz_waiting', ['GET'], '/quiz/([0-9]+)/en-attente', 'QuizController', 'waiting');
+$router->add('app_quiz_score', ['GET'], '/quiz/([0-9]+)/score', 'QuizController', 'score');
+$router->add('app_quiz_presenter', ['GET'], '/quiz/([0-9]+)/presentateur', 'QuizController', 'presenter');
 
 $route = $router->getCurrentRoute();
 
@@ -45,6 +46,7 @@ if($route === null) {
 }
 
 $controllerFqcn = 'App\\Controller\\' . $route->getController();
+
 if(!class_exists($controllerFqcn)) {
     internalServerError();
 }
@@ -54,6 +56,8 @@ $controller = new $controllerFqcn();
 if(!method_exists($controller, $route->getControllerMethod())) {
     internalServerError();
 }
+
+$params = $route->getParams();
 
 $response = $controller->{$route->getControllerMethod()}();
 

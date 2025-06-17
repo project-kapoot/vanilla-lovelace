@@ -10,6 +10,8 @@ class Route
         private readonly array $requestMethods,
         private readonly string $controller,
         private readonly string $controllerMethod,
+        private readonly array $params,
+        private readonly bool $isCurrent,
     ){}
 
     public function getName(): string
@@ -35,5 +37,15 @@ class Route
     public function getControllerMethod(): string
     {
         return $this->controllerMethod;
+    }
+
+    public function getParams(): array
+    {
+        return $this->params;
+    }
+
+    public function isCurrent(): bool
+    {
+        return $this->isCurrent;
     }
 }

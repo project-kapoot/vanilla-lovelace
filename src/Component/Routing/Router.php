@@ -13,7 +13,13 @@ class Router
 
     public function add(string $name, array $requestMethods, string $path, string $controller, string $controllerMethod): Route
     {
-        $route = new Route($name, $path, array_values($requestMethods), $controller, $controllerMethod);
+        $path = $this->normalizePath($path);
+
+        $pattern = '/^' . str_replace('/', '\/', $path) . '$/';
+
+        $isCurrent = in_array($this->requestMethod, $requestMethods) && preg_match($pattern, $this->requestPath, $params) === 1;
+
+        $route = new Route($name, $path, array_values($requestMethods), $controller, $controllerMethod, array_slice($params, 1, null), $isCurrent);
 
         $this->routes[$name] = $route;
 
@@ -25,17 +31,15 @@ class Router
         return $this->routes[$name] ?? null;
     }
 
-    public function isCurrentRoute(Route $route): bool
+    public function normalizePath(string $path): string
     {
-        $requestMethods = $route->getRequestMethods();
-
-        return in_array($this->requestMethod, $requestMethods, true) && $this->requestPath === $route->getPath();
+        return str_starts_with($path, '/') ? $path : '/' . $path;
     }
 
     public function getCurrentRoute(): ?Route
     {
         foreach($this->routes as $route) {
-            if($this->isCurrentRoute($route)) {
+            if($route->isCurrent() === true) {
                 return $route;
             }
         }
