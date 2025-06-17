@@ -44,6 +44,11 @@ class Route
         return $this->params;
     }
 
+    public function getParam(string|int $key): ?string
+    {
+        return $this->params[$key] ?? null;
+    }
+
     public function isCurrent(): bool
     {
         return $this->isCurrent;
