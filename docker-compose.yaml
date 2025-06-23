@@ -1,0 +1,49 @@
+# Déclaration des micro-services pour la pile
+services:
+  nginx:
+    container_name: nginx # Conteneur du serveur Web
+    build: ./docker/nginx
+    command: nginx -g "daemon off;"
+    links:
+      - php
+    ports:
+      - "8000:80"
+    volumes:
+      - nginx:/var/log/nginx
+      - ./:/var/www/html
+  php:
+    container_name: php # Conteneur du serveur php
+    build: ./docker/php
+    ports:
+      - "9000:9000"
+    volumes:
+      - ./:/var/www/html
+    working_dir: /var/www/html
+  mysql:
+    image: mysql:8.1
+    container_name: mysql # Conteneur mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 'admin'
+      MYSQL_DATABASE: helloworld
+      MYSQL_USER: helloworld
+      MYSQL_PASSWORD: 'helloworld'
+    ports:
+      - "3309:3306"
+    volumes:
+      - database:/var/lib/mysql
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: pma # Conteneur PHPMyAdmin (Outil de gestion graphique pour Mysql ou MariaDB)
+    links:
+      - mysql
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 1
+    restart: always
+    ports:
+      - 8888:80
+
+volumes:
+  nginx:
+  database:
