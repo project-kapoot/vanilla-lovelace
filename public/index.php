@@ -1,8 +1,34 @@
 <?php
 
+use App\Component\Database\Connection;
 use App\Entity\User;
 
 require_once __DIR__ . '/../vendor/autoload.php';
+
+$databaseConnectionFailed = function(Throwable $exception) {
+    if(!($exception instanceof PDOException)) {
+        return;
+    }
+
+    http_response_code(500);
+    exit;
+};
+
+$exceptionHandlers = [
+    $databaseConnectionFailed,
+];
+
+set_exception_handler(function(Throwable $exception) use ($exceptionHandlers) {
+    foreach($exceptionHandlers as $exceptionHandler) 
+    {
+        $exceptionHandler($exception);
+    }
+});
+
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
+$dotenv->load();
+
+$connection = new Connection($_ENV['DATABASE_DSN'], $_ENV['DATABASE_USERNAME'], $_ENV['DATABASE_PASSWORD']);
 
 $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
