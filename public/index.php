@@ -1,45 +1,83 @@
 <?php
 
-use App\Entity\User;
+use App\Component\Routing\Router;
+use App\Controller\QuizController;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-$path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-
-$template = match($path) {
-    '/' => 'home.php',
-    '/connexion' => 'login.php',
-    '/inscription' => 'register.php',
-    '/question' => 'question.php',
-    '/profil' => 'profile.php',
-    '/quiz/en-attente' => 'waiting_room.php',
-    '/quiz/score' => 'score.php',
-    '/quiz/presentateur' => 'presentateur.php',
-    default => null
-};
-
-if($template === null) {
-    echo '404 not found';
-}
-
-$file = __DIR__ . '/../templates/' . $template;
-
-if(!file_exists($file)) {
-    echo 'Le fichier : ' . $file . ' n\'existe pas !';
-}
-
-function templatePart(string $name) {
+function templatePart(string $name)
+{
     $directory = __DIR__ . '/../templates/includes/';
 
     require_once $directory . $name; 
 }
 
-$roles = [
-    'player',
-    'presenter',
-];
+function internalServerError(): void
+{
+    http_response_code(500);
+    exit;
+}
 
-$role = $roles[0];
-$user = new User([$roles[1]]);
+function notFound(): void
+{
+    http_response_code(404);
+    exit;
+}
 
-require_once $file;
+$method = $_SERVER['REQUEST_METHOD'];
+$path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+
+$router = new Router($method, $path);
+
+$router->add('app_home', ['GET'], '/', 'DefaultController', 'home');
+$router->add('app_login', ['GET', 'POST'], '/connexion', 'DefaultController', 'login');
+$router->add('app_register', ['GET', 'POST'], '/inscription', 'DefaultController', 'register');
+$router->add('app_profile', ['GET'], '/profil', 'DefaultController', 'profile');
+
+$router->add('app_quiz_question', ['GET'], '/quiz/([0-9]+)/question', 'QuizController', 'question');
+$router->add('app_quiz_waiting', ['GET'], '/quiz/([0-9]+)/en-attente', 'QuizController', 'waiting');
+$router->add('app_quiz_score', ['GET'], '/quiz/([0-9]+)/score', 'QuizController', 'score');
+$router->add('app_quiz_presenter', ['GET'], '/quiz/([0-9]+)/presentateur', 'QuizController', 'presenter');
+
+$route = $router->getCurrentRoute();
+
+if($route === null) {
+    notFound();
+}
+
+$controllerFqcn = 'App\\Controller\\' . $route->getController();
+
+if(!class_exists($controllerFqcn)) {
+    internalServerError();
+}
+
+$controller = new $controllerFqcn();
+
+if(!method_exists($controller, $route->getControllerMethod())) {
+    internalServerError();
+}
+
+$params = $route->getParams();
+
+$response = $controller->{$route->getControllerMethod()}();
+
+$templateDir = __DIR__ . '/../templates/';
+
+$templateName = $response[0];
+$context = $response[1] ?? null;
+
+$template = $templateDir . $templateName;
+
+if(!file_exists($template)) {
+    internalServerError();
+}
+
+if($context !== null) {
+    $count = extract($context, EXTR_SKIP);
+
+    if($count !== count($context)) {
+        internalServerError();
+    }
+}
+
+require_once $template;
