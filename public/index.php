@@ -5,6 +5,8 @@ use App\Component\Routing\Router;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
+define('TEMPLATE_DIR', __DIR__ . '/../templates/');
+
 $databaseConnectionFailed = function(Throwable $exception) {
     if(!($exception instanceof PDOException)) {
         return;
@@ -92,16 +94,8 @@ $params = $route->getParams();
 
 $response = $controller->{$route->getControllerMethod()}();
 
-$templateDir = __DIR__ . '/../templates/';
-
-$templateName = $response[0];
+$template = TEMPLATE_DIR . $response[0];
 $context = $response[1] ?? null;
-
-$template = $templateDir . $templateName;
-
-if(!file_exists($template)) {
-    internalServerError();
-}
 
 if($context !== null) {
     $count = extract($context, EXTR_SKIP);
@@ -111,4 +105,10 @@ if($context !== null) {
     }
 }
 
-require_once $template;
+$baseTemplate = TEMPLATE_DIR . 'base.php';
+
+if(!file_exists($baseTemplate)) {
+    internalServerError();
+}
+
+require_once $baseTemplate;
