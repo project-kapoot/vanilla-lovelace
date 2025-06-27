@@ -14,8 +14,14 @@ $databaseConnectionFailed = function(Throwable $exception) {
     exit;
 };
 
+$globalExceptionHandler = function(Throwable $exception) {
+    http_response_code(500);
+    exit;
+};
+
 $exceptionHandlers = [
     $databaseConnectionFailed,
+    $globalExceptionHandler,
 ];
 
 set_exception_handler(function(Throwable $exception) use ($exceptionHandlers) {
