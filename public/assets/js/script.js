@@ -46,7 +46,8 @@ function showConfetti() {
     });
 }
 
-if(typeof confetti !== 'undefined') {
+const isScorePage = document.querySelector('.score-page') !== null
+if(isScorePage && typeof confetti !== 'undefined') {
     window.addEventListener("DOMContentLoaded", () => {
         showConfetti();
     });
