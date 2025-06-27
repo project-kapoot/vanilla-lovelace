@@ -1,0 +1,152 @@
+@use "../abstracts" as *;
+
+.score-page {
+    font-family: $font-baloo;
+    color: $color-darkgrey;
+
+    background: $bg-gradient;
+
+	padding-block: 4rem;
+    
+	.score-card {
+		background: $color-purple;
+		border-radius: 12px;
+		padding: 1rem;
+		width: 180px;
+		text-align: center;
+		box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+	}
+
+	.avatar {
+		width: 80px;
+		border-radius: 50%;
+		object-fit: cover;
+	}
+
+	.crown {
+		background-color: $color-yellow;
+		color: $color-pink;
+		font-size: 2rem;
+		width: 40px;
+		height: 40px;
+		border-radius: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin: 0 auto 1rem auto;
+		font-weight: bold;
+		position: relative;
+		top: 10px;
+	}
+
+	.crown-1::before {
+		content: "👑";
+	}
+
+	.crown-2::before {
+		content: "🥈";
+	}
+
+	.crown-3::before {
+		content: "🥉";
+	}
+
+	.podium-img {
+		margin: 2rem auto;
+		max-width: 240px;
+		display: block;
+	}
+
+	h1 {
+		font-family: $font-baloo;
+		color: $color-white;
+		font-size: pxToEm($fs-32);
+		margin-bottom: 3rem;
+	}
+
+	h2 {
+		font-family: $font-fredoka;
+		color: $color-darkgrey;
+		font-size: pxToEm($fs-24);
+	}
+
+	.top-3 {
+		display: flex;
+		justify-content: center;
+		gap: 2rem;
+		margin-top: 2rem;
+		flex-wrap: wrap;
+
+		.top-card {
+			background: $color-purple;
+			width: 200px;
+			border: 2px solid $color-purple;
+		}
+	}
+
+	.pseudo {
+		font-family: $font-fredoka;
+		color: $color-yellow;
+	}
+
+	.score {
+		font-family: $font-baloo;
+		color: $color-darkgrey;
+		font-weight: bold;
+	}
+
+	.rank {
+		background-color: $color-yellow;
+		color: $color-pink;
+		font-weight: bold;
+		font-size: 2rem;
+		width: 40px;
+		height: 40px;
+		border-radius: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin: 0 auto 1rem auto;
+		position: relative;
+		top: 10px;
+	}
+
+	.other-players {
+		display: flex;
+		justify-content: center;
+		gap: 1.5rem;
+		margin-top: 2rem;
+		flex-wrap: wrap;
+	}
+
+	.score-footer {
+		display: flex;
+		justify-content: flex-end;
+
+		margin-top: 3rem;
+
+		.btn-primary {
+			background: $color-purple;
+			color: $color-white;
+			padding: 1rem 2rem;
+			border-radius: 8px;
+			font-weight: bold;
+			text-decoration: none;
+			display: inline-block;
+			transition: background 0.3s;
+
+			&:hover {
+				background: $color-lightblue;
+			}
+		}
+	}
+
+	.winner-announcement {
+		position: relative;
+		display: inline-block;
+	}
+
+	@media screen and (max-width: $break-sm) {
+		font-size: 0.85rem;	
+	}
+}
