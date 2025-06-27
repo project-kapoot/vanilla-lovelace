@@ -1,9 +1,40 @@
 <?php
 
+use App\Component\Database\Connection;
 use App\Component\Routing\Router;
-use App\Controller\QuizController;
 
 require_once __DIR__ . '/../vendor/autoload.php';
+
+$databaseConnectionFailed = function(Throwable $exception) {
+    if(!($exception instanceof PDOException)) {
+        return;
+    }
+
+    http_response_code(500);
+    exit;
+};
+
+$globalExceptionHandler = function(Throwable $exception) {
+    http_response_code(500);
+    exit;
+};
+
+$exceptionHandlers = [
+    $databaseConnectionFailed,
+    $globalExceptionHandler,
+];
+
+set_exception_handler(function(Throwable $exception) use ($exceptionHandlers) {
+    foreach($exceptionHandlers as $exceptionHandler) 
+    {
+        $exceptionHandler($exception);
+    }
+});
+
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
+$dotenv->load();
+
+$connection = new Connection($_ENV['DATABASE_DSN'], $_ENV['DATABASE_USERNAME'], $_ENV['DATABASE_PASSWORD']);
 
 function templatePart(string $name)
 {
